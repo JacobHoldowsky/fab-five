@@ -10,3 +10,4 @@ class Post_Comment(db.Model):
     created_at = db.Column(db.DateTime)
     
     user = db.relationship('User', back_populates='post_comments')
+    post = db.relationship('Post', back_populates='post_comments')
