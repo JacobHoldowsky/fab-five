@@ -17,7 +17,8 @@ class User(db.Model, UserMixin):
         'Team', back_populates='user', cascade='all, delete')
     team_comments = db.relationship(
         'Team_Comment', back_populates='user', cascade='all, delete')
-    posts = db.relationship('Post', back_populates='user')
+    posts = db.relationship(
+        'Post', back_populates='user', cascade='all, delete')
     post_comments = db.relationship(
         'Post_Comment', back_populates='user', cascade='all, delete')
 

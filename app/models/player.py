@@ -8,8 +8,8 @@ class Player(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    positon = db.Column(db.String(2), nullable=False),
-    headshot_src = db.Column(db.text, nullable=False)
+    position = db.Column(db.String(2), nullable=False)
+    headshot_src = db.Column(db.Text, nullable=False)
     inside_rating = db.Column(db.Integer, nullable=False)
     outside_rating = db.Column(db.Integer, nullable=False)
     rebound_rating = db.Column(db.Integer, nullable=False)
@@ -20,3 +20,4 @@ class Player(db.Model):
         'Team',
         back_populates='players',
         secondary=players_teams)
+    posts = db.relationship('Post', back_populates='player')
