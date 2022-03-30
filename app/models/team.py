@@ -1,5 +1,5 @@
 from .db import db
-from app.models.players_teams import players_teams
+from .players_teams import players_teams
 
 
 class Team(db.Model):

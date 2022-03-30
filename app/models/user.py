@@ -1,6 +1,8 @@
 from .db import db
+from .follow import follow
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from app.models.team import Team
 
 
 class User(db.Model, UserMixin):
@@ -19,6 +21,14 @@ class User(db.Model, UserMixin):
     post_comments = db.relationship(
         'Post_Comment', back_populates='user', cascade='all, delete')
 
+    followed = db.relationship(
+        'User',
+        secondary=follow,
+        primaryjoin=(follow.c.follower_id == id),
+        secondaryjoin=(follow.c.followed_id == id),
+        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic'
+    )
+
     @property
     def password(self):
         return self.hashed_password
@@ -36,3 +46,21 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email
         }
+
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
+
+    def unfollow(self, user):
+        if self.is_following(user):
+            self.followed.remove(user)
+
+    def is_following(self, user):
+        return self.followed.filter(follow.c.followed_id == user.id).count() > 0
+
+    def followed_posts(self):
+        followed = Team.query.join(follow, (follow.c.followed_id == Team.user_id)).filter(
+            follow.c.follower_id == self.id
+        )
+        own = Team.query.filter_by(user_id=self.id)
+        return followed.union(own).order_by(Team.created_at.desc())
