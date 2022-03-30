@@ -5,3 +5,5 @@ from .post_comment import PostComment
 from .post import Post
 from .team_comment import TeamComment
 from .team import Team
+from .follow import follow
+from .players_teams import players_teams

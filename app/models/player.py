@@ -1,5 +1,5 @@
-import profile
 from .db import db
+from .players_teams import players_teams
 
 
 class Player(db.Model):
@@ -15,3 +15,8 @@ class Player(db.Model):
     rebound_rating = db.Column(db.Integer, nullable=False)
     defense_rating = db.Column(db.Integer, nullable=False)
     hustle_rating = db.Column(db.Integer, nullable=False)
+
+    teams = db.relationship(
+        'Team',
+        back_populates='players',
+        secondary=players_teams)
