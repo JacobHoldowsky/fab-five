@@ -9,6 +9,11 @@ from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.team_routes import team_routes
+from .api.team_comment_routes import team_comment_routes
+from .api.post_routes import post_routes
+from .api.post_comment_routes import post_comment_routes
+from .api.player_routes import player_routes
+from .api.follow_routes import follow_routes
 
 from .seeds import seed_commands
 
@@ -33,6 +38,11 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(team_routes, usl_prefix='/api/teams')
+app.register_blueprint(team_comment_routes, usl_prefix='/api/team_comments')
+app.register_blueprint(post_routes, usl_prefix='/api/posts')
+app.register_blueprint(post_comment_routes, usl_prefix='/api/post_comments')
+app.register_blueprint(player_routes, usl_prefix='/api/players')
+app.register_blueprint(follow_routes, usl_prefix='/api/follows')
 db.init_app(app)
 Migrate(app, db)
 
