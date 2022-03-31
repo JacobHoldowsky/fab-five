@@ -21,3 +21,17 @@ class Player(db.Model):
         back_populates='players',
         secondary=players_teams)
     posts = db.relationship('Post', back_populates='player')
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'position': self.position,
+            'headshot_src': self.headshot_src,
+            'inside_rating': self.inside_rating,
+            'outside_rating': self.outside_rating,
+            'rebound_rating': self.rebound_rating,
+            'defense_rating': self.defense_rating,
+            'hustle_rating': self.hustle_rating
+        }

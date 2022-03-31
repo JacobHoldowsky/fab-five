@@ -11,3 +11,13 @@ class Team_Comment(db.Model):
     
     team = db.relationship('Team', back_populates='team_comments')
     user = db.relationship('User', back_populates='team_comments')
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'content': self.content,
+            'user_id': self.user_id,
+            'team_id': self.team_id,
+            'created_at': self.created_at,
+            'user_username': self.user.username,
+        }
