@@ -18,6 +18,11 @@ const LoginForm = () => {
     }
   };
 
+  const handleDemoUser = async (e) => {
+    e.preventDefault()
+    const data = await dispatch(login('DemoUser@gmail.com', 'Pass!1'))
+  }
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -57,6 +62,7 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type='submit'>Login</button>
+        <button onClick={handleDemoUser}>Demo User Login</button>
       </div>
     </form>
   );

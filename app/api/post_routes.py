@@ -12,6 +12,6 @@ def posts():
 
 @post_routes.route('/<int:id>')
 @login_required
-def posts(id):
+def post(id):
     post = Post.query.get(id)
     return post.to_dict()

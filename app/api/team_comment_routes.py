@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import Team_Comment, team
+from app.models import Team_Comment
 
 team_comment_routes = Blueprint('team_comments', __name__)
 
