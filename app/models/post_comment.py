@@ -11,3 +11,13 @@ class Post_Comment(db.Model):
     
     user = db.relationship('User', back_populates='post_comments')
     post = db.relationship('Post', back_populates='post_comments')
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'content': self.content,
+            'user_id': self.user_id,
+            'post_id': self.post_id,
+            'created_at': self.created_at,
+            'user_username': self.user.username,
+        }

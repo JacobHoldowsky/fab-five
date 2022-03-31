@@ -19,3 +19,14 @@ class Team(db.Model):
 
     team_comments = db.relationship('Team_Comment', back_populates='team', cascade='all, delete')
     user = db.relationship('User', back_populates='teams')
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'city': self.city,
+            'name': self.name,
+            'logo_src': self.logo_src,
+            'created_at': self.created_at,
+            'user_id': self.user_id,
+            'user_username': self.user.username,
+        }
