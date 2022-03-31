@@ -29,6 +29,14 @@ class User(db.Model, UserMixin):
         secondaryjoin=(follow.c.followed_id == id),
         backref=db.backref('followers', lazy='dynamic'), lazy='dynamic'
     )
+    
+    follower = db.relationship(
+        'User',
+        secondary=follow,
+        primaryjoin=(follow.c.followed_id == id),
+        secondaryjoin=(follow.c.follower_id == id),
+        backref=db.backref('followeds', lazy='dynamic'), lazy='dynamic'
+    )
 
     @property
     def password(self):
