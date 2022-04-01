@@ -27,6 +27,7 @@ class Team(db.Model):
             'name': self.name,
             'logo_src': self.logo_src,
             'created_at': self.created_at,
+            'players': [player.to_dict() for player in self.players],
             'user_id': self.user_id,
             'user_username': self.user.username,
         }
