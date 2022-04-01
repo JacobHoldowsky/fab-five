@@ -33,5 +33,10 @@ class Player(db.Model):
             'outside_rating': self.outside_rating,
             'rebound_rating': self.rebound_rating,
             'defense_rating': self.defense_rating,
-            'hustle_rating': self.hustle_rating
+            'hustle_rating': self.hustle_rating,
+            'overall_rating': ((self.inside_rating * 0.2) + 
+                               (self.outside_rating * 0.2) + 
+                               (self.rebound_rating * 0.2) + 
+                               (self.defense_rating * 0.2) + 
+                               (self.hustle_rating * 0.2)) / 1
         }

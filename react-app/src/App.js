@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import Posts from './components/Posts';
+import Teams from './components/Teams'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -45,7 +46,12 @@ function App() {
           <h1>My Home Page</h1>
         </ProtectedRoute>
         <ProtectedRoute path='/posts' exact={true} >
+          <h1>Posts</h1>
           <Posts />
+        </ProtectedRoute>
+        <ProtectedRoute path='/teams' exact={true} >
+          <h1>Teams</h1>
+          <Teams />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

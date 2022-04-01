@@ -1,25 +1,26 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllPosts } from '../store/post'
+import './Posts.css'
 
 const Posts = () => {
     const dispatch = useDispatch()
     const posts = useSelector((state) => Object.values(state.posts))
-    console.log('posts',posts)
+    console.log('posts', posts)
 
     useEffect(() => {
         dispatch(getAllPosts())
     }, [dispatch])
 
     return (
-        <>
-        <h1>Posts</h1>
-        {posts?.map((post) => (
-            <div key={post.id}>
-                <img src={post.img_src} alt="" />
-            </div>
-        ))}
-        </>
+        <div className='post-page-container'>
+            {posts?.map((post) => (
+                <div className='post-container' key={post.id}>
+                    <img className='post-image' src={post.img_src} alt="" />
+                </div>
+            ))}
+        </div>
+
     )
 }
 
