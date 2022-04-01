@@ -24,10 +24,8 @@ const Teams = () => {
                 return (
                     <div className='team'>
                         <div className='team-header'>
-                            <img className='team-logo' src={team.logo_src} alt="" />
                             <div className='team-info'>
-                                <h3>{team.user_username}</h3>
-                                <h3>{team.city} {team.name}</h3>
+                                <img className='team-logo' src={team.logo_src} alt="" />
                             </div>
                         </div>
                         <div className='best-player'>

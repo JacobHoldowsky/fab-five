@@ -10,33 +10,33 @@ def seed_database():
     james = Player(first_name='Lebron',
                    last_name='James',
                    position='SF',
-                   headshot_src='https://images.squarespace-cdn.com/content/v1/59efa1aa90badee876a094b1/1530828512489-VM32D16CUTB5GHQD2B92/Bron-lakers+-+Getty.jpg?format=1000w',
+                   headshot_src='https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png',
                    inside_rating=98,
                    outside_rating=83,
                    rebound_rating=98,
                    defense_rating=94,
                    hustle_rating=98,
                    passing_rating=98,
-                   overall_rating=(98*.2+83*.2+98*.2+94*.2+98*.1+98*.1)/1
+                   overall_rating=(98*.2+83*.15+98*.2+94*.2+98*.1+98*.15)/1
                    )
 
-    kidd = Player(first_name='Jason',
-                  last_name='Kidd',
+    lillard = Player(first_name='Damian',
+                  last_name='Lillard',
                   position='PG',
-                  headshot_src='https://www.nndb.com/people/924/000107603/jason-kidd-2.jpg',
-                  inside_rating=94,
-                  outside_rating=73,
-                  rebound_rating=89,
-                  defense_rating=90,
-                  hustle_rating=94,
-                  passing_rating=97,
-                  overall_rating=(94*.15+77*.15+89*.1+90*.2+94*.15+97*.25)/1
+                  headshot_src='https://cdn.nba.com/headshots/nba/latest/1040x760/203081.png',
+                  inside_rating=96,
+                  outside_rating=87,
+                  rebound_rating=82,
+                  defense_rating=91,
+                  hustle_rating=96,
+                  passing_rating=95,
+                  overall_rating=(96*.15+90*.15+82*.1+94*.2+96*.15+97*.25)/1
                   )
 
     wade = Player(first_name='Dwyane',
                   last_name='Wade',
                   position='SG',
-                  headshot_src='https://www.nba.com/resources/static/team/v2/heat/custom-projects/Player_Bios/imgs/2012-13-dwyane-wade.jpg',
+                  headshot_src='https://cdn.nba.com/headshots/nba/latest/1040x760/2548.png',
                   inside_rating=96,
                   outside_rating=78,
                   rebound_rating=84,
@@ -48,34 +48,34 @@ def seed_database():
 
     davis = Player(first_name='Anthony',
                     last_name='Davis',
-                    position='PF',
-                    headshot_src='https://hoopshype.com/wp-content/uploads/sites/92/2021/10/i_66_cc_8e_anthony-davis.png?w=1000&h=600&crop=1',
+                    position='C',
+                    headshot_src='https://cdn.nba.com/headshots/nba/latest/1040x760/203076.png',
                     inside_rating=94,
                     outside_rating=82,
                     rebound_rating=95,
                     defense_rating=97,
                     hustle_rating=95,
                     passing_rating=92,
-                    overall_rating=(94*.25+82*.1+95*.2+97*.25+95*.1+92*.1)/1
+                    overall_rating=(94*.3+82*.05+95*.25+97*.25+95*.1+92*.05)/1
                     )
 
     howard = Player(first_name='Dwight',
                     last_name='Howard',
                     position='C',
-                    headshot_src='https://nba.nbcsports.com/wp-content/uploads/sites/12/2010/11/howardface.jpg',
-                    inside_rating=93,
+                    headshot_src='https://cdn.nba.com/headshots/nba/latest/1040x760/2730.png',
+                    inside_rating=88,
                     outside_rating=54,
-                    rebound_rating=94,
-                    defense_rating=94,
-                    hustle_rating=92,
-                    passing_rating=80,
-                    overall_rating=(93*.3+54*.05+94*.25+94*.25+92*.1+80*.05)/1
+                    rebound_rating=88,
+                    defense_rating=86,
+                    hustle_rating=84,
+                    passing_rating=74,
+                    overall_rating=(88*.3+54*.05+88*.25+86*.25+84*.1+74*.05)/1
                     )
 
     paul = Player(first_name='Chris',
                   last_name='Paul',
                   position='PG',
-                  headshot_src='https://i.pinimg.com/236x/0c/e1/a4/0ce1a45672e8b02bee94f68c2611c15e--chris-delia.jpg',
+                  headshot_src='https://cdn.nba.com/headshots/nba/latest/1040x760/101108.png',
                   inside_rating=96,
                   outside_rating=88,
                   rebound_rating=78,
@@ -88,7 +88,7 @@ def seed_database():
     bryant = Player(first_name='Kobe',
                     last_name='Bryant',
                     position='SG',
-                    headshot_src='https://assets-sports.thescore.com/basketball/player/203/headshot.png',
+                    headshot_src='https://cdn.nba.com/headshots/nba/latest/1040x760/977.png',
                     inside_rating=97,
                     outside_rating=87,
                     rebound_rating=86,
@@ -101,51 +101,51 @@ def seed_database():
     anthony = Player(first_name='Carmelo',
                      last_name='Anthony',
                      position='SF',
-                     headshot_src='https://www.nicepng.com/png/detail/274-2746546_4-carmelo-anthony-carmelo-anthony.png',
+                     headshot_src='https://cdn.nba.com/headshots/nba/latest/1040x760/2546.png',
                      inside_rating=94,
                      outside_rating=86,
                      rebound_rating=86,
                      defense_rating=82,
                      hustle_rating=88,
                      passing_rating=86,
-                     overall_rating=(94*.2+86*.2+86*.2+82*.2+88*.1+86*.1)/1
+                     overall_rating=(94*.2+86*.15+86*.2+82*.2+88*.1+86*.15)/1
+                     )
+
+    antetokounmpo = Player(first_name='Giannis',
+                     last_name='Antetokounmpo',
+                     position='PF',
+                     headshot_src='https://cdn.nba.com/headshots/nba/latest/1040x760/203507.png',
+                     inside_rating=97,
+                     outside_rating=80,
+                     rebound_rating=97,
+                     defense_rating=98,
+                     hustle_rating=97,
+                     passing_rating=88,
+                     overall_rating=(97*.25+80*.1+97*.2+98*.25+97*.1+88*.1)/1
                      )
 
     garnett = Player(first_name='Kevin',
-                     last_name='Garnett',
-                     position='PF',
-                     headshot_src='https://lifetailored.com/wp-content/uploads/2017/05/21-Kevin-Garnett-415x319.jpg',
-                     inside_rating=97,
-                     outside_rating=70,
-                     rebound_rating=95,
-                     defense_rating=98,
-                     hustle_rating=97,
-                     passing_rating=94,
-                     overall_rating=(97*.25+70*.1+95*.2+98*.25+97*.1+94*.1)/1
-                     )
-
-    oneal = Player(first_name='Shaquille',
-                   last_name="O'neal",
-                   position='C',
-                   headshot_src='https://laverdadnoticias.com/__export/1636559000456/sites/laverdad/img/2021/11/10/shaquille_oneal_trato_de_hacer_una_compra_de_setenta_mil_dolares_en_walmart.jpeg_2090821642.jpeg',
-                   inside_rating=99,
-                   outside_rating=52,
-                   rebound_rating=98,
-                   defense_rating=98,
-                   hustle_rating=96,
-                   passing_rating=82,
-                   overall_rating=(99*.3+52*.05+98*.25+98*.25+96*.1+82*.05)/1
+                   last_name="Garnett",
+                   position='PF',
+                   headshot_src='https://cdn.nba.com/headshots/nba/latest/1040x760/708.png',
+                   inside_rating=95,
+                   outside_rating=70,
+                   rebound_rating=96,
+                   defense_rating=97,
+                   hustle_rating=97,
+                   passing_rating=84,
+                   overall_rating=(95*.25+70*.1+96*.2+97*.25+97*.1+84*.1)/1
                    )
 
     db.session.add(james)
-    db.session.add(kidd)
+    db.session.add(lillard)
     db.session.add(wade)
     db.session.add(davis)
-    db.session.add(oneal)
+    db.session.add(garnett)
     db.session.add(paul)
     db.session.add(bryant)
     db.session.add(anthony)
-    db.session.add(garnett)
+    db.session.add(antetokounmpo)
     db.session.add(howard)
 
     """
@@ -153,22 +153,22 @@ def seed_database():
     """
     bulls = Team(city='Chicago',
                  name='Bulls',
-                 logo_src='https://pngimage.net/wp-content/uploads/2019/05/red-bull-logo-white-png-1.png',
-                 players=[kidd, wade, james, davis, oneal],
+                 logo_src='https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg',
+                 players=[lillard, wade, james, garnett, davis],
                  user_id=1
                  )
 
     lakers = Team(city='Los Angeles',
                   name='Lakers',
-                  logo_src='https://www.nba.com/lakers/sites/lakers/files/ts_180804logo.jpg?w=756&h=440',
-                  players=[paul, bryant, anthony, garnett, howard],
+                  logo_src='https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg',
+                  players=[paul, bryant, anthony, antetokounmpo, howard],
                   user_id=2
                   )
 
     nets = Team(city='Brooklyn',
                 name='Nets',
-                logo_src='https://images.thdstatic.com/productImages/f7c5f737-51ed-47e0-b84d-80ea97446447/svn/black-applied-icon-wall-decals-nbop0303-64_1000.jpg',
-                players=[kidd, bryant, james, garnett, oneal],
+                logo_src='https://cdn.nba.com/logos/nba/1610612751/primary/L/logo.svg',
+                players=[lillard, bryant, anthony, garnett, davis],
                 user_id=3
                 )
 
