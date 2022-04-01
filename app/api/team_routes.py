@@ -10,7 +10,6 @@ def followed_teams(user_id):
     user = User.query.get(user_id)
     # teams = user.followed_teams()
     teams = Team.query.all()
-    print('TEAMSsssssssssssssafdasdfasdfasd', teams)
     return {'teams': [team.to_dict() for team in teams]}
 
 @team_routes.route('/<int:id>')

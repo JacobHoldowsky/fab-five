@@ -15,7 +15,8 @@ class Team(db.Model):
     players = db.relationship(
         'Player',
         back_populates='teams',
-        secondary=players_teams)
+        secondary=players_teams,
+        order_by='Player.overall_rating.desc()')
 
     team_comments = db.relationship('Team_Comment', back_populates='team', cascade='all, delete')
     user = db.relationship('User', back_populates='teams')

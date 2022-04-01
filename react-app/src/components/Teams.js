@@ -9,47 +9,54 @@ const Teams = () => {
     const currentUser = useSelector((state) => state.session.user)
 
 
+
     useEffect(() => {
         dispatch(getAllFollowedTeams(currentUser.id))
     }, [dispatch, currentUser.id])
 
     return (
-        <>
-            <div>
-                {teams?.map((team) => {
-                    let bestPlayer = {}
-                    let bestOverallRating = 0
-                    for (let i = 0; i < team.players.length; i++) {
-                        let player = team.players[0]
-                        if (player.overall_rating > bestOverallRating) {
-                            bestOverallRating = player.overall_rating
-                            bestPlayer = player
-                        }
-                    }
-                    let remainingPlayers = team.players.splice(team.players.indexOf(bestPlayer), 1)
-                    console.log('BEST', bestPlayer)
-                    console.log('REMAINING',remainingPlayers)
-                    return <>
-                                <div>
-                                    <img src={bestPlayer.headshot_src} alt="" />
-                                </div>
-                                <div>
-                                    {remainingPlayers.map((player) => (
-                                        <img src={player.headshot_src} alt="" />
-                                    ))}
-                                </div>
-                           </>
-
-                })}
-            </div>
-            {/* <div>
-                {teams?.map((team) => (
-                    team.players.map((player) => (
-                        <img src={player.headshot_src} alt="" />
-                    ))
-                ))}
-            </div> */}
-        </>
+        <div className='team-page'>
+            {teams?.map((team) => {
+                const bestPlayer = team.players[0]
+                const remainingPlayers = team.players.slice(1)
+                const remainingPlayers1 = remainingPlayers.slice(0,2)
+                const remainingPlayers2 = remainingPlayers.slice(2)
+                return (
+                    <div className='team'>
+                        <div className='team-header'>
+                            <img className='team-logo' src={team.logo_src} alt="" />
+                            <div className='team-info'>
+                                <h3>{team.user_username}</h3>
+                                <h3>{team.city} {team.name}</h3>
+                            </div>
+                        </div>
+                        <div className='best-player'>
+                            <img className='best-player-img' src={bestPlayer.headshot_src} alt="" />
+                        </div>
+                        <div className='remaining-players'>
+                            <div className='remaining-players-1'>
+                                {remainingPlayers1.map((player) => {
+                                    return <>
+                                        <div className='remaining-player'>
+                                            <img className='remaining-player-img' src={player.headshot_src} alt="" />
+                                        </div>
+                                    </>
+                                })}
+                            </div>
+                            <div className='remaining-players-2'>
+                                {remainingPlayers2.map((player) => {
+                                    return <>
+                                        <div className='remaining-player'>
+                                            <img className='remaining-player-img' src={player.headshot_src} alt="" />
+                                        </div>
+                                    </>
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                )
+            })}
+        </div>
     )
 }
 

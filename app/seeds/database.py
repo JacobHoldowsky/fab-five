@@ -15,7 +15,9 @@ def seed_database():
                    outside_rating=83,
                    rebound_rating=98,
                    defense_rating=94,
-                   hustle_rating=98
+                   hustle_rating=98,
+                   passing_rating=98,
+                   overall_rating=(98*.2+83*.2+98*.2+94*.2+98*.1+98*.1)/1
                    )
 
     kidd = Player(first_name='Jason',
@@ -26,7 +28,9 @@ def seed_database():
                   outside_rating=73,
                   rebound_rating=89,
                   defense_rating=90,
-                  hustle_rating=94
+                  hustle_rating=94,
+                  passing_rating=97,
+                  overall_rating=(94*.15+77*.15+89*.1+90*.2+94*.15+97*.25)/1
                   )
 
     wade = Player(first_name='Dwyane',
@@ -36,30 +40,36 @@ def seed_database():
                   inside_rating=96,
                   outside_rating=78,
                   rebound_rating=84,
-                  defense_rating=92,
-                  hustle_rating=95
+                  defense_rating=93,
+                  hustle_rating=95,
+                  passing_rating=87,
+                  overall_rating=(96*.2+78*.2+84*.2+93*.15+95*.1+87*.15)/1
                   )
 
-    martin = Player(first_name='Kenyon',
-                    last_name='Martin',
+    davis = Player(first_name='Anthony',
+                    last_name='Davis',
                     position='PF',
-                    headshot_src='http://thehoopdoctors.com/wp-content/uploads/2014/11/kenyon_martin.jpg',
-                    inside_rating=84,
-                    outside_rating=52,
-                    rebound_rating=88,
-                    defense_rating=86,
-                    hustle_rating=87
+                    headshot_src='https://hoopshype.com/wp-content/uploads/sites/92/2021/10/i_66_cc_8e_anthony-davis.png?w=1000&h=600&crop=1',
+                    inside_rating=94,
+                    outside_rating=82,
+                    rebound_rating=95,
+                    defense_rating=97,
+                    hustle_rating=95,
+                    passing_rating=92,
+                    overall_rating=(94*.25+82*.1+95*.2+97*.25+95*.1+92*.1)/1
                     )
 
     howard = Player(first_name='Dwight',
                     last_name='Howard',
                     position='C',
                     headshot_src='https://nba.nbcsports.com/wp-content/uploads/sites/12/2010/11/howardface.jpg',
-                    inside_rating=97,
+                    inside_rating=93,
                     outside_rating=54,
                     rebound_rating=94,
-                    defense_rating=95,
-                    hustle_rating=95
+                    defense_rating=94,
+                    hustle_rating=92,
+                    passing_rating=80,
+                    overall_rating=(93*.3+54*.05+94*.25+94*.25+92*.1+80*.05)/1
                     )
 
     paul = Player(first_name='Chris',
@@ -70,7 +80,9 @@ def seed_database():
                   outside_rating=88,
                   rebound_rating=78,
                   defense_rating=93,
-                  hustle_rating=97
+                  hustle_rating=97,
+                  passing_rating=98,
+                  overall_rating=(96*.15+88*.15+78*.1+93*.2+97*.15+98*.25)/1
                   )
 
     bryant = Player(first_name='Kobe',
@@ -78,10 +90,12 @@ def seed_database():
                     position='SG',
                     headshot_src='https://assets-sports.thescore.com/basketball/player/203/headshot.png',
                     inside_rating=97,
-                    outside_rating=84,
-                    rebound_rating=81,
-                    defense_rating=90,
-                    hustle_rating=98
+                    outside_rating=87,
+                    rebound_rating=86,
+                    defense_rating=93,
+                    hustle_rating=99,
+                    passing_rating=92,
+                    overall_rating=(97*.2+84*.2+81*.2+90*.15+98*.1+92*.15)/1
                     )
 
     anthony = Player(first_name='Carmelo',
@@ -92,7 +106,9 @@ def seed_database():
                      outside_rating=86,
                      rebound_rating=86,
                      defense_rating=82,
-                     hustle_rating=88
+                     hustle_rating=88,
+                     passing_rating=86,
+                     overall_rating=(94*.2+86*.2+86*.2+82*.2+88*.1+86*.1)/1
                      )
 
     garnett = Player(first_name='Kevin',
@@ -103,7 +119,9 @@ def seed_database():
                      outside_rating=70,
                      rebound_rating=95,
                      defense_rating=98,
-                     hustle_rating=97
+                     hustle_rating=97,
+                     passing_rating=94,
+                     overall_rating=(97*.25+70*.1+95*.2+98*.25+97*.1+94*.1)/1
                      )
 
     oneal = Player(first_name='Shaquille',
@@ -114,13 +132,15 @@ def seed_database():
                    outside_rating=52,
                    rebound_rating=98,
                    defense_rating=98,
-                   hustle_rating=96
+                   hustle_rating=96,
+                   passing_rating=82,
+                   overall_rating=(99*.3+52*.05+98*.25+98*.25+96*.1+82*.05)/1
                    )
 
     db.session.add(james)
     db.session.add(kidd)
     db.session.add(wade)
-    db.session.add(martin)
+    db.session.add(davis)
     db.session.add(oneal)
     db.session.add(paul)
     db.session.add(bryant)
@@ -134,7 +154,7 @@ def seed_database():
     bulls = Team(city='Chicago',
                  name='Bulls',
                  logo_src='https://pngimage.net/wp-content/uploads/2019/05/red-bull-logo-white-png-1.png',
-                 players=[kidd, wade, james, martin, oneal],
+                 players=[kidd, wade, james, davis, oneal],
                  user_id=1
                  )
 
