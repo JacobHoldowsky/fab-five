@@ -15,6 +15,8 @@ class Player(db.Model):
     rebound_rating = db.Column(db.Integer, nullable=False)
     defense_rating = db.Column(db.Integer, nullable=False)
     hustle_rating = db.Column(db.Integer, nullable=False)
+    passing_rating = db.Column(db.Integer, nullable=False)
+    overall_rating = db.Column(db.Integer, nullable=False)
 
     teams = db.relationship(
         'Team',
@@ -34,9 +36,5 @@ class Player(db.Model):
             'rebound_rating': self.rebound_rating,
             'defense_rating': self.defense_rating,
             'hustle_rating': self.hustle_rating,
-            'overall_rating': ((self.inside_rating * 0.2) + 
-                               (self.outside_rating * 0.2) + 
-                               (self.rebound_rating * 0.2) + 
-                               (self.defense_rating * 0.2) + 
-                               (self.hustle_rating * 0.2)) / 1
+            'overall_rating': self.overall_rating
         }
