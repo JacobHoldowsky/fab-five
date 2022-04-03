@@ -36,6 +36,7 @@ class Player(db.Model):
             'rebound_rating': self.rebound_rating,
             'defense_rating': self.defense_rating,
             'hustle_rating': self.hustle_rating,
+            'passing_rating': self.passing_rating,
             'overall_rating': self.overall_rating,
             'posts': [post.to_dict() for post in self.posts]
         }
