@@ -51,7 +51,7 @@ def seed_database():
                     position='C',
                     headshot_src='https://cdn.nba.com/headshots/nba/latest/1040x760/203076.png',
                     inside_rating=94,
-                    outside_rating=82,
+                    outside_rating=78,
                     rebound_rating=95,
                     defense_rating=97,
                     hustle_rating=95,
