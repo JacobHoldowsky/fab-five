@@ -285,4 +285,5 @@ def undo_database():
     db.session.execute('TRUNCATE team_comments RESTART IDENTITY CASCADE;')
     db.session.execute('TRUNCATE posts RESTART IDENTITY CASCADE;')
     db.session.execute('TRUNCATE post_comments RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE players RESTART IDENTITY CASCADE;')
     db.session.commit()
