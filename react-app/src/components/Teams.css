@@ -5,32 +5,39 @@
     gap: 50px;
 }
 
+.team-header{
+    display: flex;
+    align-items: flex-end;
+}
+
+.team-info {
+    display: flex;
+    gap: 10px;
+    margin-left: 15px;
+    margin-bottom: 16px;
+    font-family: fantasy;
+    font-size: x-large;
+    align-items: center;
+    /* align-items: flex-end; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+}
+
 .team{
     display: flex;
     justify-content: center;
     align-items: center;
     gap:20px;
-    border: 2px solid black;
+    border: 3px solid black;
     border-radius: 25px;
-    padding:30px;
-}
-
-.team-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.team-name{
-    display: flex;
-    flex-wrap: wrap;
-    font-family: fantasy;
-    font-size: 36px;
+    padding:15px;
+    width: fit-content;
 }
 
 .team-logo{
     width: 15vw;
     border-radius: 25px;
+    /* margin-left:35px; */
 }
 
 .best-player-img{
