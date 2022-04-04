@@ -10,6 +10,12 @@
     align-items: flex-end;
 }
 
+.team-info-and-overall{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .team-info {
     display: flex;
     gap: 10px;
@@ -21,6 +27,12 @@
     /* align-items: flex-end; */
     /* flex-direction: column; */
     /* align-items: center; */
+}
+
+.overall-team-rating{
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
 }
 
 .team{
@@ -77,3 +89,4 @@ flex-wrap: wrap;
     /* padding: 10px; */
     border-radius: 25px;
 }
+
