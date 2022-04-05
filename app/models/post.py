@@ -1,3 +1,4 @@
+from app.api.post_comment_routes import post_comments
 from .db import db
 
 class Post(db.Model):
@@ -31,5 +32,6 @@ class Post(db.Model):
             'player_outside_rating': self.player.outside_rating,
             'player_rebound_rating': self.player.rebound_rating,
             'player_defense_rating': self.player.defense_rating,
-            'player_hustle_rating': self.player.hustle_rating
+            'player_hustle_rating': self.player.hustle_rating,
+            'post_comments': [post_comment.to_dict() for post_comment in self.post_comments]
         }
