@@ -12,10 +12,12 @@ const PostDetail = () => {
     const [content, setContent] = useState('')
     const { postId } = useParams()
     const post = useSelector((state) => state.posts[postId])
-    console.log('POST', post)
-    const postComments = post?.post_comments
+    const postComments = Object.values(post?.post_comments).reverse()
 
 
+    useEffect(() => {
+        dispatch(getAllPosts())
+    }, [dispatch])
 
     const handleComment = async (e) => {
         e.preventDefault()
@@ -25,9 +27,6 @@ const PostDetail = () => {
         setContent('')
     }
 
-    useEffect(() => (
-        dispatch(getAllPosts())
-    ), [dispatch])
 
     return (
         <>
@@ -47,7 +46,7 @@ const PostDetail = () => {
                         <h2>Comments</h2>
                         <div className='comment-box-and-btn'>
                             <div>
-                                <form onSubmit={handleComment}>
+                                <form className='comment-form' onSubmit={handleComment}>
                                     <textarea
                                         type='text'
                                         name='content'
@@ -57,14 +56,16 @@ const PostDetail = () => {
                                         required
                                     >
                                     </textarea>
-                                    <button className='btn' type='submit'>Submit</button>
+                                    <div className='btn'>
+                                        <button  type='submit'>Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div className='comment-cont'>
                         {postComments?.map((comment) => (
-                            <div className='poster-and-comment'>
+                            <div key={comment.id} className='poster-and-comment'>
                                 <NavLink to={`/users/${comment.user_id}`} className='comment-username'>{comment.user_username}</NavLink>
                                 <div className='comment-content'>
                                     {comment.content}

@@ -23,15 +23,28 @@
     margin-top: 15px;
 }
 
+.comment-form{
+    display: flex;
+    flex-direction: column;
+    gap: 25px
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+}
+
 .textarea{
     border-radius: 2px;
+    width: 400px;
+    height: 100px
 }
 
 .comment-box-and-btn{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .comments-poster{
@@ -51,7 +64,7 @@
 .comment-content{
     /* border: 2px solid black; */
     padding: 10px;
-    border-radius: 6px;
+    border-radius: 15px;
     background-color: rgb(189, 214, 253);
     margin-top: 10px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

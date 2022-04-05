@@ -33,5 +33,5 @@ class Post(db.Model):
             'player_rebound_rating': self.player.rebound_rating,
             'player_defense_rating': self.player.defense_rating,
             'player_hustle_rating': self.player.hustle_rating,
-            'post_comments': [post_comment.to_dict() for post_comment in self.post_comments]
+            'post_comments': {post_comment.id: post_comment.to_dict() for post_comment in self.post_comments}
         }
