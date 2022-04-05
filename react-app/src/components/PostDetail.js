@@ -4,36 +4,31 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { NavLink } from 'react-router-dom'
-import { getAllPosts } from '../store/post'
+import { createComment, getAllPosts } from '../store/post'
 import './PostDetail.css'
 
 const PostDetail = () => {
     const dispatch = useDispatch()
-    const [content, setContent] = useState()
+    const [content, setContent] = useState('')
     const { postId } = useParams()
     const post = useSelector((state) => state.posts[postId])
+    console.log('POST', post)
     const postComments = post?.post_comments
 
-    const handleComment = async () => {
-        const response = await fetch(`/api/post_comments/${post?.id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(content)
-        });
 
-        if (response.ok) {
-            const data = await response.json()
-            return data
-        } else {
-            return ['An error occurred. Please try again.']
-        }
+
+    const handleComment = async (e) => {
+        e.preventDefault()
+        const newComment = { content }
+        await dispatch(createComment(newComment, post.id))
+        await dispatch(getAllPosts())
+        setContent('')
     }
 
     useEffect(() => (
         dispatch(getAllPosts())
     ), [dispatch])
+
     return (
         <>
             <div className='page-cont'>
@@ -52,10 +47,18 @@ const PostDetail = () => {
                         <h2>Comments</h2>
                         <div className='comment-box-and-btn'>
                             <div>
-                                <textarea className="textarea" value={content} onChange={() => setContent(content)} cols="30" rows="10"></textarea>
-                            </div>
-                            <div>
-                                <button className='btn' onClick={handleComment}>Submit</button>
+                                <form onSubmit={handleComment}>
+                                    <textarea
+                                        type='text'
+                                        name='content'
+                                        className="textarea"
+                                        value={content}
+                                        onChange={(e) => setContent(e.target.value)}
+                                        required
+                                    >
+                                    </textarea>
+                                    <button className='btn' type='submit'>Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
