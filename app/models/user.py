@@ -27,7 +27,8 @@ class User(db.Model, UserMixin):
         secondary=follow,
         primaryjoin=(follow.c.follower_id == id),
         secondaryjoin=(follow.c.followed_id == id),
-        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic'
+        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic',
+        overlaps="followed,followers"
     )
     
     follower = db.relationship(
@@ -35,7 +36,8 @@ class User(db.Model, UserMixin):
         secondary=follow,
         primaryjoin=(follow.c.followed_id == id),
         secondaryjoin=(follow.c.follower_id == id),
-        backref=db.backref('followeds', lazy='dynamic'), lazy='dynamic'
+        backref=db.backref('followeds', lazy='dynamic'), lazy='dynamic',
+        overlaps="followed,followers"
     )
 
     @property

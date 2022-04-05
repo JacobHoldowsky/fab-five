@@ -12,6 +12,7 @@ import Posts from './components/Posts';
 import Teams from './components/Teams'
 import PlayerDetail from './components/PlayerDetail';
 import TeamDetail from './components/TeamDetail';
+import PostDetail from './components/PostDetail';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -60,6 +61,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/teams/:teamId' exact={true} >
           <TeamDetail />
+        </ProtectedRoute>
+        <ProtectedRoute path='/players/:playerId/posts/:postId' exact={true} >
+          <PostDetail />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

@@ -20,7 +20,10 @@ const Teams = () => {
     return (
         <div className='team-page'>
             {teams?.map((team) => {
+
                 const bestPlayer = team.players[0]
+                let teamOverallRating = 0
+                team.players.forEach((player) => teamOverallRating += player.overall_rating)
                 const remainingPlayers = team.players.slice(1)
                 const remainingPlayers1 = remainingPlayers.slice(0, 2)
                 const remainingPlayers2 = remainingPlayers.slice(2)
@@ -30,14 +33,22 @@ const Teams = () => {
                             <NavLink to={`teams/${team.id}`}>
                                 <img className='team-logo' src={team.logo_src} alt="" />
                             </NavLink>
-                            <div className='team-info'>
-                                <NavLink className='team-full-name' to={`teams/${team.id}`}>
-                                    {team.city} {team.name}
-                                </NavLink>
-                                <div> | </div>
-                                <NavLink className='team-owner' to={`users/${team.user_id}`}>
-                                    {team.user_username}
-                                </NavLink>
+                            <div className='team-info-and-overall'>
+                                <div className='team-info'>
+                                    <NavLink className='team-full-name' to={`teams/${team.id}`}>
+                                        {team.city} {team.name}
+                                    </NavLink>
+                                    <div> | </div>
+                                    <div className='overall-team-rating'>
+                                        <div>
+                                            {Math.round(teamOverallRating / 5)} Overall
+                                        </div>
+                                    </div>
+                                    <div> | </div>
+                                    <NavLink className='team-owner' to={`users/${team.user_id}`}>
+                                        {team.user_username}
+                                    </NavLink>
+                                </div>
                             </div>
                         </div>
                         <div className='team'>
