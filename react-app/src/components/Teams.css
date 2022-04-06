@@ -16,6 +16,7 @@
     align-items: center;
 }
 
+
 .team-info {
     display: flex;
     gap: 10px;
@@ -29,10 +30,20 @@
     /* align-items: center; */
 }
 
+.logo-and-overall{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .overall-team-rating{
     display: flex;
     /* flex-direction: column; */
     align-items: center;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: x-large;
+    margin-bottom: 20px;
 }
 
 .team{

@@ -7,8 +7,8 @@ const loadFollowedTeams = (teams) => {
     }
 }
 
-export const getAllFollowedTeams = (userId) => async (dispatch) => {
-    const response = await fetch(`/api/teams/${userId}`);
+export const getAllFollowedTeams = () => async (dispatch) => {
+    const response = await fetch(`/api/teams/`);
 
     if (response.ok) {
         const data = await response.json();

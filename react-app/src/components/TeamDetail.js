@@ -1,23 +1,34 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { NavLink } from "react-router-dom"
+import { createTeamComment } from "../store/post"
 import { getAllFollowedTeams } from "../store/team"
 import './TeamDetail.css'
 
 
 const TeamDetail = () => {
     const dispatch = useDispatch()
+    const [teamComment, setTeamComment] = useState('')
     const { teamId } = useParams()
     const user = useSelector((state) => state.session.user)
+    const team = useSelector((state) => state.teams[teamId])
+    const teamComments = Object.values(team?.team_comments)
 
     useEffect(() => {
-        dispatch(getAllFollowedTeams(user.id))
-    }, [dispatch, user.id, teamId]);
+        dispatch(getAllFollowedTeams())
+    }, [dispatch]);
 
-    const teams = useSelector((state) => state.teams)
-    const team = teams[teamId]
-    console.log('teams', teams)
+    const handleComment = async (e) => {
+        e.preventDefault()
+        const newComment = { teamComment }
+        await dispatch(createTeamComment(newComment, teamId))
+        await dispatch(getAllFollowedTeams())
+        setTeamComment('')
+    }
+
+    // const team = teams[teamId]
+    // console.log('teams', teams)
     console.log('team', team)
 
     const bestPlayer = team?.players[0]
@@ -50,17 +61,21 @@ const TeamDetail = () => {
                 <h1>{team?.city} {team?.name}</h1>
             </div>
             <div className='ratings-and-bp'>
-                <div className='team-ratings'>
-                    <div className='team-overall-rating'>Overall: {Math.round(teamOverall/5)}</div>
-                </div>
                 <div className='td-best-player-cont'>
                     <NavLink to={`/players/${bestPlayer?.id}`}>
                         <img className='td-best-player-img' src={bestPlayer?.headshot_src} alt="" />
                     </NavLink>
-                    <NavLink to={`/players/${bestPlayer?.id}`}>{bestPlayer?.first_name} {bestPlayer?.last_name}</NavLink>
-                </div>
-                <div>
-
+                    <div className='td-player-info'>
+                        <NavLink to={`/players/${bestPlayer?.id}`}>
+                            {bestPlayer?.first_name} {bestPlayer?.last_name}
+                        </NavLink>
+                        <div>
+                            |
+                        </div>
+                        <div>
+                            {bestPlayer?.overall_rating} Overall
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className='team-detail-rp'>
@@ -69,7 +84,89 @@ const TeamDetail = () => {
                         <NavLink to={`/players/${player.id}`}>
                             <img className='td-player-img' src={player.headshot_src} alt="" />
                         </NavLink>
-                        <NavLink to={`/players/${player.id}`}>{player.first_name} {player.last_name}</NavLink>
+                        <div className='td-player-info'>
+                            <NavLink to={`/players/${player.id}`}>{player.first_name} {player.last_name}</NavLink>
+                            <div>
+                                |
+                            </div>
+                            <div>
+                                {player.overall_rating} Overall
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <div>
+                <div className='team-ratings'>
+                    <div className='player-info'>
+                        <div className='overall-rating'>
+                            <div className='overall-label'>Team Overall</div>
+                            <div className='overall-num'>{Math.round(teamOverall / 5)}</div>
+                        </div>
+                        <div className='other-ratings'>
+                            <div className='left-ratings'>
+                                <div className='left-rating-labels'>
+                                    <div>Inside Scoring:</div>
+                                    <div>Outside Scoring:</div>
+                                    <div>Defense:</div>
+                                </div>
+                                <div>
+                                    <div>{Math.round(teamInside / 5)}</div>
+                                    <div>{Math.round(teamOutside / 5)}</div>
+                                    <div>{Math.round(teamDefense / 5)}</div>
+                                </div>
+                            </div>
+                            <div className='right-ratings'>
+                                <div className='left-rating-labels'>
+                                    <div>Rebounding:</div>
+                                    <div>Hustle:</div>
+                                    <div>Passing:</div>
+                                </div>
+                                <div>
+                                    <div>{Math.round(teamRebounding / 5)}</div>
+                                    <div>{Math.round(teamHustle / 5)}</div>
+                                    <div>{Math.round(teamPassing / 5)}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='td-team-creator' >
+                    <div >
+                        Team created by:
+                    </div>
+                    <NavLink to={`/users/${team?.user_id}`}>
+                        {team?.user_username}
+                    </NavLink>
+                </div>
+            </div>
+            <div className='td-comments'>
+                <div>
+                    <h2>What do you think about this team?</h2>
+                </div>
+            </div>
+            <form className='td-form' onSubmit={handleComment}>
+                <textarea
+                    type='text'
+                    name="team_comment"
+                    classname='textarea'
+                    value={teamComment}
+                    onChange={(e) => setTeamComment(e.target.value)}
+                    required
+                    cols="30"
+                    rows="8">
+                </textarea>
+                <div className='btn'>
+                    <button type='submit'>Submit</button>
+                </div>
+            </form>
+            <div className='comment-cont'>
+                {teamComments?.map((comment) => (
+                    <div key={comment.id} className='poster-and-comment'>
+                        <NavLink to={`/users/${comment.user_id}`} className='comment-username'>{comment.user_username}</NavLink>
+                        <div className='comment-content'>
+                            {comment.content}
+                        </div>
                     </div>
                 ))}
             </div>

@@ -1,13 +1,13 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
+from flask_login import current_user, login_required
 from app.models import Team, User
 
 team_routes = Blueprint('teams', __name__)
 
-@team_routes.route('/<int:user_id>')
+@team_routes.route('/')
 @login_required
-def followed_teams(user_id):
-    user = User.query.get(user_id)
+def followed_teams():
+    user = User.query.get(current_user.id)
     # teams = user.followed_teams()
     teams = Team.query.all()
     return {'teams': [team.to_dict() for team in teams]}
