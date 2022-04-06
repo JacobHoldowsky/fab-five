@@ -4,6 +4,7 @@ import { useParams } from "react-router"
 import { getAllPlayers } from "../store/player"
 import { NavLink } from 'react-router-dom'
 import './PlayerDetail.css'
+import PostDetail from "./PostDetail"
 
 
 const PlayerDetail = () => {
@@ -46,7 +47,7 @@ const PlayerDetail = () => {
                         <div className='right-ratings'>
                             <div className='left-rating-labels'>
                                 <div>Rebounding:</div>
-                                <div>Hustle Rating:</div>
+                                <div>Hustle:</div>
                                 <div>Passing:</div>
                             </div>
                             <div>
@@ -59,7 +60,7 @@ const PlayerDetail = () => {
                 </div>
                 <div className='posts'>
                     {posts && posts.map((post) => (
-                        <div className='post-container'>
+                        <div key={post.id} className='post-container'>
                             <NavLink to={`${post.player_id}/posts/${post.id}`}>
                                 <img className='post-img' src={post.img_src} alt="" />
                             </NavLink>

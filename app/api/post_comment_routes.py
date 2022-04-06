@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from app.api.auth_routes import validation_errors_to_error_messages
-from app.forms.post_comment_form import PostCommentForm
+from app.forms import PostCommentForm
 from app.models import Post_Comment, db
 
 post_comment_routes = Blueprint('post_comments', __name__)
@@ -30,12 +30,12 @@ def post_comment(id):
 @post_comment_routes.route('/<int:post_id>', methods=['POST'])
 @login_required
 def create_post_comment(post_id):
-    print('HELOOOOOOOOOOOOOOOOOOOOOOO')
     form = PostCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        content=form.data['content']
         post_comment = Post_Comment(
-            content=form.data['content'],
+            content=content,
             user_id=current_user.id,
             post_id=post_id,
             created_at=datetime.now()
@@ -43,5 +43,7 @@ def create_post_comment(post_id):
         db.session.add(post_comment)
         db.session.commit()
         return post_comment.to_dict()
+    if form.errors:
+        return form.errors
     
     

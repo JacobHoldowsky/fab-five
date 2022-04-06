@@ -13,6 +13,7 @@ import Teams from './components/Teams'
 import PlayerDetail from './components/PlayerDetail';
 import TeamDetail from './components/TeamDetail';
 import PostDetail from './components/PostDetail';
+import { getAllPosts } from './store/post';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -21,6 +22,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      await dispatch(getAllPosts())
       setLoaded(true);
     })();
   }, [dispatch]);

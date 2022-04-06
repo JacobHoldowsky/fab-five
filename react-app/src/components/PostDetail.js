@@ -4,36 +4,30 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { NavLink } from 'react-router-dom'
-import { getAllPosts } from '../store/post'
+import { createComment, getAllPosts } from '../store/post'
 import './PostDetail.css'
 
 const PostDetail = () => {
     const dispatch = useDispatch()
-    const [content, setContent] = useState()
+    const [content, setContent] = useState('')
     const { postId } = useParams()
     const post = useSelector((state) => state.posts[postId])
-    const postComments = post?.post_comments
+    const postComments = Object.values(post?.post_comments).reverse()
 
-    const handleComment = async () => {
-        const response = await fetch(`/api/post_comments/${post?.id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(content)
-        });
 
-        if (response.ok) {
-            const data = await response.json()
-            return data
-        } else {
-            return ['An error occurred. Please try again.']
-        }
+    useEffect(() => {
+        dispatch(getAllPosts())
+    }, [dispatch])
+
+    const handleComment = async (e) => {
+        e.preventDefault()
+        const newComment = { content }
+        await dispatch(createComment(newComment, post.id))
+        await dispatch(getAllPosts())
+        setContent('')
     }
 
-    useEffect(() => (
-        dispatch(getAllPosts())
-    ), [dispatch])
+
     return (
         <>
             <div className='page-cont'>
@@ -52,16 +46,26 @@ const PostDetail = () => {
                         <h2>Comments</h2>
                         <div className='comment-box-and-btn'>
                             <div>
-                                <textarea className="textarea" value={content} onChange={() => setContent(content)} cols="30" rows="10"></textarea>
-                            </div>
-                            <div>
-                                <button className='btn' onClick={handleComment}>Submit</button>
+                                <form className='comment-form' onSubmit={handleComment}>
+                                    <textarea
+                                        type='text'
+                                        name='content'
+                                        className="textarea"
+                                        value={content}
+                                        onChange={(e) => setContent(e.target.value)}
+                                        required
+                                    >
+                                    </textarea>
+                                    <div className='btn'>
+                                        <button  type='submit'>Submit</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <div className='comment-cont'>
                         {postComments?.map((comment) => (
-                            <div className='poster-and-comment'>
+                            <div key={comment.id} className='poster-and-comment'>
                                 <NavLink to={`/users/${comment.user_id}`} className='comment-username'>{comment.user_username}</NavLink>
                                 <div className='comment-content'>
                                     {comment.content}
