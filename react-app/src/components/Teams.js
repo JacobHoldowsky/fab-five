@@ -34,16 +34,15 @@ const Teams = () => {
                                 <img className='team-logo' src={team.logo_src} alt="" />
                             </NavLink>
                             <div className='team-info-and-overall'>
+                                <div className='overall-team-rating'>
+                                    <div>
+                                        {Math.round(teamOverallRating / 5)} Overall
+                                    </div>
+                                </div>
                                 <div className='team-info'>
                                     <NavLink className='team-full-name' to={`teams/${team.id}`}>
                                         {team.city} {team.name}
                                     </NavLink>
-                                    <div> | </div>
-                                    <div className='overall-team-rating'>
-                                        <div>
-                                            {Math.round(teamOverallRating / 5)} Overall
-                                        </div>
-                                    </div>
                                     <div> | </div>
                                     <NavLink className='team-owner' to={`users/${team.user_id}`}>
                                         {team.user_username}

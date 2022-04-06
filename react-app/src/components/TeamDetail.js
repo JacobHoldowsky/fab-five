@@ -54,7 +54,15 @@ const TeamDetail = () => {
                     <NavLink to={`/players/${bestPlayer?.id}`}>
                         <img className='td-best-player-img' src={bestPlayer?.headshot_src} alt="" />
                     </NavLink>
-                    <NavLink to={`/players/${bestPlayer?.id}`}>{bestPlayer?.first_name} {bestPlayer?.last_name}</NavLink>
+                    <div className ='td-player-info'>
+                        <NavLink to={`/players/${bestPlayer?.id}`}>{bestPlayer?.first_name} {bestPlayer?.last_name}</NavLink>
+                        <div>
+                            |
+                        </div>
+                        <div>
+                            {bestPlayer?.overall_rating} Overall
+                        </div>
+                    </div>
                 </div>
                 <div>
 
@@ -66,7 +74,15 @@ const TeamDetail = () => {
                         <NavLink to={`/players/${player.id}`}>
                             <img className='td-player-img' src={player.headshot_src} alt="" />
                         </NavLink>
-                        <NavLink to={`/players/${player.id}`}>{player.first_name} {player.last_name}</NavLink>
+                        <div className='td-player-info'>
+                            <NavLink to={`/players/${player.id}`}>{player.first_name} {player.last_name}</NavLink>
+                            <div>
+                                |
+                            </div>
+                            <div>
+                                {player.overall_rating} Overall
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>

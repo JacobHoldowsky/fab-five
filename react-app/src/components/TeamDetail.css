@@ -20,6 +20,11 @@
     gap: 25px;
 }
 
+.td-player-info{
+    display: flex;
+    gap: 10px;
+}
+
 .team-detail-rp{
     display: flex;
     gap: 50px;
