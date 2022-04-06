@@ -15,6 +15,7 @@ import TeamDetail from './components/TeamDetail';
 import PostDetail from './components/PostDetail';
 import { getAllPosts } from './store/post';
 import { getAllFollowedTeams } from './store/team';
+import NewTeamForm from './components/NewTeamForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -63,6 +64,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/players/:playerId' exact={true} >
           <PlayerDetail />
+        </ProtectedRoute>
+        <ProtectedRoute path='/teams/new' exact={true} >
+          <NewTeamForm />
         </ProtectedRoute>
         <ProtectedRoute path='/teams/:teamId' exact={true} >
           <TeamDetail />

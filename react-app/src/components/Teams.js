@@ -36,7 +36,7 @@ const Teams = () => {
                             <div className='team-info-and-overall'>
                                 <div className='overall-team-rating'>
                                     <div>
-                                        {Math.round(teamOverallRating / 5)} Overall
+                                        Overall {Math.round(teamOverallRating / 5)}
                                     </div>
                                 </div>
                                 <div className='team-info'>

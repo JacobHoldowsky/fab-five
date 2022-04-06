@@ -23,7 +23,7 @@ const PostDetail = () => {
         e.preventDefault()
         const newComment = { content }
 
-        console.log('newcomment',newComment)
+        console.log('newcomment', newComment)
         await dispatch(createPostComment(newComment, post.id))
         await dispatch(getAllPosts())
         setContent('')
@@ -59,23 +59,23 @@ const PostDetail = () => {
                                     >
                                     </textarea>
                                     <div className='btn'>
-                                        <button  type='submit'>Submit</button>
+                                        <button type='submit'>Submit</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div className='comment-cont'>
-                        {postComments?.map((comment) => (
-                            <div key={comment.id} className='poster-and-comment'>
-                                <NavLink to={`/users/${comment.user_id}`} className='comment-username'>{comment.user_username}</NavLink>
-                                <div className='comment-content'>
-                                    {comment.content}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
 
+                </div>
+                <div className='comment-cont'>
+                    {postComments?.map((comment) => (
+                        <div key={comment.id} className='poster-and-comment'>
+                            <NavLink to={`/users/${comment.user_id}`} className='comment-username'>{comment.user_username}</NavLink>
+                            <div className='comment-content'>
+                                {comment.content}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
 
