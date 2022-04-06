@@ -13,9 +13,9 @@ const Teams = () => {
 
 
     useEffect(() => {
-        dispatch(getAllFollowedTeams(currentUser.id))
+        dispatch(getAllFollowedTeams())
         dispatch(getAllPlayers())
-    }, [dispatch, currentUser.id])
+    }, [dispatch])
 
     return (
         <div className='team-page'>

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { NavLink } from 'react-router-dom'
-import { createComment, getAllPosts } from '../store/post'
+import { createPostComment, getAllPosts } from '../store/post'
 import './PostDetail.css'
 
 const PostDetail = () => {
@@ -22,7 +22,7 @@ const PostDetail = () => {
     const handleComment = async (e) => {
         e.preventDefault()
         const newComment = { content }
-        await dispatch(createComment(newComment, post.id))
+        await dispatch(createPostComment(newComment, post.id))
         await dispatch(getAllPosts())
         setContent('')
     }

@@ -31,4 +31,5 @@ class Team(db.Model):
             'players': [player.to_dict() for player in self.players],
             'user_id': self.user_id,
             'user_username': self.user.username,
+            'team_comments': {team_comment.id: team_comment.to_dict() for team_comment in self.team_comments}
         }

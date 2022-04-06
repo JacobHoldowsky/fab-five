@@ -1,23 +1,34 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { NavLink } from "react-router-dom"
+import { createTeamComment } from "../store/post"
 import { getAllFollowedTeams } from "../store/team"
 import './TeamDetail.css'
 
 
 const TeamDetail = () => {
     const dispatch = useDispatch()
+    const [teamComment, setTeamComment] = useState('')
     const { teamId } = useParams()
     const user = useSelector((state) => state.session.user)
+    const team = useSelector((state) => state.teams[teamId])
+    const teamComments = Object.values(team?.team_comments)
 
     useEffect(() => {
-        dispatch(getAllFollowedTeams(user.id))
-    }, [dispatch, user.id, teamId]);
+        dispatch(getAllFollowedTeams())
+    }, [dispatch]);
 
-    const teams = useSelector((state) => state.teams)
-    const team = teams[teamId]
-    console.log('teams', teams)
+    const handleComment = async (e) => {
+        e.preventDefault()
+        const newComment = { teamComment }
+        await dispatch(createTeamComment(newComment, teamId))
+        await dispatch(getAllFollowedTeams())
+        setTeamComment('')
+    }
+
+    // const team = teams[teamId]
+    // console.log('teams', teams)
     console.log('team', team)
 
     const bestPlayer = team?.players[0]
@@ -134,12 +145,31 @@ const TeamDetail = () => {
                     <h2>What do you think about this team?</h2>
                 </div>
             </div>
-            <form className='td-form' action="POST">
-                <textarea name="team_comment" cols="30" rows="8"></textarea>
+            <form className='td-form' onSubmit={handleComment}>
+                <textarea
+                    type='text'
+                    name="team_comment"
+                    classname='textarea'
+                    value={teamComment}
+                    onChange={(e) => setTeamComment(e.target.value)}
+                    required
+                    cols="30"
+                    rows="8">
+                </textarea>
                 <div className='btn'>
                     <button type='submit'>Submit</button>
                 </div>
             </form>
+            <div className='comment-cont'>
+                {teamComments?.map((comment) => (
+                    <div key={comment.id} className='poster-and-comment'>
+                        <NavLink to={`/users/${comment.user_id}`} className='comment-username'>{comment.user_username}</NavLink>
+                        <div className='comment-content'>
+                            {comment.content}
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
