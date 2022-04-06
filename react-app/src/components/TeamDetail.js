@@ -2,18 +2,16 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { NavLink } from "react-router-dom"
-import { createTeamComment } from "../store/post"
-import { getAllFollowedTeams } from "../store/team"
+import { getAllFollowedTeams, createTeamComment } from "../store/team"
 import './TeamDetail.css'
 
 
 const TeamDetail = () => {
     const dispatch = useDispatch()
-    const [teamComment, setTeamComment] = useState('')
+    const [content, setContent] = useState('')
     const { teamId } = useParams()
-    const user = useSelector((state) => state.session.user)
     const team = useSelector((state) => state.teams[teamId])
-    const teamComments = Object.values(team?.team_comments)
+    const teamComments = Object.values(team?.team_comments).reverse()
 
     useEffect(() => {
         dispatch(getAllFollowedTeams())
@@ -21,10 +19,11 @@ const TeamDetail = () => {
 
     const handleComment = async (e) => {
         e.preventDefault()
-        const newComment = { teamComment }
-        await dispatch(createTeamComment(newComment, teamId))
+        const newComment = { content }
+        console.log('newcomment', newComment)
+        await dispatch(createTeamComment(newComment, team.id))
         await dispatch(getAllFollowedTeams())
-        setTeamComment('')
+        setContent('')
     }
 
     // const team = teams[teamId]
@@ -73,7 +72,7 @@ const TeamDetail = () => {
                             |
                         </div>
                         <div>
-                            {bestPlayer?.overall_rating} Overall
+                            Overall {bestPlayer?.overall_rating}
                         </div>
                     </div>
                 </div>
@@ -90,7 +89,7 @@ const TeamDetail = () => {
                                 |
                             </div>
                             <div>
-                                {player.overall_rating} Overall
+                                Overall {player.overall_rating}
                             </div>
                         </div>
                     </div>
@@ -133,7 +132,7 @@ const TeamDetail = () => {
                 </div>
                 <div className='td-team-creator' >
                     <div >
-                        Team created by:
+                        Created by:
                     </div>
                     <NavLink to={`/users/${team?.user_id}`}>
                         {team?.user_username}
@@ -148,13 +147,14 @@ const TeamDetail = () => {
             <form className='td-form' onSubmit={handleComment}>
                 <textarea
                     type='text'
-                    name="team_comment"
-                    classname='textarea'
-                    value={teamComment}
-                    onChange={(e) => setTeamComment(e.target.value)}
+                    name="content"
+                    className='textarea'
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
                     required
                     cols="30"
-                    rows="8">
+                    rows="8"
+                    >
                 </textarea>
                 <div className='btn'>
                     <button type='submit'>Submit</button>

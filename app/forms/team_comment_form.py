@@ -7,5 +7,6 @@ def comment_too_long(form, field):
     if len(content) > 150:
         raise ValidationError('Comment is too long.')
 
-class PostCommentForm(FlaskForm):
+class TeamCommentForm(FlaskForm):
     content = TextAreaField('content', validators=[DataRequired(), comment_too_long])
+    

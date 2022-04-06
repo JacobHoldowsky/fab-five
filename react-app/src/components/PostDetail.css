@@ -11,6 +11,11 @@
     gap: 10px;
 }
 
+.img-cont{
+    display: flex;
+    justify-content: center;
+}
+
 .img{
     height: 50vh;
 }
