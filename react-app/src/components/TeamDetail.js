@@ -50,6 +50,42 @@ const TeamDetail = () => {
                 <h1>{team?.city} {team?.name}</h1>
             </div>
             <div className='ratings-and-bp'>
+                <div className='td-best-player-cont'>
+                    <NavLink to={`/players/${bestPlayer?.id}`}>
+                        <img className='td-best-player-img' src={bestPlayer?.headshot_src} alt="" />
+                    </NavLink>
+                    <div className='td-player-info'>
+                        <NavLink to={`/players/${bestPlayer?.id}`}>
+                            {bestPlayer?.first_name} {bestPlayer?.last_name}
+                        </NavLink>
+                        <div>
+                            |
+                        </div>
+                        <div>
+                            {bestPlayer?.overall_rating} Overall
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className='team-detail-rp'>
+                {remainingPlayers?.map((player) => (
+                    <div className='td-rp-cont' key={player.id}>
+                        <NavLink to={`/players/${player.id}`}>
+                            <img className='td-player-img' src={player.headshot_src} alt="" />
+                        </NavLink>
+                        <div className='td-player-info'>
+                            <NavLink to={`/players/${player.id}`}>{player.first_name} {player.last_name}</NavLink>
+                            <div>
+                                |
+                            </div>
+                            <div>
+                                {player.overall_rating} Overall
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <div>
                 <div className='team-ratings'>
                     <div className='player-info'>
                         <div className='overall-rating'>
@@ -84,58 +120,14 @@ const TeamDetail = () => {
                         </div>
                     </div>
                 </div>
-                <div className='td-best-player-cont'>
-                    <NavLink to={`/players/${bestPlayer?.id}`}>
-                        <img className='td-best-player-img' src={bestPlayer?.headshot_src} alt="" />
-                    </NavLink>
-                    <div className='td-player-info'>
-                        <NavLink to={`/players/${bestPlayer?.id}`}>
-                            {bestPlayer?.first_name} {bestPlayer?.last_name}
-                        </NavLink>
-                        <div>
-                            |
-                        </div>
-                        <div>
-                            {bestPlayer?.overall_rating} Overall
-                        </div>
-                    </div>
-                </div>
-                <div className='team-creator'>
+                <div className='td-team-creator' >
                     <div >
-                        <div >
-                            Team created by:
-                        </div>
-                        <NavLink to={`/users/${team?.user_id}`}>
-                            {team?.user_username}
-                        </NavLink>
+                        Team created by:
                     </div>
+                    <NavLink to={`/users/${team?.user_id}`}>
+                        {team?.user_username}
+                    </NavLink>
                 </div>
-            </div>
-            <div className='team-detail-rp'>
-                {remainingPlayers?.map((player) => (
-                    <div className='td-rp-cont' key={player.id}>
-                        <NavLink to={`/players/${player.id}`}>
-                            <img className='td-player-img' src={player.headshot_src} alt="" />
-                        </NavLink>
-                        <div className='td-player-info'>
-                            <NavLink to={`/players/${player.id}`}>{player.first_name} {player.last_name}</NavLink>
-                            <div>
-                                |
-                            </div>
-                            <div>
-                                {player.overall_rating} Overall
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <div className='td-team-creator' >
-                <div >
-                    Team created by:
-                </div>
-                <NavLink to={`/users/${team?.user_id}`}>
-                    {team?.user_username}
-                </NavLink>
             </div>
             <div className='td-comments'>
                 <div>
