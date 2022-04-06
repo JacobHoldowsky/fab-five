@@ -1,5 +1,44 @@
-.team-detail-page{
+.td-page{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    
+}
+
+.ratings-and-bp{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.team-detail-rp{
+    display: flex;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+.td-best-player-cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px
+}
+
+.td-best-player-img{
+    height: 28vh;
+    background-color: whitesmoke;
+    border-radius: 25px;
+}
+
+.td-player-img{
+    height: 26vh;
+    background-color: whitesmoke;
+    border-radius: 25px;
+}
+
+.td-rp-cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
