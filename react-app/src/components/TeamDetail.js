@@ -50,9 +50,6 @@ const TeamDetail = () => {
                 <h1>{team?.city} {team?.name}</h1>
             </div>
             <div className='ratings-and-bp'>
-                <div className='team-ratings'>
-                    <div className='team-overall-rating'>Overall: {Math.round(teamOverall/5)}</div>
-                </div>
                 <div className='td-best-player-cont'>
                     <NavLink to={`/players/${bestPlayer?.id}`}>
                         <img className='td-best-player-img' src={bestPlayer?.headshot_src} alt="" />
@@ -72,6 +69,40 @@ const TeamDetail = () => {
                         <NavLink to={`/players/${player.id}`}>{player.first_name} {player.last_name}</NavLink>
                     </div>
                 ))}
+            </div>
+            <div className='team-ratings'>
+                <div className='player-info'>
+                    <div className='overall-rating'>
+                        <div className='overall-label'>Team Overall</div>
+                        <div className='overall-num'>{Math.round(teamOverall / 5)}</div>
+                    </div>
+                    <div className='other-ratings'>
+                        <div className='left-ratings'>
+                            <div className='left-rating-labels'>
+                                <div>Inside Scoring:</div>
+                                <div>Outside Scoring:</div>
+                                <div>Defense:</div>
+                            </div>
+                            <div>
+                                <div>{Math.round(teamInside / 5)}</div>
+                                <div>{Math.round(teamOutside / 5)}</div>
+                                <div>{Math.round(teamDefense / 5)}</div>
+                            </div>
+                        </div>
+                        <div className='right-ratings'>
+                            <div className='left-rating-labels'>
+                                <div>Rebounding:</div>
+                                <div>Hustle:</div>
+                                <div>Passing:</div>
+                            </div>
+                            <div>
+                                <div>{Math.round(teamRebounding / 5)}</div>
+                                <div>{Math.round(teamHustle / 5)}</div>
+                                <div>{Math.round(teamPassing / 5)}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

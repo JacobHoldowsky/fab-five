@@ -5,16 +5,25 @@
     justify-content: center;
 }
 
+.team-ratings{
+    position: fixed;
+    left: 10vw;
+    top: 20vh;
+}
+
 .ratings-and-bp{
     display: flex;
+    flex-direction: column;
     width: 100%;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
 }
 
 .team-detail-rp{
     display: flex;
     gap: 50px;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .td-best-player-cont{
@@ -31,7 +40,7 @@
 }
 
 .td-player-img{
-    height: 26vh;
+    height: 28vh;
     background-color: whitesmoke;
     border-radius: 25px;
 }
