@@ -1,58 +1,136 @@
-.td-page{
+.td-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 10px
 }
 
-.team-ratings{
-    position: fixed;
-    left: 10vw;
-    top: 20vh;
-}
-
-.ratings-and-bp{
+.team-ratings,
+.team-creator,
+.td-best-player-cont {
+    width: 25vw;
     display: flex;
-    flex-direction: column;
-    width: 100%;
     justify-content: center;
     align-items: center;
-    gap: 25px;
 }
 
-.td-player-info{
+.td-team-creator {
+    /* width: 25vw; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    /* align-items: flex-start; */
+    flex-direction: column;
+    font-family: fantasy;
+    font-size: x-large;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 15px;
+    margin-top: 30px
+}
+
+.player-info {
+    ;
+    /* width: 15vw; */
+}
+
+.other-ratings {
+    display: flex;
+    justify-content: center;
+}
+
+.left-ratings,
+.right-ratings {
+    gap: 10px;
+
+}
+
+.ratings-and-bp {
+    gap: 10px
+}
+
+.team-ratings,
+.team-creator {
+    ;
+
+    /* width: 55vw; */
+    /* position: sticky; */
+    /* width: fit-content; */
+}
+
+.team-creator {
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 15px 0;
+    visibility: hidden;
+}
+
+.team-creator {
+    display: flex;
+    /* align-items: flex-start; */
+    flex-direction: column;
+    font-family: fantasy;
+    font-size: x-large;
+}
+
+.ratings-and-bp {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    /* flex-direction: column; */
+    /* width: 100%; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* gap: 25px; */
+}
+
+.td-player-info {
     display: flex;
     gap: 10px;
 }
 
-.team-detail-rp{
+.team-detail-rp {
     display: flex;
     gap: 50px;
-    margin-top: 0px;
+    margin-top: 0;
 }
 
-.td-best-player-cont{
+.td-best-player-cont {
+    width: 30vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:20px
+    gap: 20px
 }
 
-.td-best-player-img{
+.td-best-player-img {
+    height: 30vh;
+    background-color: whitesmoke;
+    border-radius: 25px;
+}
+
+.td-player-img {
     height: 28vh;
     background-color: whitesmoke;
     border-radius: 25px;
 }
 
-.td-player-img{
-    height: 28vh;
-    background-color: whitesmoke;
-    border-radius: 25px;
-}
-
-.td-rp-cont{
+.td-rp-cont {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
+}
+
+.td-comments {
+    margin-top: 15px;
+}
+
+.td-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px
 }

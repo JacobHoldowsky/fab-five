@@ -50,12 +50,48 @@ const TeamDetail = () => {
                 <h1>{team?.city} {team?.name}</h1>
             </div>
             <div className='ratings-and-bp'>
+                <div className='team-ratings'>
+                    <div className='player-info'>
+                        <div className='overall-rating'>
+                            <div className='overall-label'>Team Overall</div>
+                            <div className='overall-num'>{Math.round(teamOverall / 5)}</div>
+                        </div>
+                        <div className='other-ratings'>
+                            <div className='left-ratings'>
+                                <div className='left-rating-labels'>
+                                    <div>Inside Scoring:</div>
+                                    <div>Outside Scoring:</div>
+                                    <div>Defense:</div>
+                                </div>
+                                <div>
+                                    <div>{Math.round(teamInside / 5)}</div>
+                                    <div>{Math.round(teamOutside / 5)}</div>
+                                    <div>{Math.round(teamDefense / 5)}</div>
+                                </div>
+                            </div>
+                            <div className='right-ratings'>
+                                <div className='left-rating-labels'>
+                                    <div>Rebounding:</div>
+                                    <div>Hustle:</div>
+                                    <div>Passing:</div>
+                                </div>
+                                <div>
+                                    <div>{Math.round(teamRebounding / 5)}</div>
+                                    <div>{Math.round(teamHustle / 5)}</div>
+                                    <div>{Math.round(teamPassing / 5)}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className='td-best-player-cont'>
                     <NavLink to={`/players/${bestPlayer?.id}`}>
                         <img className='td-best-player-img' src={bestPlayer?.headshot_src} alt="" />
                     </NavLink>
-                    <div className ='td-player-info'>
-                        <NavLink to={`/players/${bestPlayer?.id}`}>{bestPlayer?.first_name} {bestPlayer?.last_name}</NavLink>
+                    <div className='td-player-info'>
+                        <NavLink to={`/players/${bestPlayer?.id}`}>
+                            {bestPlayer?.first_name} {bestPlayer?.last_name}
+                        </NavLink>
                         <div>
                             |
                         </div>
@@ -64,8 +100,15 @@ const TeamDetail = () => {
                         </div>
                     </div>
                 </div>
-                <div>
-
+                <div className='team-creator'>
+                    <div >
+                        <div >
+                            Team created by:
+                        </div>
+                        <NavLink to={`/users/${team?.user_id}`}>
+                            {team?.user_username}
+                        </NavLink>
+                    </div>
                 </div>
             </div>
             <div className='team-detail-rp'>
@@ -86,40 +129,25 @@ const TeamDetail = () => {
                     </div>
                 ))}
             </div>
-            <div className='team-ratings'>
-                <div className='player-info'>
-                    <div className='overall-rating'>
-                        <div className='overall-label'>Team Overall</div>
-                        <div className='overall-num'>{Math.round(teamOverall / 5)}</div>
-                    </div>
-                    <div className='other-ratings'>
-                        <div className='left-ratings'>
-                            <div className='left-rating-labels'>
-                                <div>Inside Scoring:</div>
-                                <div>Outside Scoring:</div>
-                                <div>Defense:</div>
-                            </div>
-                            <div>
-                                <div>{Math.round(teamInside / 5)}</div>
-                                <div>{Math.round(teamOutside / 5)}</div>
-                                <div>{Math.round(teamDefense / 5)}</div>
-                            </div>
-                        </div>
-                        <div className='right-ratings'>
-                            <div className='left-rating-labels'>
-                                <div>Rebounding:</div>
-                                <div>Hustle:</div>
-                                <div>Passing:</div>
-                            </div>
-                            <div>
-                                <div>{Math.round(teamRebounding / 5)}</div>
-                                <div>{Math.round(teamHustle / 5)}</div>
-                                <div>{Math.round(teamPassing / 5)}</div>
-                            </div>
-                        </div>
-                    </div>
+            <div className='td-team-creator' >
+                <div >
+                    Team created by:
+                </div>
+                <NavLink to={`/users/${team?.user_id}`}>
+                    {team?.user_username}
+                </NavLink>
+            </div>
+            <div className='td-comments'>
+                <div>
+                    <h2>What do you think about this team?</h2>
                 </div>
             </div>
+            <form className='td-form' action="POST">
+                <textarea name="team_comment" cols="30" rows="8"></textarea>
+                <div className='btn'>
+                    <button type='submit'>Submit</button>
+                </div>
+            </form>
         </div>
     )
 }
