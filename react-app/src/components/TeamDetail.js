@@ -7,13 +7,18 @@ import './TeamDetail.css'
 
 const TeamDetail = () => {
     const dispatch = useDispatch()
-    const teams = useSelector((state) => state.teams)
     const { teamId } = useParams()
     const user = useSelector((state) => state.session.user)
+    
+    useEffect(() => {
+        dispatch(getAllFollowedTeams(user.id))
+    }, [dispatch, user.id, teamId]);
+
+    const teams = useSelector((state) => state.teams)
     const team = teams[teamId]
     console.log('teams', teams)
     console.log('team', team)
-
+    
     const bestPlayer = team?.players[0]
     console.log('bestplayer', bestPlayer)
     const remainingPlayers = team?.players.slice(1)
@@ -21,23 +26,22 @@ const TeamDetail = () => {
     const remainingPlayers2 = team?.players.slice(3)
     console.log(remainingPlayers)
 
-    useEffect(() => {
-        dispatch(getAllFollowedTeams(user.id))
-    }, [dispatch, user.id, teamId]);
-
     return (
         <div className='team-detail-page'>
             <div>
-                <img className='best-player-team-detail-img' src={bestPlayer?.headshot_src} alt="" />
+                <h1>{team?.city} {team?.name}</h1>
             </div>
             <div>
+                <img className='best-player-team-detail-img' src={bestPlayer?.headshot_src} alt="" />
+            </div>
+            <div className='team-detail-rp'>
                 {remainingPlayers1?.map((player) => (
                     <div key={player.id}>
                         <img className='player-img' src={player.headshot_src} alt="" />
                     </div>
                 ))}
             </div>
-            <div>
+            <div className='team-detail-rp'>
                 {remainingPlayers2?.map((player) => (
                     <div key={player.id}>
                         <img className='player-img' src={player.headshot_src} alt="" />
