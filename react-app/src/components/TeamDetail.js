@@ -55,11 +55,15 @@ const TeamDetail = () => {
 
 
     return (
+        
         <div className='td-page'>
+            
             <div>
                 <h1>{team?.city} {team?.name}</h1>
             </div>
+            
             <div className='ratings-and-bp'>
+                <img className='td-logo' src={team.logo_src} alt="hi" />
                 <div className='td-best-player-cont'>
                     <NavLink to={`/players/${bestPlayer?.id}`}>
                         <img className='td-best-player-img' src={bestPlayer?.headshot_src} alt="" />
@@ -76,26 +80,6 @@ const TeamDetail = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='team-detail-rp'>
-                {remainingPlayers?.map((player) => (
-                    <div className='td-rp-cont' key={player.id}>
-                        <NavLink to={`/players/${player.id}`}>
-                            <img className='td-player-img' src={player.headshot_src} alt="" />
-                        </NavLink>
-                        <div className='td-player-info'>
-                            <NavLink to={`/players/${player.id}`}>{player.first_name} {player.last_name}</NavLink>
-                            <div>
-                                |
-                            </div>
-                            <div>
-                                Overall {player.overall_rating}
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <div>
                 <div className='team-ratings'>
                     <div className='player-info'>
                         <div className='overall-rating'>
@@ -130,6 +114,26 @@ const TeamDetail = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className='team-detail-rp'>
+                {remainingPlayers?.map((player) => (
+                    <div className='td-rp-cont' key={player.id}>
+                        <NavLink to={`/players/${player.id}`}>
+                            <img className='td-player-img' src={player.headshot_src} alt="" />
+                        </NavLink>
+                        <div className='td-player-info'>
+                            <NavLink to={`/players/${player.id}`}>{player.first_name} {player.last_name}</NavLink>
+                            <div>
+                                |
+                            </div>
+                            <div>
+                                Overall {player.overall_rating}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <div>
                 <div className='td-team-creator' >
                     <div >
                         Created by:

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Redirect, useHistory } from "react-router"
+import { useHistory } from "react-router"
 import { getAllPlayers } from "../store/player"
 import { createTeam } from "../store/team"
 import './NewTeamForm.css'
@@ -9,14 +9,15 @@ import './NewTeamForm.css'
 const NewTeamForm = () => {
     const history = useHistory()
     const dispatch = useDispatch()
+    const [errors, setErrors] = useState([])
     const [city, setCity] = useState('')
     const [name, setName] = useState('')
     const [logo, setLogo] = useState('')
-    const [player_one, setPlayerOne] = useState('lol')
-    const [player_two, setPlayerTwo] = useState(null)
-    const [player_three, setPlayerThree] = useState(null)
-    const [player_four, setPlayerFour] = useState(null)
-    const [player_five, setPlayerFive] = useState(null)
+    const [player_one, setPlayerOne] = useState(1)
+    const [player_two, setPlayerTwo] = useState(1)
+    const [player_three, setPlayerThree] = useState(1)
+    const [player_four, setPlayerFour] = useState(1)
+    const [player_five, setPlayerFive] = useState(1)
 
     const players = useSelector((state) => Object.values(state.players))
 
@@ -27,35 +28,65 @@ const NewTeamForm = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
 
-        console.log('PLAYERONE', parseInt(player_one) + parseInt(player_four))
+        setErrors([])
 
-        const team = {
-            city,
-            name,
-            logo,
-            player_one: parseInt(player_one),
-            player_two: parseInt(player_two),
-            player_three: parseInt(player_three),
-            player_four: parseInt(player_four),
-            player_five: parseInt(player_five)
+        if ((player_one === player_two || player_one === player_three || player_one === player_four || player_one === player_five)
+            || (player_two === player_three || player_two === player_four || player_two === player_five)
+            || (player_three === player_four || player_three === player_five)
+            || (player_four === player_five)) {
+            setErrors((errors) => [...errors, 'Please select unique players.'])
+        }
+        if (city.length > 50) setErrors((errors) => [...errors, 'City name must be no more than 50 characters.'])
+        if (name.length > 50) setErrors((errors) => [...errors, 'Team name must be no more than 50 characters.'])
+        if (!logo.includes('svg')
+            && !logo.includes('png')
+            && !logo.includes('jpg')
+            && !logo.includes('jpeg')) {
+            setErrors((errors) => [...errors, 'Please enter a valid image url for the team logo.'])
         }
 
-        console.log('TEAM', team)
+        if ((player_one !== player_two && player_one !== player_three && player_one !== player_four && player_one !== player_five)
+            && (player_two !== player_three && player_two !== player_four && player_two !== player_five)
+            && (player_three !== player_four && player_three !== player_five)
+            && (player_four !== player_five)
+            && city.length <= 50
+            && name.length <= 50
+            && (logo.includes('svg')
+                || logo.includes('png')
+                || logo.includes('jpg')
+                || logo.includes('jpeg'))
+        ) {
 
-        const newTeam = await dispatch(createTeam(team))
+            const team = {
+                city,
+                name,
+                logo,
+                player_one: parseInt(player_one),
+                player_two: parseInt(player_two),
+                player_three: parseInt(player_three),
+                player_four: parseInt(player_four),
+                player_five: parseInt(player_five)
+            }
 
-        setCity('')
-        setName('')
-        setLogo('')
-        setPlayerOne(null)
-        setPlayerTwo(null)
-        setPlayerThree(null)
-        setPlayerFour(null)
-        setPlayerFive(null)
+            console.log('TEAM', team)
 
-        console.log(newTeam)
+            const newTeam = await dispatch(createTeam(team))
 
-        history.push(`/teams/${newTeam.team.id}`)
+            setCity('')
+            setName('')
+            setLogo('')
+            setPlayerOne(null)
+            setPlayerTwo(null)
+            setPlayerThree(null)
+            setPlayerFour(null)
+            setPlayerFive(null)
+
+            console.log(newTeam)
+
+            history.push(`/teams/${newTeam.team?.id}`)
+        } else {
+
+        }
     }
 
     return (
@@ -64,6 +95,11 @@ const NewTeamForm = () => {
             <div className='new-team-form-cont'>
                 <h2>Build your new team!</h2>
                 <form className='new-team-form' onSubmit={onSubmit}>
+                    <div>
+                        {errors.map((error, i) => (
+                            <div className='error' key={i}>{error}</div>
+                        ))}
+                    </div>
                     <div className='form-inputs'>
                         <div className='form-div'>
                             <label htmlFor="city">Team City:</label>
@@ -73,6 +109,7 @@ const NewTeamForm = () => {
                                 name='city'
                                 onChange={(e) => setCity(e.target.value)}
                                 value={city}
+                                required
                             />
                         </div>
                         <div className='form-div'>
@@ -83,6 +120,7 @@ const NewTeamForm = () => {
                                 name="name"
                                 onChange={(e) => setName(e.target.value)}
                                 value={name}
+                                required
                             />
                         </div>
                         <div className='form-div'>
@@ -93,6 +131,7 @@ const NewTeamForm = () => {
                                 name="logo_src"
                                 onChange={(e) => setLogo(e.target.value)}
                                 value={logo}
+                                required
                             />
                         </div>
                     </div>
