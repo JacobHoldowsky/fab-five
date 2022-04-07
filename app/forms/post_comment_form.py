@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, ValidationError
 
 def comment_too_long(form, field):
     content = field.data
-    if len(content) > 150:
+    if len(content) > 255:
         raise ValidationError('Comment is too long.')
 
 class PostCommentForm(FlaskForm):

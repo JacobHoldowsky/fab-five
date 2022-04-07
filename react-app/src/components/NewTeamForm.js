@@ -38,11 +38,8 @@ const NewTeamForm = () => {
         }
         if (city.length > 50) setErrors((errors) => [...errors, 'City name must be no more than 50 characters.'])
         if (name.length > 50) setErrors((errors) => [...errors, 'Team name must be no more than 50 characters.'])
-        if (!logo.includes('svg')
-            && !logo.includes('png')
-            && !logo.includes('jpg')
-            && !logo.includes('jpeg')) {
-            setErrors((errors) => [...errors, 'Please enter a valid image url for the team logo.'])
+        if (!logo.includes('.svg')) {
+            setErrors((errors) => [...errors, 'Please enter a valid svg image url for the team logo.'])
         }
 
         if ((player_one !== player_two && player_one !== player_three && player_one !== player_four && player_one !== player_five)
