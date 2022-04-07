@@ -1,6 +1,6 @@
 from datetime import datetime
 from turtle import position
-from app.models import db, Team, Post, Player, Post_Comment, Team_Comment
+from app.models import db, Team, Post, Player, Post_Comment, Team_Comment, players_teams
 
 
 def seed_database():
@@ -155,6 +155,7 @@ def seed_database():
                  name='Bulls',
                  logo_src='https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg',
                  players=[lillard, wade, james, garnett, davis],
+                 created_at=datetime.now(),
                  user_id=1
                  )
 
@@ -162,6 +163,7 @@ def seed_database():
                   name='Lakers',
                   logo_src='https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg',
                   players=[paul, bryant, anthony, antetokounmpo, howard],
+                  created_at=datetime.now(),
                   user_id=2
                   )
 
@@ -169,6 +171,7 @@ def seed_database():
                 name='Nets',
                 logo_src='https://cdn.nba.com/logos/nba/1610612751/primary/L/logo.svg',
                 players=[lillard, bryant, anthony, garnett, davis],
+                created_at=datetime.now(),
                 user_id=3
                 )
 
@@ -286,4 +289,5 @@ def undo_database():
     db.session.execute('TRUNCATE posts RESTART IDENTITY CASCADE;')
     db.session.execute('TRUNCATE post_comments RESTART IDENTITY CASCADE;')
     db.session.execute('TRUNCATE players RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE players_teams RESTART IDENTITY CASCADE;')
     db.session.commit()

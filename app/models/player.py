@@ -21,7 +21,8 @@ class Player(db.Model):
     teams = db.relationship(
         'Team',
         back_populates='players',
-        secondary=players_teams)
+        secondary=players_teams,
+        )
     posts = db.relationship('Post', back_populates='player')
     
     def to_dict(self):

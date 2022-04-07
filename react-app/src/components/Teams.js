@@ -21,17 +21,17 @@ const Teams = () => {
         <div className='team-page'>
             {teams?.map((team) => {
 
-                const bestPlayer = team.players[0]
+                const bestPlayer = team?.players[0]
                 let teamOverallRating = 0
-                team.players.forEach((player) => teamOverallRating += player.overall_rating)
-                const remainingPlayers = team.players.slice(1)
+                team?.players.forEach((player) => teamOverallRating += player.overall_rating)
+                const remainingPlayers = team?.players.slice(1)
                 const remainingPlayers1 = remainingPlayers.slice(0, 2)
                 const remainingPlayers2 = remainingPlayers.slice(2)
                 return (
                     <div key={team.id} className='team-and-logo'>
                         <div className='team-header'>
                             <NavLink to={`teams/${team.id}`}>
-                                <img className='team-logo' src={team.logo_src} alt="" />
+                                <img className='team-logo' src={team?.logo_src} alt="" />
                             </NavLink>
                             <div className='team-info-and-overall'>
                                 <div className='overall-team-rating'>
