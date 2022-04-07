@@ -3,3 +3,8 @@ h1 {
     display: flex;
     justify-content: center;
 }
+
+html {
+    background-color:white
+
+}

@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px
+    gap: 10px;
 }
 
 .team-ratings,
@@ -31,12 +31,8 @@
     margin-top: 20px
 }
 
-.team-ratings{
+.team-ratings {
     margin-top: 10px;
-}
-
-.ratings-and-bp {
-    gap: 10px
 }
 
 .team-creator {
@@ -47,17 +43,6 @@
     font-size: x-large;
 }
 
-.ratings-and-bp {
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: center;
-    align-items: center;
-    /* flex-direction: column; */
-    /* width: 100%; */
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* gap: 25px; */
-}
 
 .td-player-info {
     display: flex;
@@ -71,7 +56,7 @@
 }
 
 .td-best-player-cont {
-    width: 30vw;
+    /* width: 30vw; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -98,15 +83,36 @@
 }
 
 .td-comments {
+    ;
     /* margin-top: 15px; */
 }
 
 .td-form {
     display: flex;
     flex-direction: column;
-    gap: 25px
+    gap: 20px
 }
 
-.comment-cont{
+.comment-cont {
     width: 50%;
+}
+
+.td-best-player-img {
+    height: 30vh;
+}
+.td-logo {
+    width: 25vw;
+    height: 25vh;
+}
+
+.player-info {
+    width: fit-content
+}
+
+
+.ratings-and-bp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw
 }

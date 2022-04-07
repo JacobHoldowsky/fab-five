@@ -1,0 +1,45 @@
+.new-team-form-cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50vh;
+    align-items: center;
+}
+
+.form-inputs{
+    display: flex;
+    gap: 10vw
+}
+
+.new-team-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    border: 1px black solid;
+    border-radius: 25px;
+    padding: 25px
+}
+
+.form-div{
+    /* width: min-content; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px
+}
+
+.player-dropdowns{
+    display: flex;
+    gap: 2vw
+}
+
+.btn-div{
+    display: flex;
+    justify-content: center;
+}
+
+.error{
+    color: red
+}

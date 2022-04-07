@@ -1,16 +1,16 @@
-.team-page{
+.team-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 50px;
 }
 
-.team-header{
+.team-header {
     display: flex;
     align-items: flex-end;
 }
 
-.team-info-and-overall{
+.team-info-and-overall {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,74 +30,77 @@
     /* align-items: center; */
 }
 
-.logo-and-overall{
+.logo-and-overall {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.overall-team-rating{
+.overall-team-rating {
     display: flex;
     /* flex-direction: column; */
     align-items: center;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: x-large;
     margin-bottom: 20px;
 }
 
-.team{
+.team {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap:20px;
+    gap: 20px;
     border: 3px solid black;
     border-radius: 25px;
-    padding:15px;
+    padding: 15px;
     width: fit-content;
+
+
+
 }
 
-.team-logo{
-    width: 15vw;
+.team-logo {
+    width: 10vw;
+    height: 20vh;
     border-radius: 25px;
     /* margin-left:35px; */
 }
 
-.best-player-img{
+.best-player-img {
     width: 100%;
     height: 30vh;
     border-radius: 25px;
     background-color: whitesmoke;
 }
 
-.remaining-players-1{
+.remaining-players-1 {
     display: flex;
     gap: 20px
 }
 
-.remaining-players-2{
+.remaining-players-2 {
     display: flex;
     gap: 20px
 }
 
-.remaining-players{
+.remaining-players {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.remaining-player{
-/* width: 11px;
+.remaining-player {
+    /* width: 11px;
 height: 11px */
-display: flex;
-flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.remaining-player-img{
+.remaining-player-img {
     width: 100%;
     height: 20vh;
     background-color: whitesmoke;
     /* padding: 10px; */
     border-radius: 25px;
 }
-
