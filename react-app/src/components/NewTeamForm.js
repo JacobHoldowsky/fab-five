@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Redirect, useHistory } from "react-router"
 import { getAllPlayers } from "../store/player"
 import { createTeam } from "../store/team"
 
 
 const NewTeamForm = () => {
+    const history = useHistory()
     const dispatch = useDispatch()
     const [city, setCity] = useState('')
     const [name, setName] = useState('')
     const [logo, setLogo] = useState('')
-    const [playerOne, setPlayerOne] = useState(null)
-    const [playerTwo, setPlayerTwo] = useState(null)
-    const [playerThree, setPlayerThree] = useState(null)
-    const [playerFour, setPlayerFour] = useState(null)
-    const [playerFive, setPlayerFive] = useState(null)
+    const [player_one, setPlayerOne] = useState('lol')
+    const [player_two, setPlayerTwo] = useState(null)
+    const [player_three, setPlayerThree] = useState(null)
+    const [player_four, setPlayerFour] = useState(null)
+    const [player_five, setPlayerFive] = useState(null)
 
     const players = useSelector((state) => Object.values(state.players))
 
@@ -21,32 +23,38 @@ const NewTeamForm = () => {
         dispatch(getAllPlayers())
     }, [dispatch])
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
+
+        console.log('PLAYERONE',parseInt(player_one) + parseInt(player_four))
 
         const team = {
             city,
             name,
             logo,
-            players: [
-                playerOne,
-                playerTwo,
-                playerThree,
-                playerFour,
-                playerFive
-            ]
+            player_one: parseInt(player_one),
+            player_two: parseInt(player_two),
+            player_three: parseInt(player_three),
+            player_four: parseInt(player_four),
+            player_five: parseInt(player_five)
         }
 
-        dispatch(createTeam(team))
+        console.log('TEAM',team)
 
-        setCity('')
-        setName('')
-        setLogo('')
-        setPlayerOne(null)
-        setPlayerTwo(null)
-        setPlayerThree(null)
-        setPlayerFour(null)
-        setPlayerFive(null)
+        const newTeam = await dispatch(createTeam(team))
+
+        // setCity('')
+        // setName('')
+        // setLogo('')
+        // setPlayerOne(null)
+        // setPlayerTwo(null)
+        // setPlayer_three(null)
+        // setPlayer_four(null)
+        // setPlayer_five(null)
+
+        console.log(newTeam)
+
+        history.push(`/teams/${newTeam.team.id}`)
     }
 
     return (
@@ -85,72 +93,68 @@ const NewTeamForm = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="playerOne">Player One:</label>
+                    <label htmlFor="player_one">Player One:</label>
                     <select
-                        id='player-one'
+                        id='player_one'
                         type="text"
-                        name="player-one"
-                        onChange={(e) => setPlayerOne(playerOne)}
-                        value={playerOne}
+                        name="player_one"
+                        onChange={(e) => setPlayerOne(e.target.value)}
+                        value={player_one}
                     >
                         {players?.map((player) => (
-                            <option value={playerOne}>{player.first_name} {player.last_name}</option>
+                            <option value={player.id}>{player.first_name} {player.last_name}</option>
                         ))}
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="player-two">Player Two:</label>
+                    <label htmlFor="player_two">Player Two:</label>
                     <select
-                        id='player-two'
+                        id='player_two'
                         type="text"
-                        name="player-two"
-                        onChange={(e) => setPlayerTwo(playerTwo)}
-                        value={playerTwo}
+                        name="player_two"
+                        onChange={(e) => setPlayerTwo(e.target.value)}
                     >
                         {players?.map((player) => (
-                            <option value={playerTwo}>{player.first_name} {player.last_name}</option>
+                            <option value={parseInt(player.id)}>{player.first_name} {player.last_name}</option>
                         ))}
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="player-three">Player Three:</label>
+                    <label htmlFor="player_three">Player Three:</label>
                     <select
-                        id='player-three'
+                        id='player_three'
                         type="text"
-                        name="player-three"
-                        onChange={(e) => setPlayerThree(playerThree)}
-                        value={playerThree}
+                        name="player_three"
+                        onChange={(e) => setPlayerThree(e.target.value)}
                     >
                         {players?.map((player) => (
-                            <option value={playerThree}>{player.first_name} {player.last_name}</option>
+                            <option value={player.id}>{player.first_name} {player.last_name}</option>
                         ))}
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="player-four">Player Four:</label>
+                    <label htmlFor="player_four">Player Four:</label>
                     <select
-                        id='player-four'
+                        id='player_four'
                         type="text"
-                        name="player-four"
-                        onChange={(e) => setPlayerFour(playerFour)}
-                        value={playerFour}
+                        name="player_four"
+                        onChange={(e) => setPlayerFour(e.target.value)}
                     >
                         {players?.map((player) => (
-                            <option value={playerFour}>{player.first_name} {player.last_name}</option>
+                            <option value={player.id}>{player.first_name} {player.last_name}</option>
                         ))}
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="player-five">Player Five:</label>
+                    <label htmlFor="player_five">Player Five:</label>
                     <select
-                        id='player-five'
+                        id='player_five'
                         type="text"
-                        name="player-five"
-                        onChange={(e) => setPlayerFive(playerFive)}
-                        value={playerFive}
+                        name="player_five"
+                        onChange={(e) => setPlayerFive(e.target.value)}
                     >
                         {players?.map((player) => (
-                            <option value={playerFive}>{player.first_name} {player.last_name}</option>
+                            <option value={player.id}>{player.first_name} {player.last_name}</option>
                         ))}
                     </select>
                 </div>

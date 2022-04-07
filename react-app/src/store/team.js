@@ -41,8 +41,10 @@ export const createTeam = (team) => async (dispatch) => {
         body: JSON.stringify(team)
     })
 
+
     if (response.ok) {
         const data = await response.json()
+        console.log('DATAAA',data)
         const team = await dispatch(addTeam(data))
         return team
     }
