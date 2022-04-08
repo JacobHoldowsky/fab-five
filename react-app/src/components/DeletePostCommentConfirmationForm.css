@@ -1,0 +1,27 @@
+.delete-pccf{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    gap:50px;
+    
+}
+
+.delete-pccf-items{
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 25px;
+    gap: 20px;
+}
+
+.pc-cancel-delete-btns{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 5vw;
+}
+
+.header-and-btns{
+    gap: 50px;
+}

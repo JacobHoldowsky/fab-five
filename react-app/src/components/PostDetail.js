@@ -2,17 +2,19 @@
 
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { createPostComment, getAllPosts } from '../store/post'
 import './PostDetail.css'
 
 const PostDetail = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const [content, setContent] = useState('')
     const { postId } = useParams()
     const post = useSelector((state) => state.posts[postId])
     const postComments = Object.values(post?.post_comments).reverse()
+    const currentUser = useSelector((state) => state.session.user)
 
 
     useEffect(() => {
@@ -72,6 +74,12 @@ const PostDetail = () => {
                             <NavLink to={`/users/${comment.user_id}`} className='comment-username'>{comment.user_username}</NavLink>
                             <div className='comment-content'>
                                 {comment.content}
+                            {comment.user_id === currentUser.id &&
+                                <div className='comment-btns'>
+                                    <button>Edit</button>
+                                    <button onClick={() => history.push(`/posts/${post.id}/comments/${comment.id}`)}>Delete</button>
+                                </div>
+                            }
                             </div>
                         </div>
                     ))}

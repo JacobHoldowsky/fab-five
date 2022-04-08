@@ -1,5 +1,6 @@
 const GET_ALL_POSTS = '/posts/GET_ALL_POSTS'
 const CREATE_POST_COMMENT = '/posts/CREATE_POST_COMMENT'
+const DELETE_POST_COMMENT = '/posts/DELETE_POST_COMMENT'
 
 
 const loadPosts = (posts) => {
@@ -12,6 +13,13 @@ const loadPosts = (posts) => {
 const addPostComment = (comment) => {
     return {
         type: CREATE_POST_COMMENT,
+        comment
+    }
+}
+
+const removePostComment = (comment) => {
+    return {
+        type: DELETE_POST_COMMENT,
         comment
     }
 }
@@ -42,6 +50,19 @@ export const createPostComment = (comment, postId) => async (dispatch) => {
     }
 }
 
+export const deletePostComment = (commentId) => async (dispatch) => {
+    const response = await fetch(`/api/post_comments/${commentId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        const comment = await dispatch(removePostComment(data))
+        return comment
+    }
+}
+
 const initialState = {};
 
 const postsReducer = (state = initialState, action) => {
@@ -56,7 +77,11 @@ const postsReducer = (state = initialState, action) => {
             newState[action.comment.post_id].post_comments[action.comment.id] = action.comment
             return newState
         }
-        
+        case DELETE_POST_COMMENT: {
+            const newState = { ...state }
+            delete newState[action.comment.post_id].post_comments[action.comment.id]
+            return newState
+        }
         default:
             return state
     }
