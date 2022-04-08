@@ -84,6 +84,8 @@ const teamsReducer = (state = initialState, action) => {
         }
         case CREATE_TEAM_COMMENT: {
             const newState = { ...state }
+            console.log('NEWSTATE',newState)
+            console.log('NEWCOMMENT', action.comment)
             newState[action.comment.team_id].team_comments[action.comment.id] = action.comment
             return newState
         }

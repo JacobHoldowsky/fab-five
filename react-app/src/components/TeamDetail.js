@@ -8,10 +8,12 @@ import './TeamDetail.css'
 
 const TeamDetail = () => {
     const dispatch = useDispatch()
+    const [errors, setErrors] = useState([])
     const [content, setContent] = useState('')
     const { teamId } = useParams()
     const team = useSelector((state) => state.teams[teamId])
     const teamComments = Object.values(team?.team_comments).reverse()
+    const currentUser = useSelector((state) => state.session.user)
 
     useEffect(() => {
         dispatch(getAllFollowedTeams())
@@ -19,11 +21,20 @@ const TeamDetail = () => {
 
     const handleComment = async (e) => {
         e.preventDefault()
-        const newComment = { content }
-        console.log('newcomment', newComment)
-        await dispatch(createTeamComment(newComment, team.id))
-        await dispatch(getAllFollowedTeams())
-        setContent('')
+
+        setErrors([])
+
+        if (content.length > 255) {
+            setErrors((errors) => [...errors, 'Comment may be no longer than 255 characters.'])
+        }
+
+        if (content.length <= 255) {
+            const newComment = { content }
+            console.log('newcomment', newComment)
+            await dispatch(createTeamComment(newComment, team.id))
+            await dispatch(getAllFollowedTeams())
+            setContent('')
+        }
     }
 
     // const team = teams[teamId]
@@ -55,13 +66,13 @@ const TeamDetail = () => {
 
 
     return (
-        
+
         <div className='td-page'>
-            
+
             <div>
                 <h1>{team?.city} {team?.name}</h1>
             </div>
-            
+
             <div className='ratings-and-bp'>
                 <img className='td-logo' src={team.logo_src} alt="hi" />
                 <div className='td-best-player-cont'>
@@ -148,7 +159,13 @@ const TeamDetail = () => {
                     <h2>What do you think about this team?</h2>
                 </div>
             </div>
+
             <form className='td-form' onSubmit={handleComment}>
+                <div>
+                    {errors && errors.map((error, i) => (
+                        <div className='error' key={i}>{error}</div>
+                    ))}
+                </div>
                 <textarea
                     type='text'
                     name="content"
@@ -158,7 +175,7 @@ const TeamDetail = () => {
                     required
                     cols="30"
                     rows="8"
-                    >
+                >
                 </textarea>
                 <div className='btn'>
                     <button type='submit'>Submit</button>
@@ -167,9 +184,22 @@ const TeamDetail = () => {
             <div className='comment-cont'>
                 {teamComments?.map((comment) => (
                     <div key={comment.id} className='poster-and-comment'>
-                        <NavLink to={`/users/${comment.user_id}`} className='comment-username'>{comment.user_username}</NavLink>
-                        <div className='comment-content'>
-                            {comment.content}
+                        <div className='comment-and-edit-delete'>
+                            <div>
+                                <NavLink to={`/users/${comment.user_id}`} className='comment-username'>{comment.user_username}</NavLink>
+                                <div className='comment-content'>
+                                    <div className='comment'>
+                                        {comment.content}
+                                    </div>
+                                    {comment.user_id === currentUser.id &&
+                                        <div className='comment-btns'>
+                                            <button>Edit</button>
+                                            <button>Delete</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 ))}

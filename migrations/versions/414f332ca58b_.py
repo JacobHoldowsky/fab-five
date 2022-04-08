@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 4ab6d9289153
+Revision ID: 414f332ca58b
 Revises: 
-Create Date: 2022-04-01 12:00:01.729405
+Create Date: 2022-04-07 19:22:24.456055
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4ab6d9289153'
+revision = '414f332ca58b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -73,27 +73,27 @@ def upgrade():
     op.create_table('players_teams',
     sa.Column('player_id', sa.Integer(), nullable=False),
     sa.Column('team_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['player_id'], ['players.id'], ),
-    sa.ForeignKeyConstraint(['team_id'], ['teams.id'], ),
+    sa.ForeignKeyConstraint(['player_id'], ['players.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['team_id'], ['teams.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('player_id', 'team_id')
     )
     op.create_table('post_comments',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('content', sa.Text(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('post_id', sa.Integer(), nullable=True),
+    sa.Column('content', sa.String(length=255), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('post_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['post_id'], ['posts.id'], ),
+    sa.ForeignKeyConstraint(['post_id'], ['posts.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('team_comments',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('content', sa.Text(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('team_id', sa.Integer(), nullable=True),
+    sa.Column('content', sa.String(length=255), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('team_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['team_id'], ['teams.id'], ),
+    sa.ForeignKeyConstraint(['team_id'], ['teams.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
