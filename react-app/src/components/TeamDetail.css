@@ -113,13 +113,19 @@
 }
 
 .comment-content{
-    max-width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 50vw;
     overflow-wrap: break-word;
+    gap:1vh;
+    padding:10px
 }
 
 .comment-and-edit-delete {
 display: flex;
 justify-content: space-between;
+align-items: flex-end;
 width: 50vw;
 gap:50px
 
@@ -127,8 +133,10 @@ gap:50px
 
 .comment-btns{
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: center;
+    align-items: space-between;
+    gap:10px
 }
 
 .td-form{
@@ -137,3 +145,4 @@ gap:50px
     justify-content: center;
     align-items: center;
 }
+

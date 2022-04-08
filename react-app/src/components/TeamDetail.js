@@ -28,13 +28,13 @@ const TeamDetail = () => {
             setErrors((errors) => [...errors, 'Comment may be no longer than 255 characters.'])
         }
 
-            if (content.length <= 255) {
-                const newComment = { content }
-                console.log('newcomment', newComment)
-                await dispatch(createTeamComment(newComment, team.id))
-                await dispatch(getAllFollowedTeams())
-                setContent('')
-            }
+        if (content.length <= 255) {
+            const newComment = { content }
+            console.log('newcomment', newComment)
+            await dispatch(createTeamComment(newComment, team.id))
+            await dispatch(getAllFollowedTeams())
+            setContent('')
+        }
     }
 
     // const team = teams[teamId]
@@ -188,15 +188,18 @@ const TeamDetail = () => {
                             <div>
                                 <NavLink to={`/users/${comment.user_id}`} className='comment-username'>{comment.user_username}</NavLink>
                                 <div className='comment-content'>
-                                    {comment.content}
+                                    <div className='comment'>
+                                        {comment.content}
+                                    </div>
+                                    {comment.user_id === currentUser.id &&
+                                        <div className='comment-btns'>
+                                            <button>Edit</button>
+                                            <button>Delete</button>
+                                        </div>
+                                    }
                                 </div>
                             </div>
-                            {comment.user_id === currentUser.id &&
-                                <div className='comment-btns'>
-                                    <button>Edit</button>
-                                    <button>Delete</button>
-                                </div>
-                            }
+
                         </div>
                     </div>
                 ))}
