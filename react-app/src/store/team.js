@@ -52,7 +52,6 @@ export const createTeam = (team) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-        console.log('DATAAA', data)
         const team = await dispatch(addTeam(data))
         return team
     }
@@ -66,25 +65,22 @@ export const createTeamComment = (comment, teamId) => async (dispatch) => {
         body: JSON.stringify(comment)
     })
 
-    console.log('RESPONSE', response)
-
     if (response.ok) {
         const data = await response.json()
-        console.log('data', data)
         const comment = await dispatch(addTeamComment(data))
         return comment
     }
 }
 
-export const deleteTeamComment = (comment) => async (dispatch) => {
-    const response = await fetch(`/api/team_comments/${comment.id}`, {
+export const deleteTeamComment = (commentId) => async (dispatch) => {
+    const response = await fetch(`/api/team_comments/${commentId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     })
 
     if (response.ok) {
         const data = await response.json()
-        const comment = await dispatch(removeTeamComment(comment))
+        const comment = await dispatch(removeTeamComment(data))
         return comment
     }
 }

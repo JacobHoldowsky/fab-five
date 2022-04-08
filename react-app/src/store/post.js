@@ -37,7 +37,6 @@ export const createPostComment = (comment, postId) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-        console.log('data', data)
         const comment = await dispatch(addPostComment(data))
         return comment
     }

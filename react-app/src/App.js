@@ -72,7 +72,7 @@ function App() {
         <ProtectedRoute path='/teams/:teamId' exact={true} >
           <TeamDetail />
         </ProtectedRoute>
-        <ProtectedRoute path='/teams/:teamId/comments/:comment' exact={true} >
+        <ProtectedRoute path='/teams/:teamId/comments/:commentId' exact={true} >
           <DeleteTeamCommentConfirmationForm />
         </ProtectedRoute>
         <ProtectedRoute path='/players/:playerId/posts/:postId' exact={true} >

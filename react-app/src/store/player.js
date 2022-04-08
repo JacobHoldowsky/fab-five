@@ -11,7 +11,6 @@ export const getAllPlayers = () => async (dispatch) => {
     const response = await fetch ('/api/players/')
     if (response.ok) {
         const data = await response.json();
-        console.log('DATA',data)
         dispatch(loadPlayers(data))
         return data
     }

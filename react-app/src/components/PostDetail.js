@@ -23,7 +23,6 @@ const PostDetail = () => {
         e.preventDefault()
         const newComment = { content }
 
-        console.log('newcomment', newComment)
         await dispatch(createPostComment(newComment, post.id))
         await dispatch(getAllPosts())
         setContent('')
