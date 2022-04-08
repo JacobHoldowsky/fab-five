@@ -1,6 +1,7 @@
 const GET_ALL_FOLLOWED_TEAMS = '/teams/GET_FOLLOWED_TEAMS'
 const CREATE_NEW_TEAM = '/teams/CREATE_NEW_TEAM'
 const CREATE_TEAM_COMMENT = '/teams/CREATE_TEAM_COMMENT'
+const DELETE_TEAM_COMMENT = '/teams/DELETE_TEAM_COMMENT'
 
 
 const loadFollowedTeams = (teams) => {
@@ -20,6 +21,13 @@ const addTeam = (team) => {
 const addTeamComment = (comment) => {
     return {
         type: CREATE_TEAM_COMMENT,
+        comment
+    }
+}
+
+const removeTeamComment = (comment) => {
+    return {
+        type: DELETE_TEAM_COMMENT,
         comment
     }
 }
@@ -44,7 +52,7 @@ export const createTeam = (team) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-        console.log('DATAAA',data)
+        console.log('DATAAA', data)
         const team = await dispatch(addTeam(data))
         return team
     }
@@ -68,6 +76,19 @@ export const createTeamComment = (comment, teamId) => async (dispatch) => {
     }
 }
 
+export const deleteTeamComment = (comment) => async (dispatch) => {
+    const response = await fetch(`/api/team_comments/${comment.id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        const comment = await dispatch(removeTeamComment(comment))
+        return comment
+    }
+}
+
 const initialState = {}
 
 const teamsReducer = (state = initialState, action) => {
@@ -84,9 +105,12 @@ const teamsReducer = (state = initialState, action) => {
         }
         case CREATE_TEAM_COMMENT: {
             const newState = { ...state }
-            console.log('NEWSTATE',newState)
-            console.log('NEWCOMMENT', action.comment)
             newState[action.comment.team_id].team_comments[action.comment.id] = action.comment
+            return newState
+        }
+        case DELETE_TEAM_COMMENT: {
+            const newState = { ...state }
+            delete newState[action.comment.team_id].team_comments[action.comment.id]
             return newState
         }
         default:
