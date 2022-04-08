@@ -65,7 +65,7 @@ const NewTeamForm = () => {
                 player_five: parseInt(player_five)
             }
 
-            console.log('TEAM', team)
+
 
             const newTeam = await dispatch(createTeam(team))
 
@@ -78,7 +78,6 @@ const NewTeamForm = () => {
             setPlayerFour(null)
             setPlayerFive(null)
 
-            console.log(newTeam)
 
             history.push(`/teams/${newTeam.team?.id}`)
         } else {

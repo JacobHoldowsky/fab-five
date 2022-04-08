@@ -46,4 +46,10 @@ def create_post_comment(post_id):
     if form.errors:
         return form.errors
     
-    
+@post_comment_routes.route('/<int:comment_id>', methods=['DELETE'])
+@login_required
+def delete_post_comment(comment_id):
+    comment = Post_Comment.query.get(comment_id)
+    db.session.delete(comment)
+    db.session.commit()
+    return comment.to_dict()

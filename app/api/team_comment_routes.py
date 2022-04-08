@@ -21,7 +21,6 @@ def team_comment(id):
 @team_comment_routes.route('/<int:team_id>', methods=['POST'])
 @login_required
 def create_team_comment(team_id):
-    print('IN THE VALIDATOR')
     form = TeamCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -37,3 +36,11 @@ def create_team_comment(team_id):
         return team_comment.to_dict()
     if form.errors:
         return form.errors
+    
+@team_comment_routes.route('/<int:comment_id>', methods=['DELETE'])
+@login_required
+def delete_team_comment(comment_id):
+    comment = Team_Comment.query.get(comment_id)
+    db.session.delete(comment)
+    db.session.commit()
+    return comment.to_dict()

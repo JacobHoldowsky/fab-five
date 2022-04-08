@@ -12,7 +12,7 @@ const PlayerDetail = () => {
     const dispatch = useDispatch()
     const player = useSelector((state) => state.players[playerId])
     const posts = player?.posts
-    console.log(player?.posts)
+
 
     useEffect(() => {
         dispatch(getAllPlayers())

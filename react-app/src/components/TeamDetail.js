@@ -31,21 +31,16 @@ const TeamDetail = () => {
 
         if (content.length <= 255) {
             const newComment = { content }
-            console.log('newcomment', newComment)
+
             await dispatch(createTeamComment(newComment, team.id))
             await dispatch(getAllFollowedTeams())
             setContent('')
         }
     }
 
-    // const team = teams[teamId]
-    // console.log('teams', teams)
-    console.log('team', team)
 
     const bestPlayer = team?.players[0]
-    console.log('bestplayer', bestPlayer)
     const remainingPlayers = team?.players.slice(1)
-    console.log(remainingPlayers)
     let teamOverall = 0
     let teamInside = 0
     let teamOutside = 0

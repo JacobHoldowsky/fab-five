@@ -6,7 +6,6 @@ import './Posts.css'
 const Posts = () => {
     const dispatch = useDispatch()
     const posts = useSelector((state) => Object.values(state.posts))
-    console.log('posts', posts)
 
     useEffect(() => {
         dispatch(getAllPosts())

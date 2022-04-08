@@ -1,14 +1,19 @@
 import './DeleteTeamCommentConfirmationForm.css'
 import { useHistory, useParams } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { deleteTeamComment } from '../store/team'
 
 const DeleteTeamCommentConfirmationForm = () => {
     const history = useHistory()
+    const dispatch = useDispatch()
     const { teamId, commentId } = useParams()
 
-    const handleDelete = (e) => {
-        e.preventDefault()
 
-        
+    const handleDelete = async (e) => {
+        e.preventDefault()
+        const comment = await dispatch(deleteTeamComment(commentId))
+        history.push(`/teams/${teamId}`)
+        return comment
     }
 
     return (

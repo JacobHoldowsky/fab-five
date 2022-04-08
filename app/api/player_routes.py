@@ -13,6 +13,5 @@ def players():
 @player_routes.route('/<int:id>')
 @login_required
 def player(id):
-    print('PLAYERS',players)
     player = Player.query.get(id)
     return player.to_dict()

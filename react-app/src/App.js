@@ -14,6 +14,7 @@ import PlayerDetail from './components/PlayerDetail';
 import TeamDetail from './components/TeamDetail';
 import PostDetail from './components/PostDetail';
 import DeleteTeamCommentConfirmationForm from './components/DeleteTeamCommentConfirmationForm';
+import DeletePostCommentConfirmationForm from './components/DeletePostCommentConfirmationForm';
 import { getAllPosts } from './store/post';
 import { getAllFollowedTeams } from './store/team';
 import NewTeamForm from './components/NewTeamForm';
@@ -72,8 +73,11 @@ function App() {
         <ProtectedRoute path='/teams/:teamId' exact={true} >
           <TeamDetail />
         </ProtectedRoute>
-        <ProtectedRoute path='/teams/:teamId/comments/:comment' exact={true} >
+        <ProtectedRoute path='/teams/:teamId/comments/:commentId' exact={true} >
           <DeleteTeamCommentConfirmationForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/posts/:postId/comments/:commentId' exact={true} >
+          <DeletePostCommentConfirmationForm />
         </ProtectedRoute>
         <ProtectedRoute path='/players/:playerId/posts/:postId' exact={true} >
           <PostDetail />

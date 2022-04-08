@@ -24,7 +24,6 @@ def team(id):
 def create_team():
     form = NewTeamForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('IN THE TEAM ROUTE')
     if form.validate_on_submit():
         city = form.data['city']
         name = form.data['name']
