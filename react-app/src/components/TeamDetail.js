@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router"
+import { Redirect, useHistory, useParams } from "react-router"
 import { NavLink } from "react-router-dom"
 import { getAllFollowedTeams, createTeamComment } from "../store/team"
 import './TeamDetail.css'
 
 
 const TeamDetail = () => {
+    const history = useHistory()
     const dispatch = useDispatch()
     const [errors, setErrors] = useState([])
     const [content, setContent] = useState('')
@@ -194,7 +195,7 @@ const TeamDetail = () => {
                                     {comment.user_id === currentUser.id &&
                                         <div className='comment-btns'>
                                             <button>Edit</button>
-                                            <button>Delete</button>
+                                            <button onClick={() => history.push(`${team.id}/comments/${comment.id}`)}>Delete</button>
                                         </div>
                                     }
                                 </div>
