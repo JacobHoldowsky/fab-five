@@ -49,7 +49,6 @@ def delete_team_comment(comment_id):
 @team_comment_routes.route('/<int:comment_id>/edit', methods=['PUT'])
 @login_required
 def edit_team_comment(comment_id):
-    print('IN THERE YO')
     form = TeamCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

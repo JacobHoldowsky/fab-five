@@ -19,6 +19,7 @@ import { getAllPosts } from './store/post';
 import { getAllFollowedTeams } from './store/team';
 import NewTeamForm from './components/NewTeamForm';
 import EditTeamCommentConfirmationForm from './components/EditTeamCommentForm';
+import EditPostCommentForm from './components/EditPostCommentForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -82,6 +83,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/posts/:postId/comments/:commentId/delete' exact={true} >
           <DeletePostCommentConfirmationForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/posts/:postId/comments/:commentId/edit' exact={true} >
+          <EditPostCommentForm />
         </ProtectedRoute>
         <ProtectedRoute path='/players/:playerId/posts/:postId' exact={true} >
           <PostDetail />

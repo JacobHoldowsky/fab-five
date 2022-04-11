@@ -1,6 +1,7 @@
 const GET_ALL_POSTS = '/posts/GET_ALL_POSTS'
 const CREATE_POST_COMMENT = '/posts/CREATE_POST_COMMENT'
 const DELETE_POST_COMMENT = '/posts/DELETE_POST_COMMENT'
+const EDIT_POST_COMMENT = '/posts/EDIT_POST_COMMENT'
 
 
 const loadPosts = (posts) => {
@@ -20,6 +21,13 @@ const addPostComment = (comment) => {
 const removePostComment = (comment) => {
     return {
         type: DELETE_POST_COMMENT,
+        comment
+    }
+}
+
+const updatePostComment = (comment) => {
+    return {
+        type: EDIT_POST_COMMENT,
         comment
     }
 }
@@ -63,6 +71,20 @@ export const deletePostComment = (commentId) => async (dispatch) => {
     }
 }
 
+export const editPostComment = (comment) => async (dispatch) => {
+    const response = await fetch(`/api/post_comments/${comment.commentId}/edit`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        const comment = await dispatch(updatePostComment(data))
+        return comment
+    }
+}
+
 const initialState = {};
 
 const postsReducer = (state = initialState, action) => {
@@ -80,6 +102,11 @@ const postsReducer = (state = initialState, action) => {
         case DELETE_POST_COMMENT: {
             const newState = { ...state }
             delete newState[action.comment.post_id].post_comments[action.comment.id]
+            return newState
+        }
+        case EDIT_POST_COMMENT: {
+            const newState = { ...state }
+            newState[action.comment.post_id].post_comments[action.comment.id] = action.comment
             return newState
         }
         default:
