@@ -2,6 +2,7 @@ const GET_ALL_FOLLOWED_TEAMS = '/teams/GET_FOLLOWED_TEAMS'
 const CREATE_NEW_TEAM = '/teams/CREATE_NEW_TEAM'
 const CREATE_TEAM_COMMENT = '/teams/CREATE_TEAM_COMMENT'
 const DELETE_TEAM_COMMENT = '/teams/DELETE_TEAM_COMMENT'
+const EDIT_TEAM_COMMENT = '/teams/EDIT_TEAM_COMMENT'
 
 
 const loadFollowedTeams = (teams) => {
@@ -28,6 +29,13 @@ const addTeamComment = (comment) => {
 const removeTeamComment = (comment) => {
     return {
         type: DELETE_TEAM_COMMENT,
+        comment
+    }
+}
+
+const updateTeamComment = (comment) => {
+    return {
+        type: EDIT_TEAM_COMMENT,
         comment
     }
 }
@@ -85,6 +93,22 @@ export const deleteTeamComment = (commentId) => async (dispatch) => {
     }
 }
 
+export const editTeamComment = (comment) => async (dispatch) => {
+    console.log('COMMENT',comment)
+    const response = await fetch(`/api/team_comments/${comment.commentId}/edit`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        const comment = await dispatch(updateTeamComment(data))
+        console.log('EDITED COMMENT', comment)
+        return comment
+    }
+}
+
 const initialState = {}
 
 const teamsReducer = (state = initialState, action) => {
@@ -107,6 +131,11 @@ const teamsReducer = (state = initialState, action) => {
         case DELETE_TEAM_COMMENT: {
             const newState = { ...state }
             delete newState[action.comment.team_id].team_comments[action.comment.id]
+            return newState
+        }
+        case EDIT_TEAM_COMMENT: {
+            const newState = { ...state }
+            newState[action.comment.team_id].team_comments[action.comment.id] = action.comment
             return newState
         }
         default:

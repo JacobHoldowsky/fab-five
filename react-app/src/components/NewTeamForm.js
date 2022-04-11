@@ -13,11 +13,11 @@ const NewTeamForm = () => {
     const [city, setCity] = useState('')
     const [name, setName] = useState('')
     const [logo, setLogo] = useState('')
-    const [player_one, setPlayerOne] = useState(1)
-    const [player_two, setPlayerTwo] = useState(1)
-    const [player_three, setPlayerThree] = useState(1)
-    const [player_four, setPlayerFour] = useState(1)
-    const [player_five, setPlayerFive] = useState(1)
+    const [player_one, setPlayerOne] = useState(null)
+    const [player_two, setPlayerTwo] = useState(null)
+    const [player_three, setPlayerThree] = useState(null)
+    const [player_four, setPlayerFour] = useState(null)
+    const [player_five, setPlayerFive] = useState(null)
 
     const players = useSelector((state) => Object.values(state.players))
 
@@ -34,7 +34,7 @@ const NewTeamForm = () => {
             || (player_two === player_three || player_two === player_four || player_two === player_five)
             || (player_three === player_four || player_three === player_five)
             || (player_four === player_five)) {
-            setErrors((errors) => [...errors, 'Please select unique players.'])
+            setErrors((errors) => [...errors, 'Please select five unique players.'])
         }
         if (city.length > 50) setErrors((errors) => [...errors, 'City name must be no more than 50 characters.'])
         if (name.length > 50) setErrors((errors) => [...errors, 'Team name must be no more than 50 characters.'])
@@ -139,8 +139,8 @@ const NewTeamForm = () => {
                                 type="text"
                                 name="player_one"
                                 onChange={(e) => setPlayerOne(e.target.value)}
-                                value={player_one}
                             >
+                                <option value="" disabled selected hidden>Please Choose...</option>
                                 {players?.map((player) => (
                                     <option value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
@@ -154,6 +154,7 @@ const NewTeamForm = () => {
                                 name="player_two"
                                 onChange={(e) => setPlayerTwo(e.target.value)}
                             >
+                                <option value="" disabled selected hidden>Please Choose...</option>
                                 {players?.map((player) => (
                                     <option value={parseInt(player.id)}>{player.first_name} {player.last_name}</option>
                                 ))}
@@ -167,6 +168,7 @@ const NewTeamForm = () => {
                                 name="player_three"
                                 onChange={(e) => setPlayerThree(e.target.value)}
                             >
+                                <option value="" disabled selected hidden>Please Choose...</option>
                                 {players?.map((player) => (
                                     <option value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
@@ -180,6 +182,7 @@ const NewTeamForm = () => {
                                 name="player_four"
                                 onChange={(e) => setPlayerFour(e.target.value)}
                             >
+                                <option value="" disabled selected hidden>Please Choose...</option>
                                 {players?.map((player) => (
                                     <option value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
@@ -193,6 +196,7 @@ const NewTeamForm = () => {
                                 name="player_five"
                                 onChange={(e) => setPlayerFive(e.target.value)}
                             >
+                                <option value="" disabled selected hidden>Please Choose...</option>
                                 {players?.map((player) => (
                                     <option value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
