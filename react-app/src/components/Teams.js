@@ -7,7 +7,7 @@ import { getAllPlayers } from "../store/player";
 
 const Teams = () => {
     const dispatch = useDispatch()
-    const teams = useSelector((state) => Object.values(state.teams))
+    const teams = useSelector((state) => Object.values(state.teams).reverse())
     const currentUser = useSelector((state) => state.session.user)
 
 

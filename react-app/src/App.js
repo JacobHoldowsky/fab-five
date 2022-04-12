@@ -58,9 +58,6 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
-        </ProtectedRoute>
-        <ProtectedRoute path='/posts' exact={true} >
-          <h1>Posts</h1>
           <Posts />
         </ProtectedRoute>
         <ProtectedRoute path='/teams' exact={true} >

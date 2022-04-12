@@ -5,7 +5,7 @@ import './Posts.css'
 
 const Posts = () => {
     const dispatch = useDispatch()
-    const posts = useSelector((state) => Object.values(state.posts))
+    const posts = useSelector((state) => Object.values(state.posts).reverse())
 
     useEffect(() => {
         dispatch(getAllPosts())
