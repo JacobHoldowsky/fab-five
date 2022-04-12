@@ -39,3 +39,11 @@ def create_post():
         return post.to_dict()
     if form.errors:
         return form.errors
+    
+@post_routes.route('/<int:post_id>', methods=['DELETE'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    return post.to_dict()

@@ -21,6 +21,7 @@ import NewTeamForm from './components/NewTeamForm';
 import NewPostForm from './components/NewPostForm';
 import EditTeamCommentConfirmationForm from './components/EditTeamCommentForm';
 import EditPostCommentForm from './components/EditPostCommentForm';
+import DeletePostConfirmationForm from './components/DeletePostConfirmationForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -71,6 +72,15 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/posts/new' exact={true} >
           <NewPostForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/teams/:teamId' exact={true} >
+          <TeamDetail />
+        </ProtectedRoute>
+        <ProtectedRoute path='/posts/:postId/edit' exact={true} >
+          <TeamDetail />
+        </ProtectedRoute>
+        <ProtectedRoute path='/posts/:postId/delete' exact={true} >
+          <DeletePostConfirmationForm />
         </ProtectedRoute>
         <ProtectedRoute path='/teams/:teamId' exact={true} >
           <TeamDetail />

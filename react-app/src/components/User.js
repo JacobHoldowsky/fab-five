@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+// import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom'
 import './User.css'
 
@@ -7,7 +8,7 @@ function User() {
   const [user, setUser] = useState({});
   const [teams, setTeams] = useState([])
   const [posts, setPosts] = useState([])
-  const { userId } = useParams();
+  const userId = useSelector(state => state.session.user.id)
   console.log(posts)
 
   console.log(teams)
@@ -41,12 +42,22 @@ function User() {
 
   return (
     <div className='user-page'>
-      <ul>
+      <ul className='user-info'>
         <li>
           <h1>{user.username}</h1>
         </li>
+        <div className='posts-and-teams'>
+          <li>
+            {teams.length === 1 && <h3>{teams.length} team</h3>}
+            {teams.length !== 1 && <h3>{teams.length} teams</h3>}
+          </li>
+          <li>
+            {posts.length === 1 && <h3>{posts.length} post</h3>}
+            {posts.length !== 1 && <h3>{posts.length} posts</h3>}
+          </li>
+        </div>
       </ul>
-      {teams && <h1>Teams</h1>}
+      {teams.length > 0 && <h1>Teams</h1>}
 
       <div className='user-content'>
         {teams && teams.map(team => {

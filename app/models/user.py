@@ -40,6 +40,15 @@ class User(db.Model, UserMixin):
         overlaps="followed,followers"
     )
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'posts': {post.id: post.to_dict() for post in self.posts},
+            'teams': {team.id: team.to_dict() for team in self.teams}
+        }
+        
     @property
     def password(self):
         return self.hashed_password
@@ -51,12 +60,6 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email
-        }
 
     def follow(self, user):
         if not self.is_following(user):

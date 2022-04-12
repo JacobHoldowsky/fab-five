@@ -13,7 +13,7 @@ class Post(db.Model):
     
     user = db.relationship('User', back_populates='posts')
     post_comments = db.relationship('Post_Comment', back_populates='post', cascade='all, delete')
-    player = db.relationship('Player', back_populates='posts')
+    player = db.relationship('Player', back_populates='posts', lazy='subquery')
     
     def to_dict(self):
         return {

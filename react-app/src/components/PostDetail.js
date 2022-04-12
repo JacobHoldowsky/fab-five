@@ -45,7 +45,12 @@ const PostDetail = () => {
                         <div>Posted by:</div>
                         <NavLink to={`/users/${post?.user_id}`}>{post?.user_username}</NavLink>
                     </div>
+                    
                     <div className='comments-poster'>
+                        {post.user_id === currentUser.id && <div className='pd-edit-delete'>
+                            <button onClick={() => history.push(`/posts/${post.id}/edit`)}>Edit</button>
+                            <button onClick={() => history.push(`/posts/${post.id}/delete`)}>Delete</button>
+                        </div>}
                         <h2>Comments</h2>
                         <div className='comment-box-and-btn'>
                             <div>
@@ -77,7 +82,7 @@ const PostDetail = () => {
                             {comment.user_id === currentUser.id &&
                                 <div className='comment-btns'>
                                     <button onClick={() => history.push(`/posts/${post.id}/comments/${comment.id}/edit`)}>Edit</button>
-                                    <button onClick={() => history.push(`/posts/${post.id}/comments/${comment.id}`)}>Delete</button>
+                                    <button onClick={() => history.push(`/posts/${post.id}/comments/${comment.id}/delete`)}>Delete</button>
                                 </div>
                             }
                             </div>

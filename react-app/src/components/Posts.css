@@ -1,4 +1,6 @@
-.user-content{
+.splash{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
