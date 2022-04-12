@@ -18,6 +18,7 @@ import DeletePostCommentConfirmationForm from './components/DeletePostCommentCon
 import { getAllPosts } from './store/post';
 import { getAllFollowedTeams } from './store/team';
 import NewTeamForm from './components/NewTeamForm';
+import NewPostForm from './components/NewPostForm';
 import EditTeamCommentConfirmationForm from './components/EditTeamCommentForm';
 import EditPostCommentForm from './components/EditPostCommentForm';
 
@@ -71,6 +72,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/teams/new' exact={true} >
           <NewTeamForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/posts/new' exact={true} >
+          <NewPostForm />
         </ProtectedRoute>
         <ProtectedRoute path='/teams/:teamId' exact={true} >
           <TeamDetail />

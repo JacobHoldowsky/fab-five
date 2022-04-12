@@ -1,4 +1,5 @@
 const GET_ALL_POSTS = '/posts/GET_ALL_POSTS'
+const CREATE_NEW_POST = '/posts/CREATE_NEW_POST'
 const CREATE_POST_COMMENT = '/posts/CREATE_POST_COMMENT'
 const DELETE_POST_COMMENT = '/posts/DELETE_POST_COMMENT'
 const EDIT_POST_COMMENT = '/posts/EDIT_POST_COMMENT'
@@ -8,6 +9,13 @@ const loadPosts = (posts) => {
     return {
         type: GET_ALL_POSTS,
         posts
+    }
+}
+
+const addPost = (post) => {
+    return {
+        type: CREATE_NEW_POST,
+        post
     }
 }
 
@@ -41,6 +49,21 @@ export const getAllPosts = () => async (dispatch) => {
         const data = await response.json();
         await dispatch(loadPosts(data))
         return data
+    }
+}
+
+export const createPost = (post) => async (dispatch) => {
+    const response = await fetch(`/api/posts/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+    })
+    console.log()
+
+    if (response.ok) {
+        const data = await response.json()
+        const post = await dispatch(addPost(data))
+        return post
     }
 }
 
@@ -92,6 +115,11 @@ const postsReducer = (state = initialState, action) => {
         case GET_ALL_POSTS: {
             const newState = {}
             action.posts.posts.forEach((post) => (newState[post.id] = post))
+            return newState
+        }
+        case CREATE_NEW_POST: {
+            const newState = { ...state }
+            newState[action.post.id] = action.post
             return newState
         }
         case CREATE_POST_COMMENT: {
