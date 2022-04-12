@@ -18,6 +18,10 @@ import DeletePostCommentConfirmationForm from './components/DeletePostCommentCon
 import { getAllPosts } from './store/post';
 import { getAllFollowedTeams } from './store/team';
 import NewTeamForm from './components/NewTeamForm';
+import NewPostForm from './components/NewPostForm';
+import EditTeamCommentConfirmationForm from './components/EditTeamCommentForm';
+import EditPostCommentForm from './components/EditPostCommentForm';
+import DeletePostConfirmationForm from './components/DeletePostConfirmationForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -54,10 +58,6 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
-        </ProtectedRoute>
-        <ProtectedRoute path='/posts' exact={true} >
-          <h1>Posts</h1>
           <Posts />
         </ProtectedRoute>
         <ProtectedRoute path='/teams' exact={true} >
@@ -70,14 +70,32 @@ function App() {
         <ProtectedRoute path='/teams/new' exact={true} >
           <NewTeamForm />
         </ProtectedRoute>
+        <ProtectedRoute path='/posts/new' exact={true} >
+          <NewPostForm />
+        </ProtectedRoute>
         <ProtectedRoute path='/teams/:teamId' exact={true} >
           <TeamDetail />
         </ProtectedRoute>
-        <ProtectedRoute path='/teams/:teamId/comments/:commentId' exact={true} >
+        <ProtectedRoute path='/posts/:postId/edit' exact={true} >
+          <TeamDetail />
+        </ProtectedRoute>
+        <ProtectedRoute path='/posts/:postId/delete' exact={true} >
+          <DeletePostConfirmationForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/teams/:teamId' exact={true} >
+          <TeamDetail />
+        </ProtectedRoute>
+        <ProtectedRoute path='/teams/:teamId/comments/:commentId/delete' exact={true} >
           <DeleteTeamCommentConfirmationForm />
         </ProtectedRoute>
-        <ProtectedRoute path='/posts/:postId/comments/:commentId' exact={true} >
+        <ProtectedRoute path='/teams/:teamId/comments/:commentId/edit' exact={true} >
+          <EditTeamCommentConfirmationForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/posts/:postId/comments/:commentId/delete' exact={true} >
           <DeletePostCommentConfirmationForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/posts/:postId/comments/:commentId/edit' exact={true} >
+          <EditPostCommentForm />
         </ProtectedRoute>
         <ProtectedRoute path='/players/:playerId/posts/:postId' exact={true} >
           <PostDetail />

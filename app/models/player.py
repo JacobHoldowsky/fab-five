@@ -23,7 +23,7 @@ class Player(db.Model):
         back_populates='players',
         secondary=players_teams,
         )
-    posts = db.relationship('Post', back_populates='player')
+    posts = db.relationship('Post', back_populates='player', order_by='Post.created_at.desc()', lazy='subquery')
     
     def to_dict(self):
         return {

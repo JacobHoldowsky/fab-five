@@ -44,3 +44,17 @@ def delete_team_comment(comment_id):
     db.session.delete(comment)
     db.session.commit()
     return comment.to_dict()
+
+
+@team_comment_routes.route('/<int:comment_id>/edit', methods=['PUT'])
+@login_required
+def edit_team_comment(comment_id):
+    form = TeamCommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print('FORM.DATA',form.data)
+        content = form.data['content']
+        comment = Team_Comment.query.get(comment_id)
+        comment.content = content
+        db.session.commit()
+        return comment.to_dict()

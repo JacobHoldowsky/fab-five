@@ -6,6 +6,12 @@
     gap: 20px;
 }
 
+.pd-edit-delete{
+    display: flex;
+    gap: 10vw;
+    margin-top: 19.92px;
+}
+
 .detail-info{
     display: flex;
     gap: 10px;
@@ -18,6 +24,7 @@
 
 .img{
     height: 50vh;
+    border-radius: 25px;
 }
 
 .poster-info{

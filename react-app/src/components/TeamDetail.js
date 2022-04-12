@@ -189,8 +189,8 @@ const TeamDetail = () => {
                                     </div>
                                     {comment.user_id === currentUser.id &&
                                         <div className='comment-btns'>
-                                            <button>Edit</button>
-                                            <button onClick={() => history.push(`${team.id}/comments/${comment.id}`)}>Delete</button>
+                                        <button onClick={() => history.push(`${team.id}/comments/${comment.id}/edit`)}>Edit</button>
+                                            <button onClick={() => history.push(`${team.id}/comments/${comment.id}/delete`)}>Delete</button>
                                         </div>
                                     }
                                 </div>

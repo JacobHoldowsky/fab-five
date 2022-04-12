@@ -104,3 +104,14 @@ height: 11px */
     /* padding: 10px; */
     border-radius: 25px;
 }
+
+.best-player, .remaining-player{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name-and-overall{
+    display: flex;
+    gap: 10px;
+}

@@ -1,0 +1,34 @@
+.user-content{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1vw;
+}
+
+.user-page{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.post-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.posts-and-teams{
+    display: flex;
+    gap: 3vw;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+}

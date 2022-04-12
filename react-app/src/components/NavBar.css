@@ -2,4 +2,9 @@ ul {
     display: flex;
     justify-content: space-between;
     list-style: none;
+    padding:0px 20vw 0px 20vw
+}
+
+.navbar{
+    display: flex;
 }
