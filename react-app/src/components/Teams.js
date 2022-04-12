@@ -51,11 +51,17 @@ const Teams = () => {
                             </div>
                         </div>
                         <div className='team'>
-
                             <div className='best-player'>
                                 <NavLink to={`players/${bestPlayer.id}`} player={bestPlayer}>
                                     <img className='best-player-img' src={bestPlayer.headshot_src} alt="" />
                                 </NavLink>
+                                <div className='name-and-overall'>
+                                    <NavLink to={`/players/${bestPlayer.id}`}>
+                                        {bestPlayer.first_name} {bestPlayer.last_name}
+                                    </NavLink>
+                                    <div>|</div>
+                                    <div>Overall {bestPlayer.overall_rating}</div>
+                                </div>
                             </div>
                             <div className='remaining-players'>
                                 <div className='remaining-players-1'>
@@ -64,6 +70,13 @@ const Teams = () => {
                                             <NavLink to={`players/${player.id}`} player={player}>
                                                 <img className='remaining-player-img' src={player.headshot_src} alt="" />
                                             </NavLink>
+                                            <div className='name-and-overall'>
+                                                <NavLink to={`/players/${player.id}`}>
+                                                    {player.first_name} {player.last_name}
+                                                </NavLink>
+                                                <div>|</div>
+                                                <div>Overall {player.overall_rating}</div>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
@@ -73,6 +86,13 @@ const Teams = () => {
                                             <NavLink to={`players/${player.id}`} player={player}>
                                                 <img className='remaining-player-img' src={player.headshot_src} alt="" />
                                             </NavLink>
+                                            <div className='name-and-overall'>
+                                                <NavLink to={`/players/${player.id}`}>
+                                                    {player.first_name} {player.last_name}
+                                                </NavLink>
+                                                <div>|</div>
+                                                <div>Overall {player.overall_rating}</div>
+                                            </div>
                                         </div>
 
                                     ))}

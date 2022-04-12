@@ -17,7 +17,7 @@ const NavBar = () => {
         <ul>
           <li>
             <NavLink to='/' exact={true} activeClassName='active'>
-              Home
+              Fab Five
             </NavLink>
           </li>
           <li>

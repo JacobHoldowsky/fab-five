@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
+import './User.css'
 
 function User() {
   const [user, setUser] = useState({});
-  const { userId }  = useParams();
+  const [teams, setTeams] = useState([])
+  const [posts, setPosts] = useState([])
+  const { userId } = useParams();
+  console.log(posts)
+
+  console.log(teams)
 
   useEffect(() => {
     if (!userId) {
@@ -14,6 +21,18 @@ function User() {
       const user = await response.json();
       setUser(user);
     })();
+
+    (async () => {
+      const response = await fetch(`/api/users/${userId}/teams`);
+      const teams = await response.json()
+      setTeams(teams.teams);
+    })();
+
+    (async () => {
+      const response = await fetch(`/api/users/${userId}/posts`);
+      const posts = await response.json()
+      setPosts(posts.posts);
+    })();
   }, [userId]);
 
   if (!user) {
@@ -21,17 +40,54 @@ function User() {
   }
 
   return (
-    <ul>
-      <li>
-        <strong>User Id</strong> {userId}
-      </li>
-      <li>
-        <strong>Username</strong> {user.username}
-      </li>
-      <li>
-        <strong>Email</strong> {user.email}
-      </li>
-    </ul>
+    <div className='user-page'>
+      <ul>
+        <li>
+          <h1>{user.username}</h1>
+        </li>
+      </ul>
+      {teams && <h1>Teams</h1>}
+
+      <div className='user-content'>
+        {teams && teams.map(team => {
+          let teamOverallRating = 0
+          team?.players.forEach((player) => teamOverallRating += player.overall_rating)
+          return (
+            <div className='team-header'>
+
+              <div className='team-info-and-overall'>
+                <NavLink to={`/teams/${team.id}`}>
+                  <img className='team-logo' src={team?.logo_src} alt="" />
+                </NavLink>
+                <div className='team-info'>
+                  <NavLink className='team-full-name' to={`teams/${team.id}`}>
+                    {team.city} {team.name}
+                  </NavLink>
+                </div>
+                <div className='overall-team-rating'>
+                  <div>
+                    Overall {Math.round(teamOverallRating / 5)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+      <h1>Posts</h1>
+      <div className='posts'>
+        {posts && posts.map((post) => (
+          <div key={post.id} className='post-container'>
+            <NavLink to={`/players/${post.player_id}/posts/${post.id}`}>
+              <img className='post-img' src={post.img_src} alt="" />
+            </NavLink>
+            <NavLink to={`/players/${post.player_id}`}>
+              {post.player_first_name} {post.player_last_name}
+            </NavLink>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 export default User;
