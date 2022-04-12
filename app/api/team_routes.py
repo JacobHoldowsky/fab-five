@@ -48,3 +48,10 @@ def create_team():
     if form.errors:
         return form.errors
     
+@team_routes.route('/<int:team_id>', methods=['DELETE'])
+@login_required
+def delete_team(team_id):
+    team = Team.query.get(team_id)
+    db.session.delete(team)
+    db.session.commit()
+    return team.to_dict()

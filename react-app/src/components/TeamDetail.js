@@ -141,6 +141,10 @@ const TeamDetail = () => {
                 ))}
             </div>
             <div>
+                {team.user_id === currentUser.id && <div className='pd-edit-delete'>
+                    <button onClick={() => history.push(`/teams/${team.id}/edit`)}>Edit</button>
+                    <button onClick={() => history.push(`/teams/${team.id}/delete`)}>Delete</button>
+                </div>}
                 <div className='td-team-creator' >
                     <div >
                         Created by:
@@ -148,6 +152,7 @@ const TeamDetail = () => {
                     <NavLink to={`/users/${team?.user_id}`}>
                         {team?.user_username}
                     </NavLink>
+                   
                 </div>
             </div>
             <div className='td-comments'>

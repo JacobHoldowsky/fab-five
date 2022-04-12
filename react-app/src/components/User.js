@@ -71,7 +71,7 @@ function User() {
                   <img className='team-logo' src={team?.logo_src} alt="" />
                 </NavLink>
                 <div className='team-info'>
-                  <NavLink className='team-full-name' to={`teams/${team.id}`}>
+                  <NavLink className='team-full-name' to={`/teams/${team.id}`}>
                     {team.city} {team.name}
                   </NavLink>
                 </div>
