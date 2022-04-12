@@ -2,4 +2,5 @@ ul {
     display: flex;
     justify-content: space-between;
     list-style: none;
+    padding:0px 450px 0px 450px
 }
