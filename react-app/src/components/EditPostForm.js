@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router"
+import { useHistory, useParams } from "react-router"
 import { getAllPlayers } from "../store/player"
-import { createPost } from "../store/post"
-import './NewPostForm.css'
+import { editPost } from "../store/post"
+import './EditPostForm.css'
 
 
-const NewPostForm = () => {
+const EditPostForm = () => {
+    const { postId } = useParams()
+    const post = useSelector(state => state.posts[postId])
+    console.log(post, 'post')
     const history = useHistory()
     const dispatch = useDispatch()
     const [errors, setErrors] = useState([])
-    const [caption, setCaption] = useState('')
-    const [image, setImage] = useState('')
-    const [player, setPlayer] = useState(null)
+    const [caption, setCaption] = useState(post.caption)
+    const [image, setImage] = useState(post.img_src)
+    const [player, setPlayer] = useState(post.player_id)
 
     const players = useSelector((state) => Object.values(state.players))
     console.log('PLAYERS', players)
@@ -44,16 +47,13 @@ const NewPostForm = () => {
 
 
 
-            const newPost = await dispatch(createPost(post))
+            const editedPost = await dispatch(editPost(post, postId))
 
             setPlayer(null)
             setCaption('')
             setImage('')
 
-            console.log('POST', post)
-            console.log('NEWPOST', newPost)
-
-            history.push(`/players/${post.player}/posts/${newPost.post?.id}`)
+            history.push(`/players/${post.player}/posts/${postId}`)
         }
 
     }
@@ -103,8 +103,9 @@ const NewPostForm = () => {
                                 type="text"
                                 name="player"
                                 onChange={(e) => setPlayer(e.target.value)}
+                                defaultValue={post.player_id}
                             >
-                                <option value="" disabled selected hidden>Please Choose...</option>
+                                <option value={post.player_id} disabled selected hidden>{post.player_first_name} {post.player_last_name}</option>
                                 {players?.map((player) => (
                                     <option value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
@@ -118,4 +119,4 @@ const NewPostForm = () => {
     )
 }
 
-export default NewPostForm
+export default EditPostForm

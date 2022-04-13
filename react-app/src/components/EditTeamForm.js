@@ -140,7 +140,7 @@ const EditTeamForm = () => {
                                 id='player_one'
                                 type="text"
                                 name="player_one"
-                                onChange={(e) => setPlayerOne(e.target.value)}
+                                onChange={(e) => setPlayerOne(parseInt(e.target.value))}
                                 defaultValue={team.players[0].id}
                             >
                                 <option value={team.players[0].id} disabled hidden>{team.players[0].first_name} {team.players[0].last_name}</option>
@@ -155,7 +155,7 @@ const EditTeamForm = () => {
                                 id='player_two'
                                 type="text"
                                 name="player_two"
-                                onChange={(e) => setPlayerTwo(e.target.value)}
+                                onChange={(e) => setPlayerTwo(parseInt(e.target.value))}
                                 defaultValue={team.players[1].id}
                             >
                                 <option value={team.players[1].id} disabled hidden>{team.players[1].first_name} {team.players[1].last_name}</option>
@@ -170,7 +170,7 @@ const EditTeamForm = () => {
                                 id='player_three'
                                 type="text"
                                 name="player_three"
-                                onChange={(e) => setPlayerThree(e.target.value)}
+                                onChange={(e) => setPlayerThree(parseInt(e.target.value))}
                                 defaultValue={team.players[2].id}
                             >
                                 <option value={team.players[2].id} disabled hidden>{team.players[2].first_name} {team.players[2].last_name}</option>
@@ -185,7 +185,7 @@ const EditTeamForm = () => {
                                 id='player_four'
                                 type="text"
                                 name="player_four"
-                                onChange={(e) => setPlayerFour(e.target.value)}
+                                onChange={(e) => setPlayerFour(parseInt(e.target.value))}
                                 defaultValue={team.players[3].id}
                             >
                                 <option value={team.players[3].id} disabled hidden>{team.players[3].first_name} {team.players[3].last_name}</option>
@@ -200,7 +200,7 @@ const EditTeamForm = () => {
                                 id='player_five'
                                 type="text"
                                 name="player_five"
-                                onChange={(e) => setPlayerFive(e.target.value)}
+                                onChange={(e) => setPlayerFive(parseInt(e.target.value))}
                                 defaultValue={team.players[4].id}
                             >
                                 <option value={team.players[4].id} disabled hidden>{team.players[4].first_name} {team.players[4].last_name}</option>
@@ -211,6 +211,7 @@ const EditTeamForm = () => {
                         </div>
                     </div>
                     <div className='btn-div'>
+                        <button onClick={() => history.push(`/teams/${teamId}`)}>Cancel</button>
                         <button type='submit'>Submit</button>
                     </div>
                 </form>

@@ -1,6 +1,7 @@
 const GET_ALL_POSTS = '/posts/GET_ALL_POSTS'
 const CREATE_NEW_POST = '/posts/CREATE_NEW_POST'
 const DELETE_POST = '/posts/DELETE_POST'
+const EDIT_POST = '/posts/EDIT_POST'
 const CREATE_POST_COMMENT = '/posts/CREATE_POST_COMMENT'
 const DELETE_POST_COMMENT = '/posts/DELETE_POST_COMMENT'
 const EDIT_POST_COMMENT = '/posts/EDIT_POST_COMMENT'
@@ -23,6 +24,13 @@ const addPost = (post) => {
 const removePost = (post) => {
     return {
         type: DELETE_POST,
+        post
+    }
+}
+
+const updatePost = (post) => {
+    return {
+        type: EDIT_POST,
         post
     }
 }
@@ -91,6 +99,20 @@ export const deletePost = (postId) => async (dispatch) => {
     }
 }
 
+export const editPost = (post, postId) => async (dispatch) => {
+    const response = await fetch(`/api/posts/${postId}/edit`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        const post = await dispatch(updatePost(data))
+        return post
+    }
+}
+
 export const createPostComment = (comment, postId) => async (dispatch) => {
     const response = await fetch(`/api/post_comments/${postId}`, {
         method: 'POST',
@@ -149,6 +171,11 @@ const postsReducer = (state = initialState, action) => {
         case DELETE_POST: {
             const newState = { ...state }
             delete newState[action.post.id]
+            return newState
+        }
+        case EDIT_POST: {
+            const newState = { ...state }
+            newState[action.post.id] = action.post
             return newState
         }
         case CREATE_POST_COMMENT: {

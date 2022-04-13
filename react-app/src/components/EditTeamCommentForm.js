@@ -1,8 +1,9 @@
 import './EditTeamCommentForm.css'
 import { useHistory, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { editTeamComment } from '../store/team'
+import { editTeamComment, getAllFollowedTeams } from '../store/team'
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 const EditTeamCommentConfirmationForm = () => {
     const history = useHistory()
@@ -11,6 +12,10 @@ const EditTeamCommentConfirmationForm = () => {
     const [errors, setErrors] = useState([])
     const oldComment = useSelector(state => state.teams[teamId].team_comments[commentId])
     const [content, setContent] = useState(oldComment.content)
+
+    useEffect(() => {
+        dispatch(getAllFollowedTeams())
+    }, [dispatch])
 
 
 
