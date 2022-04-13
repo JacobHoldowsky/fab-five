@@ -152,7 +152,7 @@ const TeamDetail = () => {
                     <NavLink to={`/users/${team?.user_id}`}>
                         {team?.user_username}
                     </NavLink>
-                   
+
                 </div>
             </div>
             <div className='td-comments'>
@@ -194,7 +194,7 @@ const TeamDetail = () => {
                                     </div>
                                     {comment.user_id === currentUser.id &&
                                         <div className='comment-btns'>
-                                        <button onClick={() => history.push(`${team.id}/comments/${comment.id}/edit`)}>Edit</button>
+                                            <button onClick={() => history.push(`${team.id}/comments/${comment.id}/edit`)}>Edit</button>
                                             <button onClick={() => history.push(`${team.id}/comments/${comment.id}/delete`)}>Delete</button>
                                         </div>
                                     }

@@ -15,6 +15,7 @@ function UsersList() {
   }, []);
 
   const userComponents = users.map((user) => {
+    console.log('USER',user)
     let teams = Object.values(user.teams)
     let posts = Object.values(user.posts)
     return (
