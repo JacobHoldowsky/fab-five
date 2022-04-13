@@ -13,6 +13,7 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
+
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
@@ -38,35 +39,41 @@ const LoginForm = () => {
 
   return (
     <div className='login-form-cont'>
-      <form  onSubmit={onLogin}>
-        <div>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
-        </div>
-        <div>
-          <label htmlFor='email'>Email</label>
-          <input
-            name='email'
-            type='text'
-            placeholder='Email'
-            value={email}
-            onChange={updateEmail}
-          />
-        </div>
-        <div>
-          <label htmlFor='password'>Password</label>
-          <input
-            name='password'
-            type='password'
-            placeholder='Password'
-            value={password}
-            onChange={updatePassword}
-          />
-          <button type='submit'>Login</button>
-          <button onClick={handleDemoUser}>Demo User Login</button>
-        </div>
-      </form>
+      <div className='login-form' >
+
+        <form classname='login-form' onSubmit={onLogin}>
+
+          <div >
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          <div className='email-input'>
+            <label htmlFor='email'>Email</label>
+            <input
+              name='email'
+              type='text'
+              placeholder='Email'
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div className='password-input'>
+            <label htmlFor='password'>Password</label>
+            <input
+              name='password'
+              type='password'
+              placeholder='Password'
+              value={password}
+              onChange={updatePassword}
+            />
+          </div>
+          <div className='login-btns'>
+            <button type='submit'>Login</button>
+            <button onClick={handleDemoUser}>Demo User Login</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
