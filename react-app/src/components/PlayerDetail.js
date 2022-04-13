@@ -61,6 +61,7 @@ const PlayerDetail = () => {
                         </div>
                     </div>
                 </div>
+                <h1>Posts</h1>
                 <div className='posts'>
                     {posts && posts.map((post) => (
                         <div key={post.id} className='post-container'>
