@@ -41,12 +41,12 @@ const PostDetail = () => {
                     <div className='img-cont'>
                         <img className='img' src={post?.img_src} alt="" />
                     </div>
+                    <div className='poster-info'>
+                        <div id='posted-by'>Posted by:</div>
+                        <NavLink to={`/users/${post?.user_id}`}>{post?.user_username}</NavLink>
+                    </div>
                     <div className='caption'>
                         <div>{post?.caption}</div>
-                    </div>
-                    <div className='poster-info'>
-                        <div>Posted by:</div>
-                        <NavLink to={`/users/${post?.user_id}`}>{post?.user_username}</NavLink>
                     </div>
                     
                     <div className='comments-poster'>
@@ -54,7 +54,7 @@ const PostDetail = () => {
                             <button onClick={() => history.push(`/posts/${post.id}/edit`)}>Edit</button>
                             <button onClick={() => history.push(`/posts/${post.id}/delete`)}>Delete</button>
                         </div>}
-                        <h2>Comments</h2>
+                        <h1 id='comments'>Comments</h1>
                         <div className='comment-box-and-btn'>
                             <div>
                                 <form className='comment-form' onSubmit={handleComment}>

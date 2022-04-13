@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router"
+import { useHistory, useParams } from "react-router"
 import { getAllPlayers } from "../store/player"
-import { createTeam } from "../store/team"
-import './NewTeamForm.css'
+import { editTeam } from "../store/team"
+import './EditTeamForm.css'
 
 
-const NewTeamForm = () => {
+const EditTeamForm = () => {
+    const { teamId } = useParams()
+    const team = useSelector(state => state.teams[teamId])
     const history = useHistory()
     const dispatch = useDispatch()
     const [errors, setErrors] = useState([])
-    const [city, setCity] = useState('')
-    const [name, setName] = useState('')
-    const [logo, setLogo] = useState('')
-    const [player_one, setPlayerOne] = useState(null)
-    const [player_two, setPlayerTwo] = useState(null)
-    const [player_three, setPlayerThree] = useState(null)
-    const [player_four, setPlayerFour] = useState(null)
-    const [player_five, setPlayerFive] = useState(null)
-
+    const [city, setCity] = useState(team.city)
+    const [name, setName] = useState(team.name)
+    const [logo, setLogo] = useState(team.logo_src)
+    const [player_one, setPlayerOne] = useState(team.players[0].id)
+    const [player_two, setPlayerTwo] = useState(team.players[1].id)
+    const [player_three, setPlayerThree] = useState(team.players[2].id)
+    const [player_four, setPlayerFour] = useState(team.players[3].id)
+    const [player_five, setPlayerFive] = useState(team.players[4].id)
     const players = useSelector((state) => Object.values(state.players))
 
     useEffect(() => {
@@ -48,10 +49,7 @@ const NewTeamForm = () => {
             && (player_four !== player_five)
             && city.length <= 50
             && name.length <= 50
-            && (logo.includes('svg')
-                || logo.includes('png')
-                || logo.includes('jpg')
-                || logo.includes('jpeg'))
+            && (logo.includes('.svg'))
         ) {
 
             const team = {
@@ -65,9 +63,7 @@ const NewTeamForm = () => {
                 player_five: parseInt(player_five)
             }
 
-
-
-            const newTeam = await dispatch(createTeam(team))
+            const editedTeam = await dispatch(editTeam(team, teamId))
 
             setCity('')
             setName('')
@@ -79,7 +75,8 @@ const NewTeamForm = () => {
             setPlayerFive(null)
 
 
-            history.push(`/teams/${newTeam.team?.id}`)
+            history.push(`/teams/${teamId}`)
+            return editedTeam
         } else {
 
         }
@@ -89,7 +86,7 @@ const NewTeamForm = () => {
         <>
             <h1>New Team Form</h1>
             <div className='new-team-form-cont'>
-                <h2>Build your new team!</h2>
+                <h2>Edit your team!</h2>
                 <form className='new-team-form' onSubmit={onSubmit}>
                     <div>
                         {errors.map((error, i) => (
@@ -139,9 +136,10 @@ const NewTeamForm = () => {
                                 id='player_one'
                                 type="text"
                                 name="player_one"
-                                onChange={(e) => setPlayerOne(e.target.value)}
+                                onChange={(e) => setPlayerOne(parseInt(e.target.value))}
+                                defaultValue={team.players[0].id}
                             >
-                                <option value="" disabled selected hidden>Please Choose...</option>
+                                <option value={team.players[0].id} disabled hidden>{team.players[0].first_name} {team.players[0].last_name}</option>
                                 {players?.map((player) => (
                                     <option key={player.id} value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
@@ -153,9 +151,10 @@ const NewTeamForm = () => {
                                 id='player_two'
                                 type="text"
                                 name="player_two"
-                                onChange={(e) => setPlayerTwo(e.target.value)}
+                                onChange={(e) => setPlayerTwo(parseInt(e.target.value))}
+                                defaultValue={team.players[1].id}
                             >
-                                <option value="" disabled selected hidden>Please Choose...</option>
+                                <option value={team.players[1].id} disabled hidden>{team.players[1].first_name} {team.players[1].last_name}</option>
                                 {players?.map((player) => (
                                     <option key={player.id} value={parseInt(player.id)}>{player.first_name} {player.last_name}</option>
                                 ))}
@@ -167,9 +166,10 @@ const NewTeamForm = () => {
                                 id='player_three'
                                 type="text"
                                 name="player_three"
-                                onChange={(e) => setPlayerThree(e.target.value)}
+                                onChange={(e) => setPlayerThree(parseInt(e.target.value))}
+                                defaultValue={team.players[2].id}
                             >
-                                <option value="" disabled selected hidden>Please Choose...</option>
+                                <option value={team.players[2].id} disabled hidden>{team.players[2].first_name} {team.players[2].last_name}</option>
                                 {players?.map((player) => (
                                     <option key={player.id} value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
@@ -181,9 +181,10 @@ const NewTeamForm = () => {
                                 id='player_four'
                                 type="text"
                                 name="player_four"
-                                onChange={(e) => setPlayerFour(e.target.value)}
+                                onChange={(e) => setPlayerFour(parseInt(e.target.value))}
+                                defaultValue={team.players[3].id}
                             >
-                                <option value="" disabled selected hidden>Please Choose...</option>
+                                <option value={team.players[3].id} disabled hidden>{team.players[3].first_name} {team.players[3].last_name}</option>
                                 {players?.map((player) => (
                                     <option key={player.id} value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
@@ -195,9 +196,10 @@ const NewTeamForm = () => {
                                 id='player_five'
                                 type="text"
                                 name="player_five"
-                                onChange={(e) => setPlayerFive(e.target.value)}
+                                onChange={(e) => setPlayerFive(parseInt(e.target.value))}
+                                defaultValue={team.players[4].id}
                             >
-                                <option value="" disabled selected hidden>Please Choose...</option>
+                                <option value={team.players[4].id} disabled hidden>{team.players[4].first_name} {team.players[4].last_name}</option>
                                 {players?.map((player) => (
                                     <option key={player.id} value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
@@ -205,6 +207,7 @@ const NewTeamForm = () => {
                         </div>
                     </div>
                     <div className='btn-div'>
+                        <button onClick={() => history.push(`/teams/${teamId}`)}>Cancel</button>
                         <button type='submit'>Submit</button>
                     </div>
                 </form>
@@ -213,4 +216,4 @@ const NewTeamForm = () => {
     )
 }
 
-export default NewTeamForm
+export default EditTeamForm

@@ -55,3 +55,25 @@ def delete_team(team_id):
     db.session.delete(team)
     db.session.commit()
     return team.to_dict()
+
+@team_routes.route('/<int:team_id>/edit', methods=['PUT'])
+@login_required
+def edit_team(team_id):
+    form = NewTeamForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        city = form.data['city']
+        name = form.data['name']
+        logo_src = form.data['logo']
+        player_one = Player.query.get(form.data['player_one'])
+        player_two = Player.query.get(form.data['player_two'])
+        player_three = Player.query.get(form.data['player_three'])
+        player_four = Player.query.get(form.data['player_four'])
+        player_five = Player.query.get(form.data['player_five'])
+        team = Team.query.get(team_id)
+        team.city = city
+        team.name = name
+        team.logo_src = logo_src
+        team.players = [player_one, player_two, player_three, player_four, player_five]
+        db.session.commit()
+        return team.to_dict()

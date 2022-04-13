@@ -1,8 +1,10 @@
 .users{
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
     align-items: center;
-    gap: 5vh;
+    justify-content: center;
+    gap: 2vw;
 }
 
 .user-list-info{
@@ -15,4 +17,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family:monospace;
+    font-size: x-large;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.ul-username{
+    font-family: fantasy;
+    font-size: xx-large;
 }

@@ -25,7 +25,7 @@ const DeleteTeamCommentConfirmationForm = () => {
                 <div className='delete-pccf-items'>
                     <div>Are you sure you'd like to delete this team?</div>
                     <div className='pc-cancel-delete-btns'>
-                        <button onClick={() => history.push(`/players/${teamId}/teams/${teamId}`)}>Cancel</button>
+                        <button onClick={() => history.push(`/teams/${teamId}`)}>Cancel</button>
                         <button type='submit'>Confirm</button>
                     </div>
                 </div>

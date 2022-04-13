@@ -12,9 +12,7 @@ const PlayerDetail = () => {
     const dispatch = useDispatch()
     const player = useSelector((state) => state.players[playerId])
     const posts = player?.posts
-    console.log('posts',posts)
     const reversedPosts = player?.posts.reverse()
-    console.log('reversedPosts',reversedPosts)
 
 
     useEffect(() => {
