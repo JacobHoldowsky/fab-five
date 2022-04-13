@@ -15,7 +15,7 @@ const NewPostForm = () => {
     const [player, setPlayer] = useState(null)
 
     const players = useSelector((state) => Object.values(state.players))
-    console.log('PLAYERS', players)
+
 
     useEffect(() => {
         dispatch(getAllPlayers())
@@ -49,9 +49,6 @@ const NewPostForm = () => {
             setPlayer(null)
             setCaption('')
             setImage('')
-
-            console.log('POST', post)
-            console.log('NEWPOST', newPost)
 
             history.push(`/players/${post.player}/posts/${newPost.post?.id}`)
         }
@@ -106,7 +103,7 @@ const NewPostForm = () => {
                             >
                                 <option value="" disabled selected hidden>Please Choose...</option>
                                 {players?.map((player) => (
-                                    <option value={player.id}>{player.first_name} {player.last_name}</option>
+                                    <option key={player.id} value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
                             </select>
                         </div>

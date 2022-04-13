@@ -27,17 +27,22 @@ const NavBar = () => {
           </li>
           <li>
             <NavLink to='/teams/new' exact={true} activeClassName='active'>
-              Build a new team
+              New Team
             </NavLink>
           </li>
           <li>
             <NavLink to='/posts/new' exact={true} activeClassName='active'>
-              Make a new post
+              New Post
             </NavLink>
           </li>
           <li>
             <NavLink to='/users' exact={true} activeClassName='active'>
               Users
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={`/users/${currentUser.id}`} exact={true} activeClassName='active'>
+              My Profile
             </NavLink>
           </li>
           <li>

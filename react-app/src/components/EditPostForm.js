@@ -9,7 +9,6 @@ import './EditPostForm.css'
 const EditPostForm = () => {
     const { postId } = useParams()
     const post = useSelector(state => state.posts[postId])
-    console.log(post, 'post')
     const history = useHistory()
     const dispatch = useDispatch()
     const [errors, setErrors] = useState([])
@@ -18,7 +17,6 @@ const EditPostForm = () => {
     const [player, setPlayer] = useState(post.player_id)
 
     const players = useSelector((state) => Object.values(state.players))
-    console.log('PLAYERS', players)
 
     useEffect(() => {
         dispatch(getAllPlayers())
@@ -60,9 +58,9 @@ const EditPostForm = () => {
 
     return (
         <>
-            <h1>New Post Form</h1>
+            <h1>Edit Post Form</h1>
             <div className='new-team-form-cont'>
-                <h2>Make a new post!</h2>
+                <h2>Edit your post!</h2>
                 <form className='new-team-form' onSubmit={onSubmit}>
                     <div>
                         {errors.map((error, i) => (
@@ -105,9 +103,9 @@ const EditPostForm = () => {
                                 onChange={(e) => setPlayer(e.target.value)}
                                 defaultValue={post.player_id}
                             >
-                                <option value={post.player_id} disabled selected hidden>{post.player_first_name} {post.player_last_name}</option>
+                                <option value={post.player_id} disabled hidden>{post.player_first_name} {post.player_last_name}</option>
                                 {players?.map((player) => (
-                                    <option value={player.id}>{player.first_name} {player.last_name}</option>
+                                    <option key={player.id} value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
                             </select>
                         </div>

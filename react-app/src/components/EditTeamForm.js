@@ -49,10 +49,7 @@ const EditTeamForm = () => {
             && (player_four !== player_five)
             && city.length <= 50
             && name.length <= 50
-            && (logo.includes('svg')
-                || logo.includes('png')
-                || logo.includes('jpg')
-                || logo.includes('jpeg'))
+            && (logo.includes('.svg'))
         ) {
 
             const team = {
@@ -65,8 +62,6 @@ const EditTeamForm = () => {
                 player_four: parseInt(player_four),
                 player_five: parseInt(player_five)
             }
-
-            console.log('team', team)
 
             const editedTeam = await dispatch(editTeam(team, teamId))
 
@@ -129,6 +124,7 @@ const EditTeamForm = () => {
                                 name="logo_src"
                                 onChange={(e) => setLogo(e.target.value)}
                                 value={logo}
+                                placeholder='From nba.com/teams'
                                 required
                             />
                         </div>

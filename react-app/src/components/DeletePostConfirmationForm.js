@@ -9,12 +9,10 @@ const DeletePostConfirmationForm = () => {
     const { postId } = useParams()
     const currentUser = useSelector(state => state.session.user)
 
-    console.log('postId', postId)
-
     const handleDelete = async (e) => {
         e.preventDefault()
         const post = await dispatch(deletePost(postId))
-        history.push(`/users/${currentUser}`)
+        history.push(`/users/${currentUser.id}`)
         return post
     }
 

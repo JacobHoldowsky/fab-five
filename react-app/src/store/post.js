@@ -75,7 +75,6 @@ export const createPost = (post) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(post)
     })
-    console.log()
 
     if (response.ok) {
         const data = await response.json()
@@ -85,7 +84,6 @@ export const createPost = (post) => async (dispatch) => {
 }
 
 export const deletePost = (postId) => async (dispatch) => {
-    console.log('response.ok')
     const response = await fetch(`/api/posts/${postId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }

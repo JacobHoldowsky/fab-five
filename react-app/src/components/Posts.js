@@ -27,7 +27,7 @@ const Posts = () => {
                                 <NavLink to={`/players/${post.player_id}`}>
                                     {post.player_first_name} {post.player_last_name}
                                 </NavLink>
-                                <div>|</div>
+                                <div className='seperator'>|</div>
                                 <NavLink to={`/users/${post.user_id}`}>
                                     {post.user_username}
                                 </NavLink>

@@ -127,6 +127,7 @@ const NewTeamForm = () => {
                                 name="logo_src"
                                 onChange={(e) => setLogo(e.target.value)}
                                 value={logo}
+                                placeholder='From nba.com/teams'
                                 required
                             />
                         </div>
@@ -142,7 +143,7 @@ const NewTeamForm = () => {
                             >
                                 <option value="" disabled selected hidden>Please Choose...</option>
                                 {players?.map((player) => (
-                                    <option value={player.id}>{player.first_name} {player.last_name}</option>
+                                    <option key={player.id} value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
                             </select>
                         </div>
@@ -156,7 +157,7 @@ const NewTeamForm = () => {
                             >
                                 <option value="" disabled selected hidden>Please Choose...</option>
                                 {players?.map((player) => (
-                                    <option value={parseInt(player.id)}>{player.first_name} {player.last_name}</option>
+                                    <option key={player.id} value={parseInt(player.id)}>{player.first_name} {player.last_name}</option>
                                 ))}
                             </select>
                         </div>
@@ -170,7 +171,7 @@ const NewTeamForm = () => {
                             >
                                 <option value="" disabled selected hidden>Please Choose...</option>
                                 {players?.map((player) => (
-                                    <option value={player.id}>{player.first_name} {player.last_name}</option>
+                                    <option key={player.id} value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
                             </select>
                         </div>
@@ -184,7 +185,7 @@ const NewTeamForm = () => {
                             >
                                 <option value="" disabled selected hidden>Please Choose...</option>
                                 {players?.map((player) => (
-                                    <option value={player.id}>{player.first_name} {player.last_name}</option>
+                                    <option key={player.id} value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
                             </select>
                         </div>
@@ -198,7 +199,7 @@ const NewTeamForm = () => {
                             >
                                 <option value="" disabled selected hidden>Please Choose...</option>
                                 {players?.map((player) => (
-                                    <option value={player.id}>{player.first_name} {player.last_name}</option>
+                                    <option key={player.id} value={player.id}>{player.first_name} {player.last_name}</option>
                                 ))}
                             </select>
                         </div>

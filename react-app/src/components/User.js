@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom'
 import './User.css'
 
@@ -8,10 +8,8 @@ function User() {
   const [user, setUser] = useState({});
   const [teams, setTeams] = useState([])
   const [posts, setPosts] = useState([])
-  const userId = useSelector(state => state.session.user.id)
-  console.log(posts)
+  const { userId } = useParams()
 
-  console.log(teams)
 
   useEffect(() => {
     if (!userId) {
@@ -46,11 +44,13 @@ function User() {
         <li>
           <h1>{user.username}</h1>
         </li>
+        
         <div className='posts-and-teams'>
           <li>
             {teams.length === 1 && <h3>{teams.length} team</h3>}
             {teams.length !== 1 && <h3>{teams.length} teams</h3>}
           </li>
+          <h3>|</h3>
           <li>
             {posts.length === 1 && <h3>{posts.length} post</h3>}
             {posts.length !== 1 && <h3>{posts.length} posts</h3>}
@@ -64,11 +64,11 @@ function User() {
           let teamOverallRating = 0
           team?.players.forEach((player) => teamOverallRating += player.overall_rating)
           return (
-            <div className='team-header-user'>
+            <div key={team.id} className='team-header-user'>
 
               <div className='team-info-and-overall-user'>
                 <NavLink to={`/teams/${team.id}`}>
-                  <img className='team-logo' src={team?.logo_src} alt="" />
+                  <img className='team-logo-user' src={team?.logo_src} alt="" />
                 </NavLink>
                 <NavLink className='team-info-user' to={`/teams/${team.id}`}>
                   {team.city} {team.name}

@@ -88,3 +88,8 @@
     justify-content: center;
     margin-top: 15px;
 }
+
+#posted-by{
+    font-family: fantasy;
+    font-size:larger
+}

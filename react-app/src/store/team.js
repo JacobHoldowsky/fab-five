@@ -82,7 +82,6 @@ export const createTeam = (team) => async (dispatch) => {
 }
 
 export const deleteTeam = (teamId) => async (dispatch) => {
-    console.log('response.ok')
     const response = await fetch(`/api/teams/${teamId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
@@ -97,7 +96,6 @@ export const deleteTeam = (teamId) => async (dispatch) => {
 }
 
 export const editTeam = (team, teamId) => async (dispatch) => {
-    console.log('team', team)
     const response = await fetch(`/api/teams/${teamId}/edit`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -141,7 +139,6 @@ export const deleteTeamComment = (commentId) => async (dispatch) => {
 }
 
 export const editTeamComment = (comment) => async (dispatch) => {
-    console.log('COMMENT', comment)
     const response = await fetch(`/api/team_comments/${comment.commentId}/edit`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -151,7 +148,6 @@ export const editTeamComment = (comment) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json()
         const comment = await dispatch(updateTeamComment(data))
-        console.log('EDITED COMMENT', comment)
         return comment
     }
 }

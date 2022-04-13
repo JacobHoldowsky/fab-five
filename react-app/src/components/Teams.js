@@ -35,7 +35,7 @@ const Teams = () => {
                             </NavLink>
                             <div className='team-info-and-overall'>
                                 <div className='overall-team-rating'>
-                                    <div>
+                                    <div id='fantasy-header' classname='overall-team-rating-text'>
                                         Overall {Math.round(teamOverallRating / 5)}
                                     </div>
                                 </div>
@@ -59,8 +59,8 @@ const Teams = () => {
                                     <NavLink to={`/players/${bestPlayer.id}`}>
                                         {bestPlayer.first_name} {bestPlayer.last_name}
                                     </NavLink>
-                                    <div>|</div>
-                                    <div>Overall {bestPlayer.overall_rating}</div>
+                                    <div id='fantasy'>|</div>
+                                    <div id='fantasy'>Overall {bestPlayer.overall_rating}</div>
                                 </div>
                             </div>
                             <div className='remaining-players'>
@@ -74,8 +74,8 @@ const Teams = () => {
                                                 <NavLink to={`/players/${player.id}`}>
                                                     {player.first_name} {player.last_name}
                                                 </NavLink>
-                                                <div>|</div>
-                                                <div>Overall {player.overall_rating}</div>
+                                                <div id='fantasy'>|</div>
+                                                <div id='fantasy'>Overall {player.overall_rating}</div>
                                             </div>
                                         </div>
                                     ))}
@@ -90,8 +90,8 @@ const Teams = () => {
                                                 <NavLink to={`/players/${player.id}`}>
                                                     {player.first_name} {player.last_name}
                                                 </NavLink>
-                                                <div>|</div>
-                                                <div>Overall {player.overall_rating}</div>
+                                                <div id='fantasy'>|</div>
+                                                <div id='fantasy'>Overall {player.overall_rating}</div>
                                             </div>
                                         </div>
 

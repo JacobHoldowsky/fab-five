@@ -22,7 +22,7 @@
     gap: 10px;
     margin-left: 15px;
     margin-bottom: 16px;
-    font-family: fantasy;
+    /* font-family: fantasy; */
     font-size: x-large;
     align-items: center;
     /* align-items: flex-end; */
@@ -41,9 +41,12 @@
     display: flex;
     /* flex-direction: column; */
     align-items: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: x-large;
     margin-bottom: 20px;
+}
+
+.overall-team-rating-text{
+    font-family: fantasy
 }
 
 .team {
@@ -114,4 +117,15 @@ height: 11px */
 .name-and-overall{
     display: flex;
     gap: 10px;
+}
+
+#fantasy{
+    font-family: fantasy;
+    font-size: large;
+}
+
+#fantasy-header{
+    font-family:fantasy;
+    font-size: x-large;
+    /* font-weight: bold; */
 }
