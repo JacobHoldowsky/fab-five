@@ -22,6 +22,13 @@ const EditTeamCommentConfirmationForm = () => {
     const handleEdit = async (e) => {
         e.preventDefault()
         setErrors([])
+
+        if (content.length > 255) {
+            setErrors((errors) => [...errors, 'Comment may be no longer than 255 characters.'])
+        }
+
+        if (content.length <= 255) {
+
         const newComment = {
             commentId,
             content
@@ -29,6 +36,7 @@ const EditTeamCommentConfirmationForm = () => {
         const comment = await dispatch(editTeamComment(newComment))
         history.push(`/teams/${teamId}`)
         return comment
+    }
     }
 
     return (
