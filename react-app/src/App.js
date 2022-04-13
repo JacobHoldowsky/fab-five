@@ -49,9 +49,11 @@ function App() {
       <NavBar />
       <Switch>
         <Route path='/login' exact={true}>
+          <h1>Welcome to Fab Five!</h1>
           <LoginForm />
         </Route>
         <Route path='/sign-up' exact={true}>
+          <h1>Welcome to Fab Five!</h1>
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
