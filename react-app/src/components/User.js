@@ -64,17 +64,15 @@ function User() {
           let teamOverallRating = 0
           team?.players.forEach((player) => teamOverallRating += player.overall_rating)
           return (
-            <div className='team-header'>
+            <div className='team-header-user'>
 
-              <div className='team-info-and-overall'>
+              <div className='team-info-and-overall-user'>
                 <NavLink to={`/teams/${team.id}`}>
                   <img className='team-logo' src={team?.logo_src} alt="" />
                 </NavLink>
-                <div className='team-info'>
-                  <NavLink className='team-full-name' to={`teams/${team.id}`}>
-                    {team.city} {team.name}
-                  </NavLink>
-                </div>
+                <NavLink className='team-info-user' to={`/teams/${team.id}`}>
+                  {team.city} {team.name}
+                </NavLink>
                 <div className='overall-team-rating'>
                   <div>
                     Overall {Math.round(teamOverallRating / 5)}

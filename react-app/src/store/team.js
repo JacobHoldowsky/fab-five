@@ -1,5 +1,6 @@
 const GET_ALL_FOLLOWED_TEAMS = '/teams/GET_FOLLOWED_TEAMS'
 const CREATE_NEW_TEAM = '/teams/CREATE_NEW_TEAM'
+const DELETE_TEAM = '/teams/DELETE_TEAM'
 const CREATE_TEAM_COMMENT = '/teams/CREATE_TEAM_COMMENT'
 const DELETE_TEAM_COMMENT = '/teams/DELETE_TEAM_COMMENT'
 const EDIT_TEAM_COMMENT = '/teams/EDIT_TEAM_COMMENT'
@@ -15,6 +16,13 @@ const loadFollowedTeams = (teams) => {
 const addTeam = (team) => {
     return {
         type: CREATE_NEW_TEAM,
+        team
+    }
+}
+
+const removeTeam = (team) => {
+    return {
+        type: DELETE_TEAM,
         team
     }
 }
@@ -61,6 +69,21 @@ export const createTeam = (team) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json()
         const team = await dispatch(addTeam(data))
+        return team
+    }
+}
+
+export const deleteTeam = (teamId) => async (dispatch) => {
+    console.log('response.ok')
+    const response = await fetch(`/api/teams/${teamId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    })
+
+
+    if (response.ok) {
+        const data = await response.json()
+        const team = await dispatch(removeTeam(data))
         return team
     }
 }
@@ -121,6 +144,11 @@ const teamsReducer = (state = initialState, action) => {
         case CREATE_NEW_TEAM: {
             const newState = { ...state }
             newState[action.team.id] = action.team
+            return newState
+        }
+        case DELETE_TEAM: {
+            const newState = { ...state }
+            delete newState[action.team.id]
             return newState
         }
         case CREATE_TEAM_COMMENT: {

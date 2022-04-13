@@ -20,6 +20,13 @@ const addPost = (post) => {
     }
 }
 
+const removePost = (post) => {
+    return {
+        type: DELETE_POST,
+        post
+    }
+}
+
 const addPostComment = (comment) => {
     return {
         type: CREATE_POST_COMMENT,
@@ -27,12 +34,6 @@ const addPostComment = (comment) => {
     }
 }
 
-const removePost = (post) => {
-    return {
-        type: DELETE_POST,
-        post
-    }
-}
 
 const removePostComment = (comment) => {
     return {
