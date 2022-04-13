@@ -41,6 +41,9 @@ const PostDetail = () => {
                     <div className='img-cont'>
                         <img className='img' src={post?.img_src} alt="" />
                     </div>
+                    <div className='caption'>
+                        <div>{post?.caption}</div>
+                    </div>
                     <div className='poster-info'>
                         <div>Posted by:</div>
                         <NavLink to={`/users/${post?.user_id}`}>{post?.user_username}</NavLink>
