@@ -16,6 +16,10 @@ const Posts = () => {
         <div className='splash'>
             <h1>Fab Five</h1>
             <h2>The place to see your favorite players and make the team of your dreams</h2>
+            <div className='links'>
+                <a className='linkedin' href="https://www.linkedin.com/in/jacob-holdowsky-2b0baa103/" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a className='github' href="https://github.com/JacobHoldowsky" target="_blank" rel="noreferrer">Github</a>
+            </div>
             <div className='user-content-posts'>
                 <div className='posts'>
                     {posts && posts?.map((post) => (
