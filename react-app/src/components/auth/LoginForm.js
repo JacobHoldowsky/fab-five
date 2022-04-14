@@ -6,6 +6,7 @@ import './LoginForm.css'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
+  const [submitted, setSubmitted] = useState(false)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
@@ -13,11 +14,13 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
+    setSubmitted(true)
 
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(['Email and Password combination is invalid.']);
     }
+    setSubmitted(false)
   };
 
   const handleDemoUser = async (e) => {
@@ -71,7 +74,7 @@ const LoginForm = () => {
               required
             />
           </div>
-          <button className='login-btn' type='submit'>Login</button>
+          <button className='login-btn' disabled={submitted} type='submit'>Login</button>
           <button className='demo-btn' onClick={handleDemoUser}>Demo User</button>
         </div>
       </form>

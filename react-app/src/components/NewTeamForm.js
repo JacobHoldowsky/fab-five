@@ -9,6 +9,7 @@ import './NewTeamForm.css'
 const NewTeamForm = () => {
     const history = useHistory()
     const dispatch = useDispatch()
+    const [submitted, setSubmitted] = useState(false)
     const [errors, setErrors] = useState([])
     const [city, setCity] = useState('')
     const [name, setName] = useState('')
@@ -27,7 +28,7 @@ const NewTeamForm = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-
+        setSubmitted(true)
         setErrors([])
 
         if ((player_one === player_two || player_one === player_three || player_one === player_four || player_one === player_five)
@@ -78,10 +79,10 @@ const NewTeamForm = () => {
             setPlayerFour(null)
             setPlayerFive(null)
 
-
+            setSubmitted(false)
             history.push(`/teams/${newTeam.team?.id}`)
         } else {
-
+            setSubmitted(false)
         }
     }
 
@@ -205,7 +206,7 @@ const NewTeamForm = () => {
                         </div>
                     </div>
                     <div className='btn-div'>
-                        <button type='submit'>Submit</button>
+                        <button disabled={submitted} type='submit'>Submit</button>
                     </div>
                 </form>
             </div>

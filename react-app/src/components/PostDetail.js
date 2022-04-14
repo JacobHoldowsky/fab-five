@@ -9,6 +9,7 @@ import './PostDetail.css'
 
 const PostDetail = () => {
     const dispatch = useDispatch()
+    const [submitted, setSubmitted] = useState(false)
     const [errors, setErrors] = useState([])
     const history = useHistory()
     const [content, setContent] = useState('')
@@ -24,7 +25,7 @@ const PostDetail = () => {
 
     const handleComment = async (e) => {
         e.preventDefault()
-
+        setSubmitted(true)
         setErrors([])
 
         if (content.length > 255) {
@@ -37,6 +38,9 @@ const PostDetail = () => {
             await dispatch(createPostComment(newComment, post.id))
             await dispatch(getAllPosts())
             setContent('')
+            setSubmitted(false)
+        } else {
+            setSubmitted(false)
         }
     }
 
@@ -83,7 +87,7 @@ const PostDetail = () => {
                                     >
                                     </textarea>
                                     <div className='btn'>
-                                        <button type='submit'>Submit</button>
+                                        <button disabled={submitted} type='submit'>Submit</button>
                                     </div>
                                 </form>
                             </div>

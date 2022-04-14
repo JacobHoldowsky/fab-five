@@ -6,6 +6,7 @@ import './SignUpForm.css'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
+  const [submitted, setSubmitted] = useState(false)
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,6 +27,7 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    setSubmitted(true)
     setErrors([])
 
     const nums = '1234567890'
@@ -89,24 +91,27 @@ const SignUpForm = () => {
         email.endsWith(".net")) &&
       (uniqueEmail && uniqueUsername)))
 
-      if ((password === repeatPassword) &&
-        (passAlphas > 0 && passNums > 0 && passSpecialChars > 0) &&
-        (email.includes("@") ||
-          email.endsWith(".com") ||
-          email.endsWith(".org") ||
-          email.endsWith(".io") ||
-          email.endsWith(".net")) &&
-        (uniqueEmail && uniqueUsername) &&
-        (password.length > 5) &&
-        (username.length <= 20)
-      ) {
+    if ((password === repeatPassword) &&
+      (passAlphas > 0 && passNums > 0 && passSpecialChars > 0) &&
+      (email.includes("@") ||
+        email.endsWith(".com") ||
+        email.endsWith(".org") ||
+        email.endsWith(".io") ||
+        email.endsWith(".net")) &&
+      (uniqueEmail && uniqueUsername) &&
+      (password.length > 5) &&
+      (username.length <= 20)
+    ) {
 
-        console.log(username, email, password)
-        const data = await dispatch(signUp(username, email, password));
-        if (data) {
-          setErrors([data])
-        }
+      console.log(username, email, password)
+      const data = await dispatch(signUp(username, email, password));
+      setSubmitted(false)
+      if (data) {
+        setErrors([data])
       }
+    } else {
+      setSubmitted(false)
+    }
   };
 
   const updateUsername = (e) => {
@@ -179,7 +184,7 @@ const SignUpForm = () => {
               required={true}
             ></input>
           </div>
-          <button type='submit'>Sign Up</button>
+          <button disabled={submitted} type='submit'>Sign Up</button>
         </div>
       </form>
     </div>

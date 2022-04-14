@@ -7,8 +7,10 @@ import './NewPostForm.css'
 
 
 const NewPostForm = () => {
+    
     const history = useHistory()
     const dispatch = useDispatch()
+    const [submitted, setSubmitted] = useState(false)
     const [errors, setErrors] = useState([])
     const [caption, setCaption] = useState('')
     const [image, setImage] = useState('')
@@ -23,7 +25,7 @@ const NewPostForm = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-
+        setSubmitted(true)
         setErrors([])
 
         if (caption.length > 75) setErrors((errors) => [...errors, 'Caption must be no more than 75 characters.'])
@@ -49,8 +51,10 @@ const NewPostForm = () => {
             setPlayer(null)
             setCaption('')
             setImage('')
-
+            setSubmitted(false)
             history.push(`/players/${post.player}/posts/${newPost.post?.id}`)
+        } else {
+            setSubmitted(false)
         }
 
     }
@@ -108,7 +112,7 @@ const NewPostForm = () => {
                             </select>
                         </div>
                     </div>
-                    <button>Submit</button>
+                    <button disabled={submitted}>Submit</button>
                 </form>
             </div>
         </>
