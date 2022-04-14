@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -13,10 +13,10 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    
+
     const data = await dispatch(login(email, password));
     if (data) {
-      setErrors(data);
+      setErrors(['Email and Password combination is invalid.']);
     }
   };
 
@@ -42,12 +42,12 @@ const LoginForm = () => {
       <h1>Login</h1>
       <form onSubmit={onLogin}>
 
+        <div className='login-form'>
         <div>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div className='error' key={ind}>{error}</div>
           ))}
         </div>
-        <div className='login-form'>
 
           <div className='login-input'>
             <label htmlFor='email'>Email</label>
@@ -57,6 +57,7 @@ const LoginForm = () => {
               placeholder='Email'
               value={email}
               onChange={updateEmail}
+              required
             />
           </div>
           <div className='login-input'>
@@ -67,6 +68,7 @@ const LoginForm = () => {
               placeholder='Password'
               value={password}
               onChange={updatePassword}
+              required
             />
           </div>
           <button className='login-btn' type='submit'>Login</button>
