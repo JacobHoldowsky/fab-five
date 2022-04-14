@@ -1,4 +1,4 @@
-# The Main Feed
+# Fab Five
 
 Fab Five is the center for immersing oneself in the world the athletes they love. Users can build teams with their favorite players and see how their teams stack up against other teams.  Users can also post images with captions of their favorite athletes. The picture posting funtionality results in a collage-like collection of images for each athlete. On the splash page, one can scroll from one exciting view to the next as all player images are mixed together.
 
