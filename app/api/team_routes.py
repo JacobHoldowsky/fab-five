@@ -9,8 +9,6 @@ team_routes = Blueprint('teams', __name__)
 @team_routes.route('/')
 # @login_required
 def followed_teams():
-    user = User.query.get(current_user.id)
-    # teams = user.followed_teams()
     teams = Team.query.all()
     return {'teams': [team.to_dict() for team in teams]}
 
