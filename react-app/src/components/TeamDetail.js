@@ -36,6 +36,8 @@ const TeamDetail = () => {
             await dispatch(getAllFollowedTeams())
             setContent('')
             setSubmitted(false)
+        } else {
+            setSubmitted(false)
         }
 
     }

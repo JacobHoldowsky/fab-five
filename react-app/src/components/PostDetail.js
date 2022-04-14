@@ -39,6 +39,8 @@ const PostDetail = () => {
             await dispatch(getAllPosts())
             setContent('')
             setSubmitted(false)
+        } else {
+            setSubmitted(false)
         }
     }
 

@@ -8,6 +8,7 @@ const EditTeamCommentConfirmationForm = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const { commentId, postId, playerId } = useParams()
+    const [submitted, setSubmitted] = useState(false)
     const [errors, setErrors] = useState([])
     const oldComment = useSelector(state => state.posts[postId].post_comments[commentId])
     const [content, setContent] = useState(oldComment.content)
@@ -16,6 +17,7 @@ const EditTeamCommentConfirmationForm = () => {
 
     const handleEdit = async (e) => {
         e.preventDefault()
+        setSubmitted(true)
         setErrors([])
 
         if (content.length > 255) {
@@ -28,8 +30,11 @@ const EditTeamCommentConfirmationForm = () => {
                 content
             }
             const comment = await dispatch(editPostComment(newComment))
+            setSubmitted(false)
             history.push(`/players/${playerId}/posts/${postId}`)
             return comment
+        } else {
+            setSubmitted(false)
         }
     }
 
@@ -55,7 +60,7 @@ const EditTeamCommentConfirmationForm = () => {
                 >
                 </textarea>
                 <div className='btn'>
-                    <button type='submit'>Submit</button>
+                    <button disabled={submitted} type='submit'>Submit</button>
                 </div>
             </form>
         </>
