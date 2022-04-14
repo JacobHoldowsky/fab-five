@@ -14,3 +14,17 @@
     display: flex;
     justify-content: center;
 }
+
+.links{
+    margin-bottom: 20px;
+}
+
+.linkedin{
+    margin-right: 35px;
+    font-weight: bold;
+}
+
+.github{
+    margin-left: 35px;
+    font-weight: bold;
+}
