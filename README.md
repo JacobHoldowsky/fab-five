@@ -1,134 +1,82 @@
-# Flask React Project
+# The Main Feed
 
-This is the starter for the Flask React project.
+Fab Five is the center for immersing oneself in the world the athletes they love. Users can build teams with their favorite players and see how their teams stack up against other teams.  Users can also post images with captions of their favorite athletes. Replete with images in a collage-like style of each athlete, one can scroll on their home feed from one exciting view to the next. Users will love adding pictures and seeing the page change form to adapt itself to the new image. All images remain a model of their original size, but remain centered in each row with the other pictures for a sweet, eye-candy experience. 
+
+# Live Link
+
+https://fab-five.herokuapp.com/
+
+# Overview of technologies used
+
+Fab Five is a blogging website built with Flask, SQLAlchemy, PostgresSQL, React and Redux.
+
+## Backend
+
+Flask - A very user friendly choice for backend development.
+SQLAlchemy -  Makes interacting with the database a simpler process due to its intuitive style. 
+PostgresSQL - Harmonious pair to SQLAlchemy 
+
+## Frontend
+
+React - Chosen for its lightening fast rendering as it only re-renders items that change in state.
+Redux - Most state items were handled by redux, which helped keep all state necessities neat and organized.
+
+# Screenshots of the Fab Five
+
+## Posts feed (Splash Page)
+
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 02 02 PM" src="https://user-images.githubusercontent.com/52753308/163438108-170fc6aa-e73b-4d7b-875b-20bdbce66b07.png">
+![Screen Shot 2022-04-14 at 1 02 02 PM (2)](https://user-images.githubusercontent.com/52753308/163438115-346f5ec3-13d8-41ab-a738-c68e55c59450.png)
+![Screen Shot 2022-04-14 at 1 02 19 PM (2)](https://user-images.githubusercontent.com/52753308/163438155-be65da98-0096-4a4b-ac26-1350b029ae8c.png)
+
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 02 19 PM" src="https://user-images.githubusercontent.com/52753308/163438151-464242e3-76cd-488c-aaee-f98b9412d996.png">
+
+
+## Post Detail
+
+## ![Screen Shot 2022-03-28 at 10 22 33 AM](https://user-images.githubusercontent.com/52753308/160419246-9f71085e-cb01-4d6e-8f78-5008c87cb5a4.png)
+
+## ![Screen Shot 2022-03-28 at 10 22 54 AM](https://user-images.githubusercontent.com/52753308/160419316-17dbf729-0dd1-48a7-8a99-b65378f4723e.png)
+
+## User Profile
+
+## ![Screen Shot 2022-03-28 at 10 23 21 AM](https://user-images.githubusercontent.com/52753308/160419409-d2680d60-f54a-4e74-b061-e7f485cca284.png)
+
+# Developer's thoughts moving forward
+
+This was a fun project to work on, and it really started to develop a flavor once images could be displayed as a model of their original sizes.  While this project is only the beginning of a venture that has the potential to be expanded in multiple demensions, this developer is very excited with the progress thus far. The plan at this moment is to add a search function to search for a particular team or athlete. Furthermore, I would like to list all athletes by last name.
 
 ## Getting started
 
 1. Clone this repository (only this branch)
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
+      - `git clone git@github.com:JacobHoldowsky/TheMainFeed.git`
 
-2. Install dependencies
+2. Install backend dependencies
 
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+      - `pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt`
 
 3. Create a **.env** file based on the example with proper settings for your
    development environment
+   
 4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
 
 5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+      
+      - `pipenv shell`
 
-   ```bash
-   pipenv shell
-   ```
+      - 'flask db upgrade'
 
-   ```bash
-   flask db upgrade
-   ```
+      - `flask seed all`
 
-   ```bash
-   flask seed all
-   ```
+      - `flask run`
 
-   ```bash
-   flask run
-   ```
+6. Install frontend dependencies
 
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+      - cd into react-app
+      - run `npm install`
 
-***
-*IMPORTANT!*
-   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-   You can do this by running:
+7. Start front end server
 
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-*ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
-
-## Deploy to Heroku
-
-1. Before you deploy, don't forget to run the following command in order to
-ensure that your production environment has all of your up-to-date
-dependencies. You only have to run this command when you have installed new
-Python packages since your last deployment, but if you aren't sure, it won't
-hurt to run it again.
-
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-2. Create a new project on Heroku
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-4. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-5. Run
-
-   ```bash
-   heroku login
-   ```
-
-6. Login to the heroku container registry
-
-   ```bash
-   heroku container:login
-   ```
-
-7. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-8. Push your docker container to heroku from the root directory of your project.
-   (If you are using an M1 mac, follow [these steps below](#for-m1-mac-users) instead, then continue on to step 9.)
-   This will build the Dockerfile and push the image to your heroku container registry.
-
-   ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
-
-9. Release your docker container to heroku
-
-      ```bash
-      heroku container:release web -a {NAME_OF_HEROKU_APP}
-      ```
-
-10. set up your database
-
-      ```bash
-      heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-      heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-      ```
-
-11. Under Settings find "Config Vars" and add any additional/secret .env
-variables.
-
-12. profit
-
-### For M1 Mac users
-
-(Replaces **Step 8**)
-
-1. Build image with linux platform for heroku servers. Replace
-{NAME_OF_HEROKU_APP} with your own tag:
-
-   ```bash=
-   docker buildx build --platform linux/amd64 -t {NAME_OF_HEROKU_APP} .
-   ```
-
-2. Tag your app with the url for your apps registry. Make sure to use the name
-of your Heroku app in the url and tag name:
-
-   ```bash=2
-   docker tag {NAME_OF_HEROKU_APP} registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
-
-3. Use docker to push the image to the Heroku container registry:
-
-   ```bash=3
-   docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
+      - in react-app directory, run `npm start`
+      - This should take you to localhost:3000, but you can also go there manually in your browser
