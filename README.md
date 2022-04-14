@@ -25,9 +25,9 @@ Redux - Most state items were handled by redux, which helped keep all state nece
 
 ## Posts feed (Splash Page)
 
-![Screen Shot 2022-04-14 at 1 02 02 PM (2)](https://user-images.githubusercontent.com/52753308/163438115-346f5ec3-13d8-41ab-a738-c68e55c59450.png)
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 03 49 PM" src="https://user-images.githubusercontent.com/52753308/163438342-88c8e766-7000-42bc-b477-05bfc67804ab.png">
 
-![Screen Shot 2022-04-14 at 1 02 19 PM (2)](https://user-images.githubusercontent.com/52753308/163438155-be65da98-0096-4a4b-ac26-1350b029ae8c.png)
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 04 12 PM" src="https://user-images.githubusercontent.com/52753308/163438429-41c8f836-ef83-4349-9400-78955cefa55b.png">
 
 
 ## Post Detail
