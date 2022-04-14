@@ -1,6 +1,6 @@
 # The Main Feed
 
-Fab Five is the center for immersing oneself in the world the athletes they love. Users can build teams with their favorite players and see how their teams stack up against other teams.  Users can also post images with captions of their favorite athletes. Replete with images in a collage-like style of each athlete, one can scroll on their home feed from one exciting view to the next. Users will love adding pictures and seeing the page change form to adapt itself to the new image. All images remain a model of their original size, but remain centered in each row with the other pictures for a sweet, eye-candy experience. 
+Fab Five is the center for immersing oneself in the world the athletes they love. Users can build teams with their favorite players and see how their teams stack up against other teams.  Users can also post images with captions of their favorite athletes. The picture posting funtionality results in a collage-like collection of images for each athlete. On the splash page, one can scroll from one exciting view to the next as all player images are mixed together.
 
 # Live Link
 
@@ -29,26 +29,45 @@ Redux - Most state items were handled by redux, which helped keep all state nece
 
 <img width="1440" alt="Screen Shot 2022-04-14 at 1 06 27 PM" src="https://user-images.githubusercontent.com/52753308/163438715-1d8d289d-2a55-4c8d-8619-701570929f8a.png">
 
-
 ## Post Detail
 
-## ![Screen Shot 2022-03-28 at 10 22 33 AM](https://user-images.githubusercontent.com/52753308/160419246-9f71085e-cb01-4d6e-8f78-5008c87cb5a4.png)
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 08 50 PM" src="https://user-images.githubusercontent.com/52753308/163439060-9bf4b259-6edc-4b2b-b7cb-e584960bbf19.png">
 
-## ![Screen Shot 2022-03-28 at 10 22 54 AM](https://user-images.githubusercontent.com/52753308/160419316-17dbf729-0dd1-48a7-8a99-b65378f4723e.png)
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 09 16 PM" src="https://user-images.githubusercontent.com/52753308/163439123-31acc581-3433-4859-95e6-9e4526a05568.png">
+
+## Teams feed
+
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 09 52 PM" src="https://user-images.githubusercontent.com/52753308/163439185-fbd0543d-cd65-4e12-b858-13bf7b5a0132.png">
+
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 10 19 PM" src="https://user-images.githubusercontent.com/52753308/163439275-40034d53-965a-452b-93df-34f83068c8c7.png">
+
+## Team Detail
+
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 11 07 PM" src="https://user-images.githubusercontent.com/52753308/163439408-4a96ddcd-713d-4bcf-8458-3646ec1a2836.png">
+
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 12 08 PM" src="https://user-images.githubusercontent.com/52753308/163439612-465101f9-4dc7-453e-b154-1fe5434926ea.png">
+
+## Player Detail
+
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 13 01 PM" src="https://user-images.githubusercontent.com/52753308/163439781-11ab6cf8-73e8-4ac2-9bc6-a224029c609d.png">
+
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 13 15 PM" src="https://user-images.githubusercontent.com/52753308/163439803-40c030d7-abbd-4182-956a-fb3a507f6fab.png">
 
 ## User Profile
 
-## ![Screen Shot 2022-03-28 at 10 23 21 AM](https://user-images.githubusercontent.com/52753308/160419409-d2680d60-f54a-4e74-b061-e7f485cca284.png)
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 16 22 PM" src="https://user-images.githubusercontent.com/52753308/163440244-61cdcc1b-8724-406c-8c46-0ee1074c9cae.png">
+
+<img width="1440" alt="Screen Shot 2022-04-14 at 1 16 35 PM" src="https://user-images.githubusercontent.com/52753308/163440277-ff4887db-1c57-477d-a305-ecddae3f9d87.png">
 
 # Developer's thoughts moving forward
 
-This was a fun project to work on, and it really started to develop a flavor once images could be displayed as a model of their original sizes.  While this project is only the beginning of a venture that has the potential to be expanded in multiple demensions, this developer is very excited with the progress thus far. The plan at this moment is to add a search function to search for a particular team or athlete. Furthermore, I would like to list all athletes by last name.
+I see so much potential in this website. I can see the implementation of head-to-head functionality in which one team can "play" against another team. The game would be simulated based upon statistical analysis of each team's ratings. The next step would be to implement a league mode in which a schedule would be created for a number of teams to play each other, ultimately ending with one team winning the championship.
 
 ## Getting started
 
 1. Clone this repository (only this branch)
 
-      - `git clone git@github.com:JacobHoldowsky/TheMainFeed.git`
+      - `git clone git@github.com:JacobHoldowsky/fab-five.git`
 
 2. Install backend dependencies
 
