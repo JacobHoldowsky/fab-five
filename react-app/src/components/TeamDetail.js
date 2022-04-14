@@ -8,6 +8,7 @@ import './TeamDetail.css'
 
 const TeamDetail = () => {
     const history = useHistory()
+    const [submitted, setSubmitted] = useState(false)
     const dispatch = useDispatch()
     const [errors, setErrors] = useState([])
     const [content, setContent] = useState('')
@@ -22,7 +23,7 @@ const TeamDetail = () => {
 
     const handleComment = async (e) => {
         e.preventDefault()
-
+        setSubmitted(true)
         setErrors([])
 
         if (content.length > 255) {
@@ -31,11 +32,12 @@ const TeamDetail = () => {
 
         if (content.length <= 255) {
             const newComment = { content }
-
             await dispatch(createTeamComment(newComment, team.id))
             await dispatch(getAllFollowedTeams())
             setContent('')
+            setSubmitted(false)
         }
+
     }
 
 
@@ -179,7 +181,7 @@ const TeamDetail = () => {
                 >
                 </textarea>
                 <div className='btn'>
-                    <button type='submit'>Submit</button>
+                    <button disabled={submitted} type='submit'>Submit</button>
                 </div>
             </form>
             <div className='comment-cont'>
