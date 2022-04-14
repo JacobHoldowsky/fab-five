@@ -7,7 +7,7 @@ from app.models import Team, User, Player, db
 team_routes = Blueprint('teams', __name__)
 
 @team_routes.route('/')
-@login_required
+# @login_required
 def followed_teams():
     user = User.query.get(current_user.id)
     # teams = user.followed_teams()
