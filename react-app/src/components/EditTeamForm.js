@@ -39,8 +39,8 @@ const EditTeamForm = () => {
         }
         if (city.length > 50) setErrors((errors) => [...errors, 'City name must be no more than 50 characters.'])
         if (name.length > 50) setErrors((errors) => [...errors, 'Team name must be no more than 50 characters.'])
-        if (!logo.includes('.svg')) {
-            setErrors((errors) => [...errors, 'Please enter a valid svg image url for the team logo.'])
+        if (!logo.includes('https://cdn.nba.com/logos/nba/') || !logo.includes('/primary/L/logo.svg')) {
+            setErrors((errors) => [...errors, 'Please enter a team image url from nba.com/teams.'])
         }
 
         if ((player_one !== player_two && player_one !== player_three && player_one !== player_four && player_one !== player_five)
@@ -49,7 +49,7 @@ const EditTeamForm = () => {
             && (player_four !== player_five)
             && city.length <= 50
             && name.length <= 50
-            && (logo.includes('.svg'))
+            && (logo.includes('https://cdn.nba.com/logos/nba/') && logo.includes('/primary/L/logo.svg'))
         ) {
 
             const team = {
@@ -117,7 +117,7 @@ const EditTeamForm = () => {
                             />
                         </div>
                         <div className='form-div'>
-                            <label htmlFor="logo_src">Team logo:</label>
+                            <label htmlFor="logo_src">Team Logo:</label>
                             <input
                                 id='logo_src'
                                 type="text"
