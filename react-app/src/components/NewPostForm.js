@@ -35,9 +35,8 @@ const NewPostForm = () => {
         if (!player) setErrors((errors) => [...errors, 'Please select a player.'])
 
 
-        if (caption.length <= 75 &&
-            (image.includes('svg') || image.includes('jpeg') || image.includes('jpg') || image.includes('png')) &&
-            player) {
+        if (caption.length <= 75 && (image.includes('data:image/jpeg;base64') || (image.includes('.svg') || image.includes('.jpeg') || image.includes('.jpg') || image.includes('.png')) || image.includes('https://')) &&
+            player ) {
             const post = {
                 player: parseInt(player),
                 image,

@@ -74,7 +74,7 @@ const TeamDetail = () => {
             </div>
 
             <div className='ratings-and-bp'>
-                <img className='td-logo' src={team.logo_src} alt="hi" />
+                <img className='td-logo' src={team.logo_src} alt="" />
                 <div className='td-best-player-cont'>
                     <NavLink to={`/players/${bestPlayer?.id}`}>
                         <img className='td-best-player-img' src={bestPlayer?.headshot_src} alt="" />
