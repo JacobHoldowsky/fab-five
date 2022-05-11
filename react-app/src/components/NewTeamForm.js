@@ -12,7 +12,7 @@ const NewTeamForm = () => {
     const [submitted, setSubmitted] = useState(false)
     const [errors, setErrors] = useState([])
     const [city, setCity] = useState('')
-    const [name, setName] = useState('')
+    const [name, setName] = useState('https://exstreamist.com/wp-content/uploads/2015/10/NBA_Logo.jpg')
     const [logo, setLogo] = useState('')
     const [player_one, setPlayerOne] = useState(null)
     const [player_two, setPlayerTwo] = useState(null)

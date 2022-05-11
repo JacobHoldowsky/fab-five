@@ -7,10 +7,15 @@ import './Posts.css'
 const Posts = () => {
     const dispatch = useDispatch()
     const posts = useSelector((state) => Object.values(state.posts).reverse())
+    const defaultImgAddress = 'https://cdn.nba.com/headshots/nba/latest/1040x760/logoman.png'
 
     useEffect(() => {
         dispatch(getAllPosts())
     }, [dispatch])
+
+    const addDefaultSrc = (ev) => {
+        ev.target.src = 'https://exstreamist.com/wp-content/uploads/2015/10/NBA_Logo.jpg'
+    }
 
     return (
         <div className='splash'>
@@ -25,7 +30,7 @@ const Posts = () => {
                     {posts && posts?.map((post) => (
                         <div key={post.id} className='post-container'>
                             <NavLink to={`/players/${post.player_id}/posts/${post.id}`}>
-                                <img className='post-img' src={post.img_src} alt="" />
+                                <img className='post-img' onError={addDefaultSrc} src={post.img_src} alt="https://cdn.nba.com/headshots/nba/latest/1040x760/logoman.png" />
                             </NavLink>
                             <div className='post-info'>
                                 <NavLink to={`/players/${post.player_id}`}>

@@ -23,6 +23,10 @@ const PostDetail = () => {
         dispatch(getAllPosts())
     }, [dispatch])
 
+    const addDefaultSrc = (ev) => {
+        ev.target.src = 'https://exstreamist.com/wp-content/uploads/2015/10/NBA_Logo.jpg'
+    }
+
     const handleComment = async (e) => {
         e.preventDefault()
         setSubmitted(true)
@@ -53,7 +57,7 @@ const PostDetail = () => {
                 </h1>
                 <div className='img-and-caption'>
                     <div className='img-cont'>
-                        <img className='img' src={post?.img_src} alt="" />
+                        <img className='img' src={post?.img_src} onError={addDefaultSrc} alt="" />
                     </div>
                     <div className='poster-info'>
                         <div id='posted-by'>Posted by:</div>
