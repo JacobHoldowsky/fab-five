@@ -14,6 +14,10 @@ const PlayerDetail = () => {
     const posts = player?.posts
     const reversedPosts = player?.posts.reverse()
 
+    const addDefaultSrc = (ev) => {
+        ev.target.src = 'https://exstreamist.com/wp-content/uploads/2015/10/NBA_Logo.jpg'
+    }
+
 
     useEffect(() => {
         dispatch(getAllPlayers())
@@ -64,7 +68,7 @@ const PlayerDetail = () => {
                     {posts && posts.map((post) => (
                         <div key={post.id} className='post-container'>
                             <NavLink to={`${post.player_id}/posts/${post.id}`}>
-                                <img className='post-img' src={post.img_src} alt="" />
+                                <img className='post-img' onError={addDefaultSrc} src={post.img_src} alt="" />
                             </NavLink>
                         </div>
                     ))}

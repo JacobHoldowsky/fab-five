@@ -10,6 +10,9 @@ function User() {
   const [posts, setPosts] = useState([])
   const { userId } = useParams()
 
+  const addDefaultSrc = (ev) => {
+    ev.target.src = 'https://exstreamist.com/wp-content/uploads/2015/10/NBA_Logo.jpg'
+  }
 
   useEffect(() => {
     if (!userId) {
@@ -88,7 +91,7 @@ function User() {
         {posts && posts.map((post) => (
           <div key={post.id} className='post-container'>
             <NavLink to={`/players/${post.player_id}/posts/${post.id}`}>
-              <img className='post-img' src={post.img_src} alt="" />
+              <img className='post-img' onError={addDefaultSrc} src={post.img_src} alt='' />
             </NavLink>
             <NavLink to={`/players/${post.player_id}`}>
               {post.player_first_name} {post.player_last_name}

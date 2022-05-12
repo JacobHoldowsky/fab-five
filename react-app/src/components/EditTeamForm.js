@@ -15,6 +15,7 @@ const EditTeamForm = () => {
     const [city, setCity] = useState(team.city)
     const [name, setName] = useState(team.name)
     const [logo, setLogo] = useState(team.logo_src)
+    const [logoLoading, setLogoLoading] = useState(false)
     const [player_one, setPlayerOne] = useState(team.players[0].id)
     const [player_two, setPlayerTwo] = useState(team.players[1].id)
     const [player_three, setPlayerThree] = useState(team.players[2].id)
@@ -31,6 +32,8 @@ const EditTeamForm = () => {
 
         setErrors([])
 
+        const formData = new FormData()
+
         if ((player_one === player_two || player_one === player_three || player_one === player_four || player_one === player_five)
             || (player_two === player_three || player_two === player_four || player_two === player_five)
             || (player_three === player_four || player_three === player_five)
@@ -39,9 +42,9 @@ const EditTeamForm = () => {
         }
         if (city.length > 50) setErrors((errors) => [...errors, 'City name must be no more than 50 characters.'])
         if (name.length > 50) setErrors((errors) => [...errors, 'Team name must be no more than 50 characters.'])
-        if (!logo.includes('.svg')) {
-            setErrors((errors) => [...errors, 'Please enter a valid svg image url for the team logo.'])
-        }
+        // if (!logo.includes('https://cdn.nba.com/logos/nba/') || !logo.includes('/primary/L/logo.svg')) {
+        //     setErrors((errors) => [...errors, 'Please enter a team image url from nba.com/teams.'])
+        // }
 
         if ((player_one !== player_two && player_one !== player_three && player_one !== player_four && player_one !== player_five)
             && (player_two !== player_three && player_two !== player_four && player_two !== player_five)
@@ -49,21 +52,21 @@ const EditTeamForm = () => {
             && (player_four !== player_five)
             && city.length <= 50
             && name.length <= 50
-            && (logo.includes('.svg'))
+            // && (logo.includes('https://cdn.nba.com/logos/nba/') && logo.includes('/primary/L/logo.svg'))
         ) {
 
-            const team = {
-                city,
-                name,
-                logo,
-                player_one: parseInt(player_one),
-                player_two: parseInt(player_two),
-                player_three: parseInt(player_three),
-                player_four: parseInt(player_four),
-                player_five: parseInt(player_five)
-            }
+            formData.append('city', city)
+            formData.append('name', name)
+            formData.append('logo', logo)
+            formData.append('player_one', parseInt(player_one))
+            formData.append('player_two', parseInt(player_two))
+            formData.append('player_three', parseInt(player_three))
+            formData.append('player_four', parseInt(player_four))
+            formData.append('player_five', parseInt(player_five))
 
-            const editedTeam = await dispatch(editTeam(team, teamId))
+            const editedTeam = await dispatch(editTeam(formData, teamId))
+
+            if (editedTeam) setLogoLoading(false)
 
             setCity('')
             setName('')
@@ -80,6 +83,11 @@ const EditTeamForm = () => {
         } else {
 
         }
+    }
+
+    const updateLogo = (e) => {
+        const file = e.target.files[0];
+        setLogo(file);
     }
 
     return (
@@ -113,18 +121,6 @@ const EditTeamForm = () => {
                                 name="name"
                                 onChange={(e) => setName(e.target.value)}
                                 value={name}
-                                required
-                            />
-                        </div>
-                        <div className='form-div'>
-                            <label htmlFor="logo_src">Team logo:</label>
-                            <input
-                                id='logo_src'
-                                type="text"
-                                name="logo_src"
-                                onChange={(e) => setLogo(e.target.value)}
-                                value={logo}
-                                placeholder='From nba.com/teams'
                                 required
                             />
                         </div>
@@ -210,6 +206,7 @@ const EditTeamForm = () => {
                         <button onClick={() => history.push(`/teams/${teamId}`)}>Cancel</button>
                         <button type='submit'>Submit</button>
                     </div>
+                    {(logoLoading) && <p>Loading...</p>}
                 </form>
             </div>
         </>

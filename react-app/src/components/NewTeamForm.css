@@ -30,6 +30,11 @@
     gap: 5px
 }
 
+#hi{
+    display: flex;
+    justify-content: center;
+}
+
 .player-dropdowns{
     display: flex;
     gap: 2vw

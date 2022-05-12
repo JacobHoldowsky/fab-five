@@ -14,6 +14,7 @@ const NewTeamForm = () => {
     const [city, setCity] = useState('')
     const [name, setName] = useState('')
     const [logo, setLogo] = useState('')
+    const [logoLoading, setLogoLoading] = useState(false)
     const [player_one, setPlayerOne] = useState(null)
     const [player_two, setPlayerTwo] = useState(null)
     const [player_three, setPlayerThree] = useState(null)
@@ -31,6 +32,8 @@ const NewTeamForm = () => {
         setSubmitted(true)
         setErrors([])
 
+        const formData = new FormData()
+
         if ((player_one === player_two || player_one === player_three || player_one === player_four || player_one === player_five)
             || (player_two === player_three || player_two === player_four || player_two === player_five)
             || (player_three === player_four || player_three === player_five)
@@ -39,9 +42,9 @@ const NewTeamForm = () => {
         }
         if (city.length > 50) setErrors((errors) => [...errors, 'City name must be no more than 50 characters.'])
         if (name.length > 50) setErrors((errors) => [...errors, 'Team name must be no more than 50 characters.'])
-        if (!logo.includes('.svg')) {
-            setErrors((errors) => [...errors, 'Please enter a valid svg image url for the team logo.'])
-        }
+        // if (!logo.includes('https://cdn.nba.com/logos/nba/') || !logo.includes('/primary/L/logo.svg')) {
+        //     setErrors((errors) => [...errors, 'Please enter a team image url from nba.com/teams.'])
+        // }
 
         if ((player_one !== player_two && player_one !== player_three && player_one !== player_four && player_one !== player_five)
             && (player_two !== player_three && player_two !== player_four && player_two !== player_five)
@@ -49,26 +52,23 @@ const NewTeamForm = () => {
             && (player_four !== player_five)
             && city.length <= 50
             && name.length <= 50
-            && (logo.includes('svg')
-                || logo.includes('png')
-                || logo.includes('jpg')
-                || logo.includes('jpeg'))
+            // && (logo.includes('https://cdn.nba.com/logos/nba/') && logo.includes('/primary/L/logo.svg'))
         ) {
 
-            const team = {
-                city,
-                name,
-                logo,
-                player_one: parseInt(player_one),
-                player_two: parseInt(player_two),
-                player_three: parseInt(player_three),
-                player_four: parseInt(player_four),
-                player_five: parseInt(player_five)
-            }
+
+            formData.append('city', city)
+            formData.append('name', name)
+            formData.append('logo', logo)
+            formData.append('player_one', parseInt(player_one))
+            formData.append('player_two', parseInt(player_two))
+            formData.append('player_three', parseInt(player_three))
+            formData.append('player_four', parseInt(player_four))
+            formData.append('player_five', parseInt(player_five))
 
 
+            const newTeam = await dispatch(createTeam(formData))
 
-            const newTeam = await dispatch(createTeam(team))
+            if (newTeam) setLogoLoading(false)
 
             setCity('')
             setName('')
@@ -86,6 +86,11 @@ const NewTeamForm = () => {
         }
     }
 
+    const updateLogo = (e) => {
+        const file = e.target.files[0];
+        setLogo(file);
+    }
+
     return (
         <>
             <h1>New Team Form</h1>
@@ -99,7 +104,7 @@ const NewTeamForm = () => {
                     </div>
                     <div className='form-inputs'>
                         <div className='form-div'>
-                            <label htmlFor="city">Team City:</label>
+                            <label htmlFor="city">Team City</label>
                             <input
                                 id='city'
                                 type="text"
@@ -110,7 +115,7 @@ const NewTeamForm = () => {
                             />
                         </div>
                         <div className='form-div'>
-                            <label htmlFor="name">Team Name:</label>
+                            <label htmlFor="name">Team Name</label>
                             <input
                                 id='name'
                                 type="text"
@@ -121,21 +126,22 @@ const NewTeamForm = () => {
                             />
                         </div>
                         <div className='form-div'>
-                            <label htmlFor="logo_src">Team logo:</label>
-                            <input
-                                id='logo_src'
-                                type="text"
-                                name="logo_src"
-                                onChange={(e) => setLogo(e.target.value)}
-                                value={logo}
-                                placeholder='From nba.com/teams'
-                                required
-                            />
+                            <label htmlFor="logo_src">Team Logo</label>
+                                <input
+                                    id='logo_src'
+                                    type="file"
+                                    name="logo_src"
+                                    accept="image/*"
+                                    onChange={updateLogo}
+                                    // value={logo}
+                                    // placeholder='From nba.com/teams'
+                                    required
+                                />
                         </div>
                     </div>
                     <div className='player-dropdowns'>
                         <div className='form-div'>
-                            <label htmlFor="player_one">Player One:</label>
+                            <label htmlFor="player_one">Player One</label>
                             <select
                                 id='player_one'
                                 type="text"
@@ -149,7 +155,7 @@ const NewTeamForm = () => {
                             </select>
                         </div>
                         <div className='form-div'>
-                            <label htmlFor="player_two">Player Two:</label>
+                            <label htmlFor="player_two">Player Two</label>
                             <select
                                 id='player_two'
                                 type="text"
@@ -163,7 +169,7 @@ const NewTeamForm = () => {
                             </select>
                         </div>
                         <div className='form-div'>
-                            <label htmlFor="player_three">Player Three:</label>
+                            <label htmlFor="player_three">Player Three</label>
                             <select
                                 id='player_three'
                                 type="text"
@@ -177,7 +183,7 @@ const NewTeamForm = () => {
                             </select>
                         </div>
                         <div className='form-div'>
-                            <label htmlFor="player_four">Player Four:</label>
+                            <label htmlFor="player_four">Player Four</label>
                             <select
                                 id='player_four'
                                 type="text"
@@ -191,7 +197,7 @@ const NewTeamForm = () => {
                             </select>
                         </div>
                         <div className='form-div'>
-                            <label htmlFor="player_five">Player Five:</label>
+                            <label htmlFor="player_five">Player Five</label>
                             <select
                                 id='player_five'
                                 type="text"
@@ -208,6 +214,7 @@ const NewTeamForm = () => {
                     <div className='btn-div'>
                         <button disabled={submitted} type='submit'>Submit</button>
                     </div>
+                    {(logoLoading) && <p>Loading...</p>}
                 </form>
             </div>
         </>
