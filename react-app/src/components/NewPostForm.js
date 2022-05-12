@@ -14,6 +14,7 @@ const NewPostForm = () => {
     const [errors, setErrors] = useState([])
     const [caption, setCaption] = useState('')
     const [image, setImage] = useState('')
+    const [imageLoading, setImageLoading] = useState(false)
     const [player, setPlayer] = useState(null)
 
     const players = useSelector((state) => Object.values(state.players))
@@ -28,34 +29,40 @@ const NewPostForm = () => {
         setSubmitted(true)
         setErrors([])
 
+        const formData = new FormData()
+
         if (caption.length > 75) setErrors((errors) => [...errors, 'Caption must be no more than 75 characters.'])
-        if (!image.includes('svg') && !image.includes('jpeg') && !image.includes('jpg') && !image.includes('png')) {
-            setErrors((errors) => [...errors, 'Please enter a valid image url.'])
-        }
+        // if (!image.includes('svg') && !image.includes('jpeg') && !image.includes('jpg') && !image.includes('png')) {
+        //     setErrors((errors) => [...errors, 'Please enter a valid image url.'])
+        // }
         if (!player) setErrors((errors) => [...errors, 'Please select a player.'])
 
+        if (caption.length <= 75 && player ) {
 
-        if (caption.length <= 75 && (image.includes('data:image/jpeg;base64') || (image.includes('.svg') || image.includes('.jpeg') || image.includes('.jpg') || image.includes('.png')) || image.includes('https://')) &&
-            player ) {
-            const post = {
-                player: parseInt(player),
-                image,
-                caption
-            }
+            formData.append('player', parseInt(player))
+            formData.append('caption', caption)
+            formData.append('image', image)
 
+            console.log('image',image)
 
+            const newPost = await dispatch(createPost(formData))
 
-            const newPost = await dispatch(createPost(post))
+            if (newPost) setImageLoading(false)
 
             setPlayer(null)
             setCaption('')
             setImage('')
             setSubmitted(false)
-            history.push(`/players/${post.player}/posts/${newPost.post?.id}`)
+            history.push(`/players/${parseInt(player)}/posts/${newPost.post?.id}`)
         } else {
             setSubmitted(false)
         }
 
+    }
+
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
     }
 
     return (
@@ -74,11 +81,12 @@ const NewPostForm = () => {
                             <label htmlFor="image">Image</label>
                             <input
                                 id='image'
-                                type="text"
+                                type="file"
                                 name='image'
-                                onChange={(e) => setImage(e.target.value)}
-                                value={image}
-                                placeholder='Valid Image URL'
+                                accept='image/*'
+                                onChange={updateImage}
+                                // value={image}
+                                // placeholder='Valid Image URL'
                                 required
                             />
                         </div>

@@ -69,14 +69,28 @@ export const getAllFollowedTeams = () => async (dispatch) => {
 export const createTeam = (team) => async (dispatch) => {
     const response = await fetch(`/api/teams/`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(team)
+        // headers: { 'Content-Type': 'application/json' },
+        body: team
     })
 
 
     if (response.ok) {
         const data = await response.json()
         const team = await dispatch(addTeam(data))
+        return team
+    }
+}
+
+export const editTeam = (team, teamId) => async (dispatch) => {
+    const response = await fetch(`/api/teams/${teamId}/edit`, {
+        method: 'PUT',
+        // headers: { 'Content-Type': 'application/json' },
+        body: team
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        const team = await dispatch(updateTeam(data))
         return team
     }
 }
@@ -91,20 +105,6 @@ export const deleteTeam = (teamId) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json()
         const team = await dispatch(removeTeam(data))
-        return team
-    }
-}
-
-export const editTeam = (team, teamId) => async (dispatch) => {
-    const response = await fetch(`/api/teams/${teamId}/edit`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(team)
-    })
-
-    if (response.ok) {
-        const data = await response.json()
-        const team = await dispatch(updateTeam(data))
         return team
     }
 }

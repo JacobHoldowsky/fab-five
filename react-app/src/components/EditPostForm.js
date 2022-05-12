@@ -28,18 +28,15 @@ const EditPostForm = () => {
         setErrors([])
 
         if (caption.length > 75) setErrors((errors) => [...errors, 'Caption must be no more than 75 characters.'])
-        if (!image.includes('svg') && !image.includes('jpeg') && !image.includes('jpg') && !image.includes('png')) {
-            setErrors((errors) => [...errors, 'Please enter a valid image url.'])
-        }
+        // if (!image.includes('svg') && !image.includes('jpeg') && !image.includes('jpg') && !image.includes('png')) {
+        //     setErrors((errors) => [...errors, 'Please enter a valid image url.'])
+        // }
         if (!player) setErrors((errors) => [...errors, 'Please select a player.'])
 
 
-        if (caption.length <= 75 &&
-            (image.includes('svg') || image.includes('jpeg') || image.includes('jpg') || image.includes('png')) &&
-            player) {
+        if (caption.length <= 75 && player) {
             const post = {
                 player: parseInt(player),
-                image,
                 caption
             }
 
@@ -68,7 +65,7 @@ const EditPostForm = () => {
                         ))}
                     </div>
                     <div className='form-inputs'>
-                        <div className='form-div'>
+                        {/* <div className='form-div'>
                             <label htmlFor="image">Image</label>
                             <input
                                 id='image'
@@ -79,7 +76,7 @@ const EditPostForm = () => {
                                 placeholder='Valid Image URL'
                                 required
                             />
-                        </div>
+                        </div> */}
                         <div className='form-div'>
                             <label htmlFor="caption">Caption</label>
                             <input
