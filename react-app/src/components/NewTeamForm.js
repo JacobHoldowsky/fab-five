@@ -42,18 +42,18 @@ const NewTeamForm = () => {
         }
         if (city.length > 50) setErrors((errors) => [...errors, 'City name must be no more than 50 characters.'])
         if (name.length > 50) setErrors((errors) => [...errors, 'Team name must be no more than 50 characters.'])
-        // if (!logo.includes('https://cdn.nba.com/logos/nba/') || !logo.includes('/primary/L/logo.svg')) {
-        //     setErrors((errors) => [...errors, 'Please enter a team image url from nba.com/teams.'])
-        // }
+        if (!logo.name.includes('svg') && !logo.name.includes('jpeg') && !logo.name.includes('jpg') && !logo.name.includes('png')) {
+            setErrors((errors) => [...errors, 'Please insert a logo file with one of following extensions: .jpeg, jpg, .svg, .png'])
+        }
 
         if ((player_one !== player_two && player_one !== player_three && player_one !== player_four && player_one !== player_five)
             && (player_two !== player_three && player_two !== player_four && player_two !== player_five)
             && (player_three !== player_four && player_three !== player_five)
             && (player_four !== player_five)
             && city.length <= 50
-            && name.length <= 50
-            // && (logo.includes('https://cdn.nba.com/logos/nba/') && logo.includes('/primary/L/logo.svg'))
-        ) {
+            && name.length <= 50 && 
+            (logo.name.includes('svg') || logo.name.includes('jpeg') || logo.name.includes('jpg') || logo.name.includes('png')))
+         {
 
 
             formData.append('city', city)
@@ -65,6 +65,7 @@ const NewTeamForm = () => {
             formData.append('player_four', parseInt(player_four))
             formData.append('player_five', parseInt(player_five))
 
+            console.log('logo',logo)
 
             const newTeam = await dispatch(createTeam(formData))
 
