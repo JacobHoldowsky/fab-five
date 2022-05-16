@@ -32,12 +32,13 @@ const NewPostForm = () => {
         const formData = new FormData()
 
         if (caption.length > 75) setErrors((errors) => [...errors, 'Caption must be no more than 75 characters.'])
-        // if (!image.includes('svg') && !image.includes('jpeg') && !image.includes('jpg') && !image.includes('png')) {
-        //     setErrors((errors) => [...errors, 'Please enter a valid image url.'])
-        // }
+        if (!image.name.includes('svg') && !image.name.includes('jpeg') && !image.name.includes('jpg') && !image.name.includes('png')) {
+            setErrors((errors) => [...errors, 'Please insert an image file with one of following extensions: .jpeg, jpg, .svg, .png'])
+        }
         if (!player) setErrors((errors) => [...errors, 'Please select a player.'])
 
-        if (caption.length <= 75 && player ) {
+        if (caption.length <= 75 && player && 
+            (image.name.includes('svg') || image.name.includes('jpeg') || image.name.includes('jpg') || image.name.includes('png')) ) {
 
             formData.append('player', parseInt(player))
             formData.append('caption', caption)
