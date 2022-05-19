@@ -86,7 +86,7 @@ const TeamDetail = () => {
                         <div>
                             |
                         </div>
-                        <div>
+                        <div id='fantasy'>
                             Overall {bestPlayer?.overall_rating}
                         </div>
                     </div>
@@ -134,10 +134,10 @@ const TeamDetail = () => {
                         </NavLink>
                         <div className='td-player-info'>
                             <NavLink to={`/players/${player.id}`}>{player.first_name} {player.last_name}</NavLink>
-                            <div>
+                            <div id='fantasy'>
                                 |
                             </div>
-                            <div>
+                            <div id='fantasy'>
                                 Overall {player.overall_rating}
                             </div>
                         </div>
