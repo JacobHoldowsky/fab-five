@@ -91,7 +91,6 @@ const Teams = () => {
                                                     {player.first_name} {player.last_name}
                                                 </NavLink>
                                                 {/* <div id='fantasy'>|</div> */}
-                                                {/* <div id='fantasy'>Overall {player.overall_rating}</div> */}
                                             </div>
                                         </div>
 

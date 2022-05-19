@@ -68,7 +68,7 @@
 
 .best-player-img {
     width: 100%;
-    height: 32vh;
+    height: 30vh;
     border-radius: 25px;
     background-color: whitesmoke;
 }
@@ -99,7 +99,7 @@ height: 11px */
 
 .remaining-player-img {
     width: 100%;
-    height: 28vh;
+    height: 26vh;
     background-color: whitesmoke;
     /* padding: 10px; */
     border-radius: 25px;
@@ -115,7 +115,6 @@ height: 11px */
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* gap: 10px; */
 }
 
 #fantasy{
